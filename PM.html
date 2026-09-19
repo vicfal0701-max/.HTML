@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PM-kompendium: Sagor (Svenska 3)</title>
+<style>
+:root{
+  --bg:#f3f5f8; --ink:#17212c; --muted:#56626f; --card:#ffffff; --line:#d3dae2; --soft:#e9eef4;
+  --bet:#7a3b8f; --ahl:#b3263e; --bor:#0f766e; --kah:#9a6a06; --fah:#1d4ed8;
+  --bet-t:#f1e6f6; --ahl-t:#fbe6e9; --bor-t:#dcf3f0; --kah-t:#f8eed3; --fah-t:#e1e9fd;
+  --focus:#0b5cff;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#11161c; --ink:#e8edf3; --muted:#9aa7b5; --card:#19212a; --line:#2c3743; --soft:#212b36;
+    --bet:#d9a3ee; --ahl:#ff9aab; --bor:#63d6c8; --kah:#f0c25a; --fah:#8fb1ff;
+    --bet-t:#2b1f33; --ahl-t:#35202a; --bor-t:#17302e; --kah-t:#33290f; --fah-t:#1c2745;
+    --focus:#8fb1ff;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Charter,"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:17px;line-height:1.65}
+h1,h2,h3,h4,nav,summary,button,.chip,.tag,label,th,.meta{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:0 40px;padding:0 20px}
+nav.side{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:28px 0}
+nav.side .brand{font-weight:700;font-size:15px;line-height:1.3;margin-bottom:18px}
+nav.side a{display:block;text-decoration:none;padding:6px 10px;border-radius:6px;font-size:14.5px;color:var(--muted)}
+nav.side a:hover{background:var(--soft);color:var(--ink)}
+nav.side .key{margin-top:22px;font-size:13px;color:var(--muted)}
+nav.side .key span{display:block;padding:2px 0}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.dot.bet,.chip.bet .dot{background:var(--bet)} .dot.ahl{background:var(--ahl)} .dot.bor{background:var(--bor)} .dot.kah{background:var(--kah)} .dot.fah{background:var(--fah)}
+main{padding:36px 0 80px;min-width:0}
+header.hero{padding:6px 0 26px;border-bottom:2px solid var(--ink);margin-bottom:34px}
+header.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 12px;letter-spacing:-.02em}
+header.hero p{max-width:62ch;margin:0;color:var(--muted);font-size:18px}
+section{margin:0 0 56px}
+h2{font-size:28px;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+h3{font-size:20px;margin:0 0 6px}
+h4{font-size:15.5px;margin:18px 0 6px}
+.lead{color:var(--muted);max-width:66ch;margin:0 0 22px}
+p{max-width:70ch;margin:0 0 12px}
+ul,ol{max-width:72ch;padding-left:22px;margin:0 0 12px}
+li{margin:4px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin:0 0 18px}
+.notice{background:var(--soft);border-left:4px solid var(--ink);border-radius:4px;padding:14px 18px;margin:0 0 22px;max-width:74ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.chip{display:inline-flex;align-items:center;font-size:13px;padding:2px 10px 2px 8px;border-radius:999px;margin:0 6px 6px 0;border:1px solid var(--line);background:var(--card);text-decoration:none;white-space:nowrap}
+.chip.bet{background:var(--bet-t)} .chip.ahl{background:var(--ahl-t)} .chip.bor{background:var(--bor-t)} .chip.kah{background:var(--kah-t)} .chip.fah{background:var(--fah-t)}
+.chip .dot{margin-right:6px}
+.tag{display:inline-block;font-size:13px;padding:1px 9px;border-radius:4px;background:var(--soft);color:var(--muted);margin:0 6px 6px 0;text-decoration:none}
+a.tag:hover{color:var(--ink)}
+/* source cards */
+.src{border-top:6px solid var(--line)}
+.src.bet{border-top-color:var(--bet)} .src.ahl{border-top-color:var(--ahl)} .src.bor{border-top-color:var(--bor)} .src.kah{border-top-color:var(--kah)} .src.fah{border-top-color:var(--fah)}
+.src .meta{font-size:14px;color:var(--muted);margin:0 0 12px}
+blockquote{margin:12px 0;padding:10px 16px;border-left:4px solid var(--line);background:var(--soft);border-radius:0 6px 6px 0;max-width:70ch}
+.src.bet blockquote{border-left-color:var(--bet)} .src.ahl blockquote{border-left-color:var(--ahl)} .src.bor blockquote{border-left-color:var(--bor)} .src.kah blockquote{border-left-color:var(--kah)} .src.fah blockquote{border-left-color:var(--fah)}
+blockquote cite{display:block;font-style:normal;font-size:14px;color:var(--muted);margin-top:4px;font-family:"Segoe UI",system-ui,sans-serif}
+.model{background:var(--soft);border-radius:6px;padding:12px 16px;margin:8px 0 4px;max-width:72ch}
+button{font-size:13.5px;padding:5px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer}
+button:hover{background:var(--soft)}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:0 0 12px}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;font-size:17px;list-style-position:inside}
+details[open] summary{border-bottom:1px solid var(--line)}
+details .body{padding:8px 22px 18px}
+.small{font-size:15px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 18px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-size:14px}
+.tablewrap{overflow-x:auto;max-width:100%}
+.pair{border-left:5px solid var(--line);padding:10px 16px;margin:0 0 14px;background:var(--card);border-radius:0 8px 8px 0;border:1px solid var(--line);border-left-width:5px}
+.pair h4{margin:0 0 4px}
+.pair .kind{font-size:13px;color:var(--muted);margin-bottom:6px;display:block;font-family:"Segoe UI",system-ui,sans-serif}
+/* finder */
+.finder{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 14px}
+.finder label{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:2px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;font-size:15px}
+.finder label:has(input:checked){border-color:var(--ink);background:var(--soft)}
+.finder input{width:18px;height:18px}
+.bar{height:10px;border-radius:5px;background:var(--soft);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--ink)}
+.res{padding:10px 0;border-bottom:1px solid var(--line);max-width:74ch}
+.res:last-child{border-bottom:0}
+.res a{font-weight:600;font-family:"Segoe UI",system-ui,sans-serif}
+.warn{color:var(--ahl);font-weight:600;font-family:"Segoe UI",system-ui,sans-serif}
+.check li{list-style:none;margin-left:-22px}
+.check label{display:flex;gap:10px;align-items:flex-start;font-family:Charter,Georgia,serif;font-size:16.5px;cursor:pointer}
+.check input{margin-top:7px;flex:none}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr;padding:0 14px}
+  nav.side{position:static;height:auto;padding:14px 0 0;display:flex;flex-wrap:wrap;gap:4px}
+  nav.side .brand,nav.side .key{display:none}
+  nav.side a{background:var(--soft)}
+  body{font-size:16.5px}
+}
+@media print{
+  nav.side,.finder,button{display:none!important}
+  .layout{display:block;max-width:none;padding:0}
+  body{background:#fff;color:#000;font-size:11pt}
+  details{border:0} details .body{padding:0}
+  .card,.pair{break-inside:avoid}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="side" aria-label="Innehåll">
+  <div class="brand">PM-kompendium: Sagor</div>
+  <a href="#start">Så använder du det</a>
+  <a href="#kallor">De fem källorna</a>
+  <a href="#kopplingar">Kopplingar mellan texterna</a>
+  <a href="#amnen">Ämnesguide med färdiga upplägg</a>
+  <a href="#valjare">Kombinationsväljaren</a>
+  <a href="#verktyg">Referat, citat och fraser</a>
+  <a href="#mall">PM-mall och tidsplan</a>
+  <a href="#kontroll">Kontrolllista mot matrisen</a>
+  <a href="#fallgropar">Fallgropar</a>
+  <a href="#fakta">Snabbfakta</a>
+  <a href="#kallforteckning">Källförteckning</a>
+  <div class="key" aria-hidden="true">
+    <span><i class="dot bet"></i>Bettelheim</span>
+    <span><i class="dot ahl"></i>Ahlborg</span>
+    <span><i class="dot bor"></i>Börjesson</span>
+    <span><i class="dot kah"></i>Kahle</span>
+    <span><i class="dot fah"></i>Fahl</span>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="top">
+  <h1>Sagor: allt du behöver för PM:et</h1>
+  <p>Fem källor sammanfattade, kopplade till varandra och förberedda för nio tänkbara ämnen. Målet är att du på provet ska kunna lägga all energi på att formulera dig.</p>
+</header>
+
+<section id="start">
+  <h2>Så använder du det här</h2>
+  <p class="lead">Tre steg före provet, tre steg under det.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Före provet</h3>
+      <ol>
+        <li>Läs <a href="#kallor">källkorten</a> och lär dig vem som hävdar vad. Träna på att säga varje källas huvudtanke i en mening.</li>
+        <li>Lär dig <a href="#kopplingar">kopplingarna</a>. Det är där dina jämförelser och slutsatser kommer ifrån.</li>
+        <li>Gå igenom <a href="#amnen">ämnesguiden</a> och skriv ett upplägg för minst två ämnen med egna ord.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>På provet</h3>
+      <ol>
+        <li>Känn igen ämnet: vilket av de nio ämnena ligger närmast? Hitta det i ämnesguiden.</li>
+        <li>Välj tre källor (två räcker, fyra är max). Följ <a href="#mall">mallen</a>.</li>
+        <li>Skriv referaten kring frågeställningen, bygg jämförelsen på dem och avsluta med en slutsats som svarar på frågan.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="notice">
+    <strong>Om hjälpmedel:</strong> kompendiet är till för din förberedelse. På provet ska texten vara din egen, så använd modellstyckena som inspiration och formulera om. Kolla också med din lärare vilka hjälpmedel som är tillåtna under själva skrivtillfället.
+  </div>
+  <div class="card">
+    <h3>Om du bara hinner lära dig en sak: allroundtrion</h3>
+    <p>Ahlborg, Bettelheim och Börjesson täcker åtta av nio ämnen bra eller mycket bra. Enda svagare punkten är kommersialism och populärkultur, där du byter ut Börjesson mot Fahl. Se <a href="#valjare">kombinationsväljaren</a> för att testa andra trior.</p>
+    <p>
+      <span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip bor"><i class="dot"></i>Börjesson</span>
+    </p>
+  </div>
+</section>
+
+<section id="kallor">
+  <h2>De fem källorna</h2>
+  <p class="lead">Varje kort visar vad texten säger, vilken hållning skribenten har, ett förvalt citat och vad du kan hoppa över. Årtal och siffror är hämtade ur texterna.</p>
+
+  <article class="card src bet" id="src-bet">
+    <h3>Bruno Bettelheim: Sagans förtrollade värld (1976)</h3>
+    <p class="meta">Bokutdrag, två kapitel. Psykoanalytiskt perspektiv. Argumenterande och normativ: skriver om vad barn behöver.</p>
+    <p><strong>Kärnan:</strong> Folksagor är det mest berikande barn kan få, eftersom de tar upp människans inre problem och visar att svårigheter går att övervinna.</p>
+    <h4>Huvudpoänger</h4>
+    <ul>
+      <li>En berättelse ska både roa och berika: utveckla förståndet, hjälpa barnet reda ut känslor och erkänna dess svårigheter. Folksagor gör detta bättre än nästan all annan barnlitteratur.</li>
+      <li>Sagorna speglar inte det moderna samhällets villkor. De lär i stället om människors <em>inre</em> problem, vilket gäller i alla samhällen.</li>
+      <li>Barn behöver moralisk fostran som sker indirekt, genom det som känns handgripligt riktigt, inte genom abstrakta etiska begrepp.</li>
+      <li>Sagorna har finslipats genom århundraden och talar samtidigt till barnets och den vuxnes medvetna, förmedvetna och omedvetna.</li>
+      <li>Barnet bearbetar det omedvetna genom fantasi och dagdrömmar kring sagoelement, inte med förnuftet. Förträngt material kan skada, men släpps det fram i fantasin förlorar det mycket av sin skadeverkan.</li>
+      <li>Föräldrar vill ofta skydda barn från det mörka och säga att alla är goda. Men barn vet att de själva inte alltid är goda, och kan då börja se sig själva som odjur.</li>
+      <li>Sagans budskap: hårda strider går inte att undvika, men den som möter dem tappert kan övervinna dem. Moderna ”snälla” sagor undviker död och åldrande, folksagan tar upp dem rakt på sak.</li>
+    </ul>
+    <h4>Förvalt citat (11 ord)</h4>
+    <blockquote>”Folksagan däremot konfronterar barnet rakt på sak med grundläggande mänskliga förhållanden.”<cite>Bettelheim (1976), kapitlet om sagorna och de existentiella villkoren</cite></blockquote>
+    <p class="small">Så bäddar du in det: Bettelheim menar att folksagan, till skillnad från moderna berättelser, ”konfronterar barnet rakt på sak med grundläggande mänskliga förhållanden”.</p>
+    <h4>Fler platser att hämta citat från</h4>
+    <ul class="small">
+      <li>Kapitel 1, stycke 3: barnets behov av ordning bland känslorna och indirekt moralisk fostran.</li>
+      <li>Kapitel 2, stycke 3: föräldrar som undanhåller det mörka, barnet som ser sig som ett odjur.</li>
+      <li>Kapitel 2, stycke 5: strider ingår i livet men går att övervinna.</li>
+      <li>Kapitel 2, stycke 6: ”snälla” sagor undviker döden och åldrandet.</li>
+    </ul>
+    <h4>Kan du hoppa över</h4>
+    <p class="small">Detaljerna om oidipusbekymmer, narcissistiska besvikelser och psykoanalysens nivåer (medvetet, förmedvetet, omedvetet) behövs bara om ämnet gäller psykologi. Schiller-citatet är ett citat i ett citat, undvik det.</p>
+    <h4>Modellstycke</h4>
+    <div class="model" id="m-bet">I boken Sagans förtrollade värld, utgiven 1976, skriver Bruno Bettelheim om folksagornas betydelse för barn. Bettelheim menar att sagorna hjälper barnet att ordna sina känslor och förstå sitt inre, eftersom de behandlar universella problem som barn brottas med. Han framhåller att sagorna, till skillnad från moderna ”snälla” berättelser, inte väjer för svåra ämnen som döden och åldrandet. Enligt Bettelheim lär sagorna barnet att strider är en del av livet men att de går att övervinna.</div>
+    <button type="button" data-copy="m-bet">Kopiera modellstycket</button>
+    <h4 style="margin-top:18px">Passar ämnena</h4>
+    <p><a class="tag" href="#t2">Barn eller vuxna</a><a class="tag" href="#t3">Populäritet</a><a class="tag" href="#t4">Mörker</a><a class="tag" href="#t8">Fostran</a><a class="tag" href="#t9">Påverkan</a></p>
+  </article>
+
+  <article class="card src ahl" id="src-ahl">
+    <h3>Karin Ahlborg: ”Barnvänliga – efter stor sexrensning” (Aftonbladet 5 mars 2013)</h3>
+    <p class="meta">Tidningsartikel. Historisk och avslöjande ton, ledigt språk. Skriv aldrig lika ledigt själv.</p>
+    <p><strong>Kärnan:</strong> Bröderna Grimms sagor var från början våldsamma och sexuella, och gjordes barnvänliga först genom många bearbetningar.</p>
+    <h4>Huvudpoänger</h4>
+    <ul>
+      <li>Originalens innehåll: våldtäkt (Törnrosa i sina tidiga förlagor), sadism och graviditet. Straff som att Snövits elaka mor tvingas dansa till döds i glödande järnskor, och att Askungens styvsystrar får ögonen urhackade av duvor.</li>
+      <li>Första utgåvan 1812 blev ingen succé. Kritikerna ansåg texterna olämpliga för barn och stötande.</li>
+      <li>Bröderna ville inte underhålla barn. Deras syfte var nationellt: att hitta gemensamma rötter för ett Tyskland som då bestod av ungefär 200 furstendömen.</li>
+      <li>De anklagas i dag för forskningsfusk: de samlade inte själva, höll sig inte till allmogen och inte bara till tyska sagor. Törnrosa lär ha ursprung i en fransk bok från 1528, och liknande intrig finns i Tusen och en natt.</li>
+      <li>Under 17 utgåvor och 52 år mildrades våldet, sexet togs bort och kristna symboler lades till (mormors bibel i Rödluvan).</li>
+      <li>Klassaspekt: barn som redan hade rikedom fick höra sagorna, för fattiga barn ansågs det grymt att plantera drömmar om rikedom.</li>
+      <li>Sagorna blev en av världens mest lästa böcker, översatt till 160 språk. Efter andra världskriget kritiserades de i Tyskland, och Louis Snyder (1978) hävdade att de skapat ideal som möjliggjorde Nazityskland. De flesta forskare avfärdar det.</li>
+      <li>Philip Pullman skriver i dag om sagorna för att täppa till luckor.</li>
+    </ul>
+    <h4>Förvalt citat (10 ord)</h4>
+    <blockquote>”Bröderna Grimms sagor var från början inte alls särskilt barnvänliga.”<cite>Ahlborg (2013), artikelns första stycken</cite></blockquote>
+    <p class="small">Så bäddar du in det: Ahlborg inleder med att slå fast: ”Bröderna Grimms sagor var från början inte alls särskilt barnvänliga.”</p>
+    <h4>Fler platser att hämta citat från</h4>
+    <ul class="small">
+      <li>Stycket om 1812-utgåvan och kritikernas reaktion.</li>
+      <li>Stycket om att bröderna aldrig tänkt sig att underhålla barn (deras nationella mission).</li>
+      <li>Stycket om Snyder och forskarnas avfärdande.</li>
+      <li>Stycket om att bara vissa barn fick höra sagorna.</li>
+    </ul>
+    <h4>Kan du hoppa över</h4>
+    <p class="small">Handlingen i Perceforest, alla exempel på våldsamma straff och uttrycket ”sim sala bim”. Använd ett eller två exempel om ämnet gäller mörker. Tonen i ”Bullshit, säger de flesta forskare” ska du inte efterlikna, skriv i stället ”de flesta forskare avfärdar detta”.</p>
+    <h4>Modellstycke</h4>
+    <div class="model" id="m-ahl">I artikeln ”Barnvänliga – efter stor sexrensning”, publicerad i Aftonbladet den 5 mars 2013, skriver Karin Ahlborg om hur bröderna Grimms sagor har förändrats. Ahlborg redogör för att sagorna ursprungligen innehöll våld och sexuella inslag och att kritikerna därför ansåg dem olämpliga för barn när den första utgåvan kom 1812. Hon beskriver hur bröderna successivt mildrade innehållet under 17 utgåvor, och att sagorna därefter blev en av världens mest lästa böcker. Ahlborg tar också upp att brödernas ursprungliga syfte var att stärka en tysk gemenskap, inte att underhålla barn.</div>
+    <button type="button" data-copy="m-ahl">Kopiera modellstycket</button>
+    <h4 style="margin-top:18px">Passar ämnena</h4>
+    <p><a class="tag" href="#t1">Förändring</a><a class="tag" href="#t2">Barn eller vuxna</a><a class="tag" href="#t4">Mörker</a><a class="tag" href="#t5">Spegel av tiden</a><a class="tag" href="#t6">Ursprung</a><a class="tag" href="#t9">Påverkan</a></p>
+  </article>
+
+  <article class="card src bor" id="src-bor">
+    <h3>Robert Börjesson: ”En Rödluvan för vår tid” (Dagens Nyheter 19 april 2011)</h3>
+    <p class="meta">Intervju med regissören Catherine Hardwicke (och skådespelaren Amanda Seyfried) om filmen Red Riding Hood. Åsikterna är Hardwickes, inte Börjessons.</p>
+    <p><strong>Kärnan:</strong> Hardwicke menar att sagor har lager som gör att de betyder olika saker i olika åldrar, och att de hela tiden anpassas efter sin tid.</p>
+    <h4>Huvudpoänger</h4>
+    <ul>
+      <li>Hardwicke har gjort en modern version av Rödluvan. Kritiker ser den delvis som ett kalkylerat försök att kopiera Twilights framgångsrecept (kärlekstriangel, varulvar).</li>
+      <li>Sagor är populära i filmvärlden och fler filmatiseringar kommer (Snövit, Jack och bönstjälken, Pinocchio, Skönheten och odjuret, Hans och Greta).</li>
+      <li>Hardwicke tror att Hollywood har upptäckt det Bettelheim skrev om i Sagans förtrollade värld (Börjesson anger året 1975).</li>
+      <li>Sagor har olika betydelse för olika åldrar: som barn handlar Rödluvan om rädsla, som äldre märker man en sexuell underton. Under ytan finns komplexa lager.</li>
+      <li>Sagan hjälper dig i livets strider och att konfrontera rädsla och lust i stället för att sopa det under mattan.</li>
+      <li>Sagor uppdateras för att stämma med sin tid och moral. I tidigare versioner räddade Rödluvan sitt eget liv, senare räddades hon av en man. Hardwicke vill i sin version ha paranoia och terrorskräck.</li>
+      <li>Rödluvan finns i många versioner, från Perrault till Angela Carters feministiska The Company of Wolves.</li>
+    </ul>
+    <h4>Förvalt citat (12 ord)</h4>
+    <blockquote>”hela tiden uppdateras för att överensstämma med sin tid och dess moral”<cite>Hardwicke i intervju av Börjesson (DN 2011). Ordagrant utdrag ur meningen ”… att de hela tiden uppdateras …”</cite></blockquote>
+    <p class="small">Så bäddar du in det: Regissören Catherine Hardwicke, som intervjuas av Robert Börjesson, menar att sagor ”hela tiden uppdateras för att överensstämma med sin tid och dess moral”.</p>
+    <h4>Fler platser att hämta citat från</h4>
+    <ul class="small">
+      <li>Hardwickes svar om att sagor har olika betydelse för olika åldrar.</li>
+      <li>Hardwickes uttalande om att sagan hjälper dig att konfrontera rädsla och lust.</li>
+      <li>Hennes utsaga om att Rödluvan först räddade sig själv.</li>
+    </ul>
+    <h4>Kan du hoppa över</h4>
+    <p class="small">Testkyssar i sovrummet, Hardwickes arkitektbakgrund, Seyfrieds utseende, musiken i filmen och att pappan spelas av samma skådespelare som i Twilight.</p>
+    <h4>Modellstycke</h4>
+    <div class="model" id="m-bor">I artikeln ”En Rödluvan för vår tid”, publicerad i Dagens Nyheter den 19 april 2011, återger Robert Börjesson regissören Catherine Hardwickes tankar om sagor och om hennes filmatisering av Rödluvan. Hardwicke menar att sagor har olika betydelse för olika åldrar och att de hjälper människor att möta rädsla och lust i stället för att förtränga dem. Hon framhåller också att sagor hela tiden uppdateras efter sin tid, och nämner att Rödluvan i tidigare versioner räddade sig själv medan en man senare fick rädda henne.</div>
+    <button type="button" data-copy="m-bor">Kopiera modellstycket</button>
+    <h4 style="margin-top:18px">Passar ämnena</h4>
+    <p><a class="tag" href="#t1">Förändring</a><a class="tag" href="#t3">Populäritet</a><a class="tag" href="#t4">Mörker</a><a class="tag" href="#t5">Spegel av tiden</a><a class="tag" href="#t7">Kommersialism</a></p>
+  </article>
+
+  <article class="card src kah" id="src-kah">
+    <h3>Sigrid Kahle: ”Tusen och en natt: arabisk texthistoria” (Gåvor från Österland, 2001)</h3>
+    <p class="meta">Historisk kunskapstext, mest neutral och närmast vetenskaplig i stilen. Bra förebild för din egen ton. I filen står namnet stavat ”Khale”, kontrollera stavningen på provpappret.</p>
+    <p><strong>Kärnan:</strong> Tusen och en natt har vuxit fram ur flera kulturer över tusen år, formats av översättare och har aldrig varit skrivna för barn.</p>
+    <h4>Huvudpoänger</h4>
+    <ul>
+      <li>Rötterna finns i 700-talets Irak, i Abbasidrikets Bagdad, där persiska, indiska, grekiska och arabiska influenser möttes. Berättandet skedde muntligt.</li>
+      <li>Belägg: al-Mas’udi 956 och al-Nadim 987 nämner samlingen. Titeln Tusen och en natt finns hela på 1100-talet. Berättelserna fick fast form under 1200-talet och den äldsta fullständiga handskriften är från 1400-talet.</li>
+      <li>Den egyptiska grenen är senare. När antalet 1001 saknades fylldes det ut med sagostoff från annat håll.</li>
+      <li>Antoine Galland översatte fritt 1704–1717 och blev en sensation. Han lade berättelserna till rätta efter fransk smak. Aladdin och Ali Baba tillkom senare och saknar i stort sett arabiska originaltexter.</li>
+      <li>1800-talets översättare gjorde olika val: Burton väjde inte för erotik, Littmann gömde det ekivoka bakom latin. Första svenska översättningen gjordes av Sandström 1836–51.</li>
+      <li>Bland araber har de varken setts som fin litteratur eller enkla folksagor. De har aldrig varit skrivna för barn. Från aristokratisk underhållning blev de folkkära och sedan kommersiell teater. I dag har araberna accepterat dem och många författare inspireras av Shahrazad.</li>
+    </ul>
+    <h4>Förvalt citat (7 ord)</h4>
+    <blockquote>”De har aldrig varit skrivna för barn.”<cite>Kahle (2001), i den avslutande delen om sagornas fortsatta öde</cite></blockquote>
+    <p class="small">Så bäddar du in det: Kahle konstaterar att sagorna i Tusen och en natt ”aldrig varit skrivna för barn”.</p>
+    <h4>Fler platser att hämta citat från</h4>
+    <ul class="small">
+      <li>Stycket om att Galland lade berättelserna till rätta efter tidens smak.</li>
+      <li>Stycket om det multikulturella Bagdad i inledningen.</li>
+      <li>Sista stycket: från aristokratisk underhållning till kommersiell teater, samt dagens författare.</li>
+    </ul>
+    <h4>Kan du hoppa över</h4>
+    <p class="small">Handskrifternas exakta tidsordning, namnen på alla översättare och Mahdis utgåva. Du behöver dem bara om ämnet är ursprung och spridning. Undvik uppgiften om 1917, den är otydlig i texten.</p>
+    <h4>Modellstycke</h4>
+    <div class="model" id="m-kah">I texten ”Tusen och en natt: arabisk texthistoria”, publicerad i Gåvor från Österland (2001), redogör Sigrid Kahle för hur sagosamlingen Tusen och en natt växte fram. Kahle beskriver att berättelserna har rötter i persisk, indisk och arabisk tradition och att de länge traderades muntligt innan de fick fast form. Hon förklarar hur den franske orientalisten Antoine Galland gjorde dem kända i Europa i början av 1700-talet genom en fri översättning anpassad efter fransk smak. Kahle betonar att sagorna aldrig har varit skrivna för barn.</div>
+    <button type="button" data-copy="m-kah">Kopiera modellstycket</button>
+    <h4 style="margin-top:18px">Passar ämnena</h4>
+    <p><a class="tag" href="#t1">Förändring</a><a class="tag" href="#t2">Barn eller vuxna</a><a class="tag" href="#t6">Ursprung</a></p>
+  </article>
+
+  <article class="card src fah" id="src-fah">
+    <h3>Hanna Fahl: ”Sagolika klassiker hittar nya roller i populärkulturen” (Dagens Nyheter 2 december 2011)</h3>
+    <p class="meta">Artikel med experter som får komma till tals: Anna Arnman (film- och konstvetare, Linnéuniversitetet) och Nene Ormes (författare). De två är delvis oeniga.</p>
+    <p><strong>Kärnan:</strong> Sagor görs om för vuxna i film och tv just nu, och förklaringen är omstridd: längtan efter trygghet eller pengar och beprövade ikoner?</p>
+    <h4>Huvudpoänger</h4>
+    <ul>
+      <li>Ett kluster av sagoberättelser för vuxna: tv-serierna Grimm och Once Upon a Time, filmen Red Riding Hood och två Snövit-filmer året därpå. Det ingår i ett decennium av fantastik (Twilight, Harry Potter, Game of Thrones).</li>
+      <li>Adam Gidwitz: sagofascinationen handlar om ett grundläggande behov, och vi törstar efter magi när världen känns magibefriad.</li>
+      <li>Arnman: i orostider söker vi trygghet och traditionella mönster. Sagorna handlar om hur vi ser på vår samtid. De förläggs oftast till vardagen (urban fantasy).</li>
+      <li>Ormes: sagor är grundläggande för mänskligheten och att göra om dem passar sagotraditionen (lägga till och dra ifrån). Grimms sagor har censurerats hårt. Mörkare tolkningar låter det goda och onda glida på en gråskala.</li>
+      <li>Snövit är ofta filmad: tydligheten (ond drottning mot god flicka) och de sju dvärgarna gör den intressant.</li>
+      <li>Ekonomi: filmbolagen tror sig veta vad som är ”bankable”, och sagogestalterna är kulturella ikoner. Ormes tror däremot inte att oro är förklaringen, en polisfilm är inte mindre trygg än Snövit.</li>
+    </ul>
+    <h4>Förvalt citat (7 ord)</h4>
+    <blockquote>”I orostider vill vi ha det traditionella”<cite>Anna Arnman i intervju av Fahl (DN 2011)</cite></blockquote>
+    <p class="small">Så bäddar du in det: Filmvetaren Anna Arnman menar att människor söker sig till sagor av en särskild anledning: ”I orostider vill vi ha det traditionella”.</p>
+    <h4>Fler platser att hämta citat från</h4>
+    <ul class="small">
+      <li>Arnmans uttalanden om trygghet, vardag och Snövit.</li>
+      <li>Ormes om att omgörandet passar sagoberättandets tradition.</li>
+      <li>De två sista styckena: Ormes skepsis mot oro-förklaringen.</li>
+    </ul>
+    <h4>Kan du hoppa över</h4>
+    <p class="small">Rammstein-tolkningen, serien Fables, Jim C Hines bokserie och listan på tv-serier. Nämn en eller två titlar om du behöver ett exempel.</p>
+    <h4>Modellstycke</h4>
+    <div class="model" id="m-fah">I artikeln ”Sagolika klassiker hittar nya roller i populärkulturen”, publicerad i Dagens Nyheter den 2 december 2011, skriver Hanna Fahl om att klassiska sagor i dag görs om för en vuxen publik i film och tv. Fahl återger olika förklaringar till trenden. Filmvetaren Anna Arnman menar att människor i oroliga tider söker sig till trygghet och traditionella berättelser, medan författaren Nene Ormes framhåller att ekonomiska motiv spelar stor roll och betvivlar att oro är förklaringen.</div>
+    <button type="button" data-copy="m-fah">Kopiera modellstycket</button>
+    <h4 style="margin-top:18px">Passar ämnena</h4>
+    <p><a class="tag" href="#t2">Barn eller vuxna</a><a class="tag" href="#t3">Populäritet</a><a class="tag" href="#t5">Spegel av tiden</a><a class="tag" href="#t7">Kommersialism</a></p>
+  </article>
+</section>
+
+<section id="kopplingar">
+  <h2>Kopplingar mellan texterna</h2>
+  <p class="lead">Här finns dina jämförelser färdigt utlagda. Varje par visar hur källorna förhåller sig till varandra, så att du kan skriva ”Till skillnad från …” och ”Båda betonar …” utan att fundera.</p>
+
+  <h4>De fyra röda trådarna genom alla texter</h4>
+  <div class="grid2">
+    <div class="card"><h3>Sagor förändras</h3><p>Ahlborg (Grimm rensas), Kahle (Galland, översättare), Börjesson (uppdatering efter tiden), Fahl (Ormes: omgörning är tradition). Bettelheim nämner att sagor har slipats i århundraden.</p></div>
+    <div class="card"><h3>Barn eller vuxna</h3><p>Bettelheim (barnets behov), Ahlborg och Kahle (ursprungligen inte för barn), Börjesson (olika åldrar ser olika saker), Fahl (nu åter för vuxna).</p></div>
+    <div class="card"><h3>Det mörka</h3><p>Bettelheim (barn behöver det), Ahlborg (rensades bort), Börjesson (konfrontera rädsla och lust), Fahl (mörkare tolkningar), Kahle (Burton och erotiken).</p></div>
+    <div class="card"><h3>Varför de lever kvar</h3><p>Bettelheim (inre, tidlösa behov), Börjesson (lager i sagan), Fahl (trygghet och pengar), Kahle (inspirerar författare).</p></div>
+  </div>
+
+  <h4>Alla tio par</h4>
+  <div id="pairs">
+    <article class="pair" id="pair-bet-ahl"><h4><span class="chip bet"><i class="dot"></i>Bettelheim</span> och <span class="chip ahl"><i class="dot"></i>Ahlborg</span></h4><span class="kind">Motsättning: skyddande mot konfronterande syn</span>
+      <p>Bettelheim menar att barn behöver möta det mörka och att ”snälla” berättelser sviker dem. Ahlborg visar att just det mörka skalades bort när Grimms sagor anpassades för barn. Ahlborgs klassargument (fattiga barn borde inte få höra om rikedom) står mot Bettelheims tanke att sagor gagnar alla barn. Snyders tes (skadlig påverkan) står mot Bettelheims (hjälpande påverkan).</p></article>
+    <article class="pair" id="pair-bet-bor"><h4><span class="chip bet"><i class="dot"></i>Bettelheim</span> och <span class="chip bor"><i class="dot"></i>Börjesson</span></h4><span class="kind">Samstämmighet: Hardwicke hänvisar uttryckligen till Bettelheim</span>
+      <p>Båda framhåller att sagor har flera lager, betyder olika saker i olika åldrar och hjälper människan att möta rädsla i stället för att blunda. Notera att Börjesson anger 1975 som år för Bettelheims bok, medan Bettelheim-texten anger 1976, så undvik att skriva ut båda.</p></article>
+    <article class="pair" id="pair-bet-kah"><h4><span class="chip bet"><i class="dot"></i>Bettelheim</span> och <span class="chip kah"><i class="dot"></i>Kahle</span></h4><span class="kind">Kontrast och nyans: vilken sorts saga?</span>
+      <p>Bettelheim skriver om folksagor som barnens främsta litteratur. Kahle visar att Tusen och en natt aldrig skrevs för barn och varken är enkla folksagor eller fin litteratur. Det visar att ”saga” inte är en enhetlig kategori. Gemensamt: båda beskriver berättelser som slipats genom århundraden.</p></article>
+    <article class="pair" id="pair-bet-fah"><h4><span class="chip bet"><i class="dot"></i>Bettelheim</span> och <span class="chip fah"><i class="dot"></i>Fahl</span></h4><span class="kind">Kontrast: inre eller yttre förklaring</span>
+      <p>Bettelheim förklarar sagornas värde med inre, tidlösa psykologiska behov och menar att de inte speglar det moderna samhällets villkor. Fahl (Arnman) menar tvärtom att sagor handlar om hur vi ser på vår samtid och söker trygghet i oro. Gemensamt: både Bettelheim och Gidwitz talar om något grundläggande i människan.</p></article>
+    <article class="pair" id="pair-ahl-bor"><h4><span class="chip ahl"><i class="dot"></i>Ahlborg</span> och <span class="chip bor"><i class="dot"></i>Börjesson</span></h4><span class="kind">Samstämmighet: sagor formas efter tidens moral</span>
+      <p>Ahlborg: Grimm tog bort sex och våld och lade till kristna symboler. Börjesson (Hardwicke): Rödluvan gick från att rädda sig själv till att räddas av en man, och i den nya filmen präglas hon av terrorskräck. Båda visar också nya bearbetningar i dag (Pullman, Hardwicke).</p></article>
+    <article class="pair" id="pair-ahl-kah"><h4><span class="chip ahl"><i class="dot"></i>Ahlborg</span> och <span class="chip kah"><i class="dot"></i>Kahle</span></h4><span class="kind">Samstämmighet och komplettering: bearbetning och ursprung</span>
+      <p>Båda visar att sagorna ursprungligen inte var till för barn och att de bearbetades: Grimm rensades, Galland anpassade efter fransk smak. Ahlborg noterar att Törnrosas intrig finns i Tusen och en natt. Kontrast: Grimms nationella projekt (ena Tyskland) mot Tusen och en natts flerkulturella ursprung. Erotiken: Grimm-rensning mot Burtons översättning som inte väjde.</p></article>
+    <article class="pair" id="pair-ahl-fah"><h4><span class="chip ahl"><i class="dot"></i>Ahlborg</span> och <span class="chip fah"><i class="dot"></i>Fahl</span></h4><span class="kind">Samstämmighet: pendeln mellan mörkt och milt</span>
+      <p>Ormes bekräftar att Grimms sagor censurerats hårt, Ahlborg visar hur. Fahl beskriver hur mörkret nu återvänder i vuxenversioner, och Ahlborg nämner Pullmans omskrivning. Mönstret: mörk original, rensad barnversion, mörk vuxenversion.</p></article>
+    <article class="pair" id="pair-bor-kah"><h4><span class="chip bor"><i class="dot"></i>Börjesson</span> och <span class="chip kah"><i class="dot"></i>Kahle</span></h4><span class="kind">Komplettering: sagor som underhållningsvara</span>
+      <p>Kahle ger det långa perspektivet: sagor som hovunderhållning som blev kommersiell teater. Börjesson ger det moderna: Hollywoods sagoboom. Båda visar hur sagor får nya roller i underhållningsindustrin och anpassas efter publikens smak.</p></article>
+    <article class="pair" id="pair-bor-fah"><h4><span class="chip bor"><i class="dot"></i>Börjesson</span> och <span class="chip fah"><i class="dot"></i>Fahl</span></h4><span class="kind">Samstämmighet och motsättning: varför gör Hollywood sagor?</span>
+      <p>Båda skrevs 2011 och handlar om sagoboomen (Rödluvan, Snövit, Twilight). Hardwicke tror att filmbolagen upptäckt sagornas djup, medan Fahl (Ormes, Arnman) lyfter pengar och trygghet. Samma samtid tolkas olika: Arnman ser trygghetssökande, Hardwicke lägger in paranoia och terrorskräck.</p></article>
+    <article class="pair" id="pair-kah-fah"><h4><span class="chip kah"><i class="dot"></i>Kahle</span> och <span class="chip fah"><i class="dot"></i>Fahl</span></h4><span class="kind">Komplettering: sagor för vuxna, då och nu</span>
+      <p>Sagor som vuxenunderhållning, då (Tusen och en natt) och nu (film och tv). Kommersialisering finns i båda. Författare inspireras: Shahrazad hos Kahle, sagor som ram hos Ormes. Ormes ”sagor har alltid funnits” stämmer med Kahles långa historia. Skillnad: Kahle skriver om ett arabiskt och persiskt arv, Fahl om västerländska Grimm-sagor.</p></article>
+  </div>
+</section>
+
+<section id="amnen">
+  <h2>Ämnesguide med färdiga upplägg</h2>
+  <p class="lead">Nio tänkbara ämnen. Varje upplägg har rekommenderad trio, en fjärde källa som reserv, en färdig frågeställning och ett slutsatsutkast att använda som modell. Öppna det ämne som ligger närmast det du får på provet.</p>
+
+  <div class="card">
+    <h4 style="margin-top:0">Känn igen ämnet på nyckelorden</h4>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Om uppgiften nämner …</th><th>Gå till</th></tr></thead>
+      <tbody>
+        <tr><td>förändring, censur, bearbetning, omskrivning</td><td><a href="#t1">Hur och varför förändras sagor</a></td></tr>
+        <tr><td>barn, vuxna, målgrupp, lämplighet</td><td><a href="#t2">Är sagor till för barn</a></td></tr>
+        <tr><td>populär, varför i dag, intresse, lockelse</td><td><a href="#t3">Varför är sagor populära</a></td></tr>
+        <tr><td>våld, sex, mörker, skräck, rädsla</td><td><a href="#t4">Sagornas mörka sidor</a></td></tr>
+        <tr><td>samhälle, värderingar, tidsanda, spegel</td><td><a href="#t5">Sagor speglar sin tid</a></td></tr>
+        <tr><td>ursprung, spridning, kultur, tradition</td><td><a href="#t6">Sagors ursprung och spridning</a></td></tr>
+        <tr><td>film, tv, populärkultur, pengar, industri</td><td><a href="#t7">Sagor och kommersialism</a></td></tr>
+        <tr><td>moral, uppfostran, psykologi, känslor</td><td><a href="#t8">Sagors fostrande funktion</a></td></tr>
+        <tr><td>påverkan, nationalism, ideologi, inflytande</td><td><a href="#t9">Sagors påverkan</a></td></tr>
+      </tbody></table></div>
+    <p class="small">Passar ämnet ingen av raderna exakt: välj det ämne som ligger närmast och bygg tyngdpunkten på vad uppgiften faktiskt frågar. Sätt då frågeställningen i uppgiftens ordalag.</p>
+  </div>
+
+  <details id="t1"><summary>Hur och varför förändras sagor (bearbetning, censur, omskrivning)</summary><div class="body">
+    <p><span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip kah"><i class="dot"></i>Kahle</span><span class="chip bor"><i class="dot"></i>Börjesson</span> reserv: <span class="chip fah"><i class="dot"></i>Fahl</span></p>
+    <p><strong>Röd tråd:</strong> Sagor har aldrig varit fasta texter. Varje tid och publik omformar dem efter sin smak, moral och marknad.</p>
+    <p><strong>Frågeställning:</strong> På vilka sätt och av vilka skäl har sagor förändrats genom tiderna?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Ahlborg:</strong> 17 utgåvor på 52 år, våld och sex mildras, kristna symboler, Snövits mor blir styvmor, Pullman skriver om.</li>
+      <li><strong>Kahle:</strong> från muntligt till skrift, 1001 nätter fylls ut med stoff från annat håll, Galland anpassar efter fransk smak, olika 1800-talsöversättningar.</li>
+      <li><strong>Börjesson:</strong> Hardwicke: sagor uppdateras efter tid och moral, Rödluvan räddade först sig själv, hennes version präglas av paranoia.</li>
+      <li><strong>Fahl (reserv):</strong> Ormes: omgörning hör till traditionen, Grimm censurerades hårt.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Vem styr förändringen: utgivare, översättare, filmskapare?</li><li>Riktningen: äldre bearbetningar rensar, moderna återför det mörka.</li><li>Motivet: anpassa till barn, till smak, till marknad.</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s1">Sammantaget visar källorna att sagor sällan har varit fasta texter. Ahlborg beskriver hur bröderna Grimms sagor mildrades och kristnades för att passa barn, och Kahle visar hur Tusen och en natt formades efter en fransk publiks smak när Galland översatte dem. Börjesson visar att samma process pågår i dag, då regissörer omtolkar sagor efter samtidens moral och rädslor. Riktningen skiljer sig dock åt: äldre bearbetningar mildrade ofta innehållet, medan moderna versioner i högre grad återför det mörka. Det tyder på att sagornas livskraft till stor del bygger på deras anpassningsbarhet.</div>
+    <button type="button" data-copy="s1">Kopiera</button>
+  </div></details>
+
+  <details id="t2"><summary>Är sagor till för barn (målgrupp, barn eller vuxna)</summary><div class="body">
+    <p><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip kah"><i class="dot"></i>Kahle</span> reserv: <span class="chip fah"><i class="dot"></i>Fahl</span></p>
+    <p><strong>Röd tråd:</strong> Barnperspektivet är i hög grad en senare tillkomst. Bettelheim menar ändå att sagor tjänar barn bäst, och i dag riktas de åter till vuxna.</p>
+    <p><strong>Frågeställning:</strong> För vilken målgrupp har sagor skrivits, och hur har det förändrats?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Bettelheim:</strong> folksagor ger barn ordning bland känslor och indirekt moral, samtidigt som de når vuxna på alla nivåer.</li>
+      <li><strong>Ahlborg:</strong> bröderna hade inte tänkt sig att underhålla barn, kritikerna 1812, anpassning över 52 år, klassaspekten.</li>
+      <li><strong>Kahle:</strong> Tusen och en natt aldrig skrivna för barn, aristokratisk underhållning, Tengströms utgåva för barn och vuxna.</li>
+      <li><strong>Fahl (reserv):</strong> nya versioner riktas till vuxen publik.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Ursprunglig målgrupp mot senare.</li><li>Är mörkret ett hinder (kritikerna hos Ahlborg) eller ett behov (Bettelheim)?</li><li>Sagor som når alla åldrar (Bettelheim, Hardwicke).</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s2">Källorna pekar på att sagorna inte från början riktades till barn. Ahlborg visar att bröderna Grimms första utgåva ansågs olämplig för barn och att texterna bearbetades i flera omgångar, och Kahle framhåller att sagorna i Tusen och en natt aldrig har varit skrivna för barn. Bettelheim hävdar däremot att folksagorna bäst tillgodoser barnets psykiska behov, vilket kan tolkas som att sagornas värde för barn upptäcktes i efterhand snarare än planerades. Sagans målgrupp verkar alltså bero mer på tid och syfte än på sagornas natur.</div>
+    <button type="button" data-copy="s2">Kopiera</button>
+  </div></details>
+
+  <details id="t3"><summary>Varför är sagor fortfarande populära</summary><div class="body">
+    <p><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip fah"><i class="dot"></i>Fahl</span><span class="chip bor"><i class="dot"></i>Börjesson</span> reserv: <span class="chip kah"><i class="dot"></i>Kahle</span></p>
+    <p><strong>Röd tråd:</strong> Två förklaringsnivåer: inre och tidlösa behov (Bettelheim, Hardwicke) mot yttre omständigheter som oro och pengar (Fahl).</p>
+    <p><strong>Frågeställning:</strong> Hur förklaras att sagor fortfarande engagerar människor?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Bettelheim:</strong> sagor ordnar känslor och behandlar universella problem för alla åldrar.</li>
+      <li><strong>Börjesson:</strong> Hardwicke: flera lager, olika betydelser för olika åldrar, konfrontera rädsla och lust.</li>
+      <li><strong>Fahl:</strong> Gidwitz (behov av magi), Arnman (trygghet i oro), Ormes (pengar och ”bankable”, tvivlar på oro-förklaringen).</li>
+      <li><strong>Kahle (reserv):</strong> Shahrazads berättarkonst inspirerar författare än i dag.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Inre behov mot yttre omständigheter.</li><li>Tidlöst mot tidsbundet (Bettelheim mot Arnman).</li><li>Arnman mot Ormes: förklaringen är omstridd.</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s3">Källorna erbjuder två sorters förklaringar till att sagor fortfarande engagerar. Bettelheim och Hardwicke, som intervjuas av Börjesson, betonar sagornas inre värde: de rymmer flera lager som talar till människor i olika åldrar och hjälper dem att möta rädsla och begär. Fahl lyfter i stället yttre förklaringar, som längtan efter trygghet i oroliga tider och filmbolagens jakt på lönsamma berättelser, även om Nene Ormes ifrågasätter oro som förklaring. Förklaringarna utesluter inte varandra: sagornas djup kan förklara varför de fungerar, medan samtiden och marknaden förklarar varför de får så stort utrymme just nu.</div>
+    <button type="button" data-copy="s3">Kopiera</button>
+  </div></details>
+
+  <details id="t4"><summary>Sagornas mörka sidor (våld, sex, skräck): nödvändigt eller olämpligt</summary><div class="body">
+    <p><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip bor"><i class="dot"></i>Börjesson</span> reserv: <span class="chip fah"><i class="dot"></i>Fahl</span></p>
+    <p><strong>Röd tråd:</strong> Två synsätt: skydda barnet från det mörka (kritikerna 1812, ”snälla” sagor) mot att barnet behöver möta det (Bettelheim, Hardwicke).</p>
+    <p><strong>Frågeställning:</strong> Vilken roll spelar det mörka i sagor, och hur har synen på det förändrats?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Bettelheim:</strong> föräldrar undanhåller barn det mörka, barn ser sig som odjur, sagor tar upp död och åldrande.</li>
+      <li><strong>Ahlborg:</strong> originalens våld och sex, kritikernas reaktion, rensning över 17 utgåvor.</li>
+      <li><strong>Börjesson:</strong> Hardwicke: konfrontera rädsla och lust i stället för att sopa under mattan, sexuell underton, paranoia.</li>
+      <li><strong>Fahl (reserv):</strong> mörkare tolkningar, gråskala mellan gott och ont.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Skyddande mot konfronterande syn.</li><li>Vem avgör vad som är lämpligt: tid, klass, kritiker?</li><li>Barn mot vuxna som publik.</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s4">Källorna företräder två motstående synsätt på sagornas mörker. Enligt Ahlborg ansågs de tidiga Grimm-sagorna stötande för barn, och innehållet mildrades i takt med att de fick en yngre publik. Bettelheim och Hardwicke, som intervjuas av Börjesson, menar i stället att människor har nytta av att sagorna konfronterar rädsla, död och begär, och Bettelheim varnar för att berättelser som undviker sådant lämnar barnet ensamt med sina känslor. Skillnaden tycks delvis handla om vad som ska skyddas: barnets oskuld eller barnets möjlighet att bearbeta svåra känslor. Att Hardwicke själv lyfter fram rädsla och paranoia i sin filmatisering kan tyda på att synen på mörkret har förskjutits mot Bettelheims hållning.</div>
+    <button type="button" data-copy="s4">Kopiera</button>
+  </div></details>
+
+  <details id="t5"><summary>Sagor speglar sin tid (samhälle och värderingar)</summary><div class="body">
+    <p><span class="chip bor"><i class="dot"></i>Börjesson</span><span class="chip fah"><i class="dot"></i>Fahl</span><span class="chip ahl"><i class="dot"></i>Ahlborg</span> reserv: <span class="chip bet"><i class="dot"></i>Bettelheim</span> (som motpol)</p>
+    <p><strong>Röd tråd:</strong> Varje tid läser in sin moral och sina rädslor i sagorna. Bettelheim menar dock att sagorna behandlar tidlösa inre problem.</p>
+    <p><strong>Frågeställning:</strong> På vilket sätt speglar sagor den tid och det samhälle de berättas i?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Börjesson:</strong> Rödluvan (räddar sig själv, sedan en man som räddar, terrorskräck i den nya versionen).</li>
+      <li><strong>Fahl:</strong> Arnman: sagor visar hur vi ser vår samtid, vardagsmiljöer. Ormes tvivlar på trygghetsförklaringen.</li>
+      <li><strong>Ahlborg:</strong> kristna symboler, klassdimensionen, nationsbygge, Snyders tes och forskarnas avfärdande.</li>
+      <li><strong>Bettelheim (motpol):</strong> sagorna speglar inte moderna villkor utan universella inre problem.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Vad speglas: oro, moral, klass?</li><li>Hur tydlig är spegeln (Ormes betvivlar den)?</li><li>Tidsbundet mot tidlöst (Bettelheim).</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s5">Källorna visar att sagor ofta fungerar som en spegel av sin samtid. Ahlborg beskriver hur Grimms sagor anpassades till tidens moral genom att våld och sex togs bort och kristna symboler lades till, och Börjesson återger Hardwickes iakttagelse att Rödluvan gick från att rädda sig själv till att räddas av en man. Fahl visar att dagens sagofilmer förläggs till vardagen och tolkas som ett uttryck för samtidens oro, även om Nene Ormes är tveksam till den förklaringen. Att förklaringen är omstridd visar att sambandet mellan saga och samhälle är svårt att belägga fullt ut, men att sagor omformas efter sin tid framstår som väl belagt.</div>
+    <button type="button" data-copy="s5">Kopiera</button>
+  </div></details>
+
+  <details id="t6"><summary>Sagors ursprung och spridning</summary><div class="body">
+    <p><span class="chip kah"><i class="dot"></i>Kahle</span><span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip fah"><i class="dot"></i>Fahl</span> reserv: <span class="chip bet"><i class="dot"></i>Bettelheim</span></p>
+    <p><strong>Röd tråd:</strong> Sagor är sällan nationella. De vandrar mellan kulturer, muntligt och skriftligt, och får nya former.</p>
+    <p><strong>Frågeställning:</strong> Hur har sagor uppstått och spridits mellan kulturer?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Kahle:</strong> persiska, indiska och arabiska rötter, muntligt till skrift, Galland tar dem till Europa.</li>
+      <li><strong>Ahlborg:</strong> Grimms nationella syfte, forskningsfusk-anklagelsen, Törnrosa och Perceforest, likheten med Tusen och en natt.</li>
+      <li><strong>Fahl:</strong> Ormes: sagor är grundläggande för mänskligheten, svenska folksagor var förbisedda.</li>
+      <li><strong>Bettelheim (reserv):</strong> sagor har finslipats genom århundraden.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Nationellt projekt mot gränsöverskridande arv.</li><li>Muntligt mot skriftligt.</li><li>Vem ”äger” en saga?</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s6">Källorna visar att sagor sällan tillhör en enda kultur. Kahle beskriver hur Tusen och en natt växte fram ur persiska, indiska och arabiska berättartraditioner och senare fick ny form genom europeiska översättare. Ahlborg visar att bröderna Grimm samlade sagor i ett nationellt syfte, men att flera av dem, exempelvis Törnrosa, enligt henne kan spåras till fransk litteratur och har släktskap med Tusen och en natt. Fahl återger Nene Ormes tanke att sagorna är grundläggande för mänskligheten. Sammantaget verkar sagornas spridning ha byggt på ett ständigt utbyte mellan kulturer, vilket gör försök att knyta dem till en enda nation svåra att motivera.</div>
+    <button type="button" data-copy="s6">Kopiera</button>
+  </div></details>
+
+  <details id="t7"><summary>Sagor i film och tv: kommersialism och populärkultur</summary><div class="body">
+    <p><span class="chip fah"><i class="dot"></i>Fahl</span><span class="chip bor"><i class="dot"></i>Börjesson</span><span class="chip kah"><i class="dot"></i>Kahle</span> reserv: <span class="chip ahl"><i class="dot"></i>Ahlborg</span></p>
+    <p><strong>Röd tråd:</strong> Sagor är både kulturarv och handelsvara. Kommersialiseringen är inte ny, men i dag drivs den av filmbolagens jakt på det riskfria.</p>
+    <p><strong>Frågeställning:</strong> Vilka motiv ligger bakom sagornas plats i populärkulturen?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Fahl:</strong> ”bankable”, kända ikoner, fantasy-boom, Arnman och Ormes om orsakerna.</li>
+      <li><strong>Börjesson:</strong> fler sagofilmer på väg, misstanken att Red Riding Hood kopierar Twilight, Hardwickes syn på sagornas djup.</li>
+      <li><strong>Kahle:</strong> Galland och det lönande företaget, kommersiell teater i Orientens städer.</li>
+      <li><strong>Ahlborg (reserv):</strong> Grimm blev en av världens mest lästa böcker, jubileumsåret och Pullmans bearbetning.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Konstnärliga mot ekonomiska motiv.</li><li>Nytt mot gammalt: kommersialisering fanns redan i Kahles historia.</li><li>Hardwicke (djup) mot Ormes (pengar).</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s7">Källorna visar att sagorna är både kulturarv och handelsvara. Fahl beskriver hur filmbolagen väljer sagor eftersom de är kända och därmed relativt riskfria, och Börjesson återger både kritikernas misstanke att Hardwickes film kopierar Twilights framgångsrecept och regissörens egen förklaring att sagor rymmer djupa lager. Kahle visar att kommersialiseringen inte är ny: när Tusen och en natt kom till Europa blev de en sensation och ett lönsamt företag, och i Orienten blev de senare underhållning i kommersiell teater. Sagornas ekonomiska värde verkar alltså hänga ihop med deras kända karaktärer och långa historia, medan det konstnärliga värdet är svårare att mäta.</div>
+    <button type="button" data-copy="s7">Kopiera</button>
+  </div></details>
+
+  <details id="t8"><summary>Sagors fostrande och psykologiska funktion (moral)</summary><div class="body">
+    <p><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip bor"><i class="dot"></i>Börjesson</span><span class="chip ahl"><i class="dot"></i>Ahlborg</span> reserv: <span class="chip fah"><i class="dot"></i>Fahl</span></p>
+    <p><strong>Röd tråd:</strong> Sagor som verktyg: barnet lär moral indirekt (Bettelheim), men vad som räknas som lämplig moral bestäms av tid och klass (Ahlborg).</p>
+    <p><strong>Frågeställning:</strong> Vilken funktion har sagor för människors utveckling och moral?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Bettelheim:</strong> indirekt moralisk fostran, konkret snarare än abstrakt, hjälp att ordna känslor, fantasi och det omedvetna.</li>
+      <li><strong>Börjesson:</strong> Hardwicke: sagan hjälper dig i livets strider, konfrontera rädsla och lust.</li>
+      <li><strong>Ahlborg:</strong> kristna symboler tillfogas, fattiga barn ansågs inte böra få drömma om rikedom.</li>
+      <li><strong>Fahl (reserv):</strong> Ormes: gestalter som arketyper i stället för stereotyper, gråskala mellan gott och ont.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Universell mot samhällsformad moral.</li><li>Indirekt fostran mot uttalad (kristna symboler).</li><li>Barns nytta mot vuxnas kontroll över vad barn får höra.</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s8">Källorna ger delvis olika bilder av vad sagor gör för människan. Bettelheim menar att sagor ger barn en indirekt moralisk fostran och hjälper dem att ordna sina känslor, och Hardwicke, som intervjuas av Börjesson, framhåller att sagor hjälper människor att konfrontera rädsla och lust. Ahlborg visar dock att vad som ansågs vara lämplig fostran varierade med tid och klass: sagorna kristnades, och fattiga barn ansågs inte böra få höra om rikedom och lycka. Det tyder på att sagornas fostrande funktion aldrig har varit neutral, även om Bettelheim framställer den som allmängiltig.</div>
+    <button type="button" data-copy="s8">Kopiera</button>
+  </div></details>
+
+  <details id="t9"><summary>Sagors påverkan på människor och samhälle (ideologi, nationalism)</summary><div class="body">
+    <p><span class="chip ahl"><i class="dot"></i>Ahlborg</span><span class="chip bet"><i class="dot"></i>Bettelheim</span><span class="chip kah"><i class="dot"></i>Kahle</span> reserv: <span class="chip fah"><i class="dot"></i>Fahl</span></p>
+    <p><strong>Röd tråd:</strong> Sagors verkan bedöms helt olika: helande (Bettelheim), skadlig (Snyder hos Ahlborg) och inspirerande (Kahle).</p>
+    <p><strong>Frågeställning:</strong> Hur beskrivs sagors påverkan på människor och samhälle?</p>
+    <h4>Hämta ur källorna</h4>
+    <ul>
+      <li><strong>Ahlborg:</strong> brödernas nationella syfte, Snyders tes 1978 om ideal som möjliggjorde Nazityskland, de flesta forskare avfärdar den.</li>
+      <li><strong>Bettelheim:</strong> sagor hjälper barnet att växa, bearbeta det omedvetna och möta livets strider.</li>
+      <li><strong>Kahle:</strong> Shahrazads berättarkonst inspirerar nutida arabiska och persiska författare, sagorna har accepterats i arabvärlden.</li>
+      <li><strong>Fahl (reserv):</strong> Arnman: sagor visar hur vi ser på vår samtid.</li>
+    </ul>
+    <h4>Jämförelsepunkter</h4>
+    <ul><li>Individens utveckling mot samhällets utveckling.</li><li>Positiv mot negativ påverkan.</li><li>Hur välgrundade är påståendena (Snyder avfärdas av de flesta forskare)?</li></ul>
+    <h4>Slutsatsutkast (modell)</h4>
+    <div class="model" id="s9">Källorna bedömer sagors påverkan på människor och samhälle mycket olika. Bettelheim ser folksagorna som något som hjälper barnet att växa och hantera sitt inre kaos. Ahlborg redogör för Louis Snyders tes att bröderna Grimms sagor skapade ideal som möjliggjorde Nazityskland, men noterar att de flesta forskare avfärdar den. Kahle beskriver en mer indirekt påverkan: Shahrazads berättarkonst inspirerar än i dag många författare. Att bedömningarna skiljer sig så mycket visar hur svårt det är att belägga vad berättelser gör med människor, och de starkast belagda effekterna i källorna verkar gälla inflytande på berättande och individ snarare än på hela samhällen.</div>
+    <button type="button" data-copy="s9">Kopiera</button>
+  </div></details>
+</section>
+
+<section id="valjare">
+  <h2>Kombinationsväljaren</h2>
+  <p class="lead">Kryssa i två till fyra källor och se vilka ämnen kombinationen täcker bäst, samt hur källorna hänger ihop.</p>
+  <div class="card">
+    <fieldset style="border:0;padding:0;margin:0">
+      <legend class="small" style="padding:0">Välj källor</legend>
+      <div class="finder" id="finder">
+        <label><input type="checkbox" value="bet"><i class="dot bet"></i>Bettelheim</label>
+        <label><input type="checkbox" value="ahl"><i class="dot ahl"></i>Ahlborg</label>
+        <label><input type="checkbox" value="bor"><i class="dot bor"></i>Börjesson</label>
+        <label><input type="checkbox" value="kah"><i class="dot kah"></i>Kahle</label>
+        <label><input type="checkbox" value="fah"><i class="dot fah"></i>Fahl</label>
+      </div>
+    </fieldset>
+    <div id="finder-msg" class="small" aria-live="polite">Välj minst två källor.</div>
+    <div id="finder-out" aria-live="polite"></div>
+    <div id="finder-pairs"></div>
+  </div>
+</section>
+
+<section id="verktyg">
+  <h2>Referat, citat och fraser</h2>
+  <p class="lead">Läraren vill se referat, alltså omformulering med tydlig källhänvisning. Här är mönstret, citatreglerna och fraserna som lyfter språket.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Referatets uppbyggnad</h3>
+      <ol>
+        <li><strong>Presentera källan:</strong> ”I sin bok <em>Titel</em>, utgiven år, skriver Namn om …” (samma mönster som din lärare gav).</li>
+        <li><strong>Redogör:</strong> ”Namn redogör för …”, ”Namn menar att …”. Berätta vad skribenten säger, inte vad du tycker.</li>
+        <li><strong>Håll fokus på frågeställningen:</strong> välj bara det som hör till frågan.</li>
+        <li><strong>Återkom till källan:</strong> använd namnet igen så att läsaren alltid vet vems idé det är.</li>
+        <li><strong>Tempus:</strong> presens (”Ahlborg beskriver”, ”Kahle menar”).</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Citatregler</h3>
+      <ul>
+        <li>Citera sparsamt, ett kort citat per källa räcker och tar mer plats än du tror.</li>
+        <li>Återge ordagrant och sätt citattecken. Ändra inte ett enda ord.</li>
+        <li>Bädda in citatet i din egen mening och säg vem som yttrar det.</li>
+        <li>Förklara vad citatet visar med egna ord efteråt.</li>
+        <li>Är det en intervjuad person som talar: ”Hardwicke, som intervjuas av Börjesson”.</li>
+        <li>Ta bort något inuti ett citat med [ … ]. Skriv aldrig om det till det du önskar att det stod.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>Verb som bär referat på A-nivå</h4>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Funktion</th><th>Verb</th></tr></thead>
+    <tbody>
+      <tr><td>Beskriva</td><td>redogör för, beskriver, skildrar, presenterar, tar upp</td></tr>
+      <tr><td>Hävda</td><td>menar, hävdar, framhåller, betonar, understryker, anser</td></tr>
+      <tr><td>Visa</td><td>visar, påvisar, belyser, illustrerar, exemplifierar</td></tr>
+      <tr><td>Förklara</td><td>förklarar, motiverar, anger som orsak, tolkar</td></tr>
+      <tr><td>Ifrågasätta</td><td>ifrågasätter, betvivlar, invänder, avfärdar, kritiserar</td></tr>
+      <tr><td>Hänvisa</td><td>hänvisar till, återger, refererar till, citerar</td></tr>
+    </tbody></table></div>
+
+  <h4>Objektiv saklighet: byt ut det här</h4>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Undvik</th><th>Skriv i stället</th></tr></thead>
+    <tbody>
+      <tr><td>Jag tycker att Bettelheim har rätt</td><td>Bettelheims resonemang får stöd av Hardwicke, som …</td></tr>
+      <tr><td>Det är bra att sagor är mörka</td><td>Enligt Bettelheim fyller det mörka en viktig funktion, eftersom …</td></tr>
+      <tr><td>Man kan ju säga att …</td><td>Det kan konstateras att …</td></tr>
+      <tr><td>Sagor är typ superpopulära</td><td>Sagor har en stor och bestående popularitet.</td></tr>
+      <tr><td>Ahlborg tycker att sagorna var läskiga</td><td>Ahlborg beskriver hur sagorna innehöll våld och sexuella inslag.</td></tr>
+    </tbody></table></div>
+
+  <h4>Fraser för jämförelse, nyansering och slutsats</h4>
+  <div class="grid2">
+    <div class="card"><h3>Jämföra</h3><ul>
+      <li>Både X och Y framhåller att …</li>
+      <li>Till skillnad från X menar Y att …</li>
+      <li>Medan X främst fokuserar på …, lyfter Y fram …</li>
+      <li>X:s resonemang får stöd av Y, som …</li>
+      <li>Här går källorna isär: …</li></ul></div>
+    <div class="card"><h3>Nyansera</h3><ul>
+      <li>Detta ska dock nyanseras: …</li>
+      <li>En möjlig förklaring till skillnaden är att …</li>
+      <li>Samtidigt bör det poängteras att …</li>
+      <li>Det finns dock en invändning: …</li>
+      <li>Påståendet är omstritt, eftersom …</li></ul></div>
+    <div class="card"><h3>Dra slutsats</h3><ul>
+      <li>Sammantaget visar källorna att …</li>
+      <li>Med utgångspunkt i det som framkommit kan man dra slutsatsen att …</li>
+      <li>Även om … tyder det mesta på att …</li>
+      <li>Skillnaden verkar bero på …</li>
+      <li>Källorna ger tillsammans en bild av att …</li></ul></div>
+    <div class="card"><h3>Binda ihop text</h3><ul>
+      <li>Utöver detta, dessutom, vidare</li>
+      <li>Däremot, å andra sidan, i stället</li>
+      <li>Därför, följaktligen, som en följd av detta</li>
+      <li>Med detta som bakgrund övergår texten till …</li></ul></div>
+  </div>
+</section>
+
+<section id="mall">
+  <h2>PM-mall och tidsplan</h2>
+  <p class="lead">Matrisen belönar att texten har inledning, huvudtext och avslutning, att stycken fyller sin funktion och att textbindningen fungerar. Här är ett upplägg som gör det.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Del</th><th>Innehåll</th><th>Ungefärlig andel</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Inledning</strong></td><td>Kort bakgrund till ämnet, syfte, frågeställningen (så som uppgiften ställer den) och en mening om vilka källor du använder.</td><td>ca 10 procent</td></tr>
+      <tr><td><strong>Referat, källa 1</strong></td><td>Presentera källan (författare, titel, år), 3 till 5 referatmeningar kopplade till frågan, ett kort citat.</td><td>ca 15 procent</td></tr>
+      <tr><td><strong>Referat, källa 2</strong></td><td>Samma mönster. Inled med en textbindning som pekar bakåt: ”Till skillnad från …”.</td><td>ca 15 procent</td></tr>
+      <tr><td><strong>Referat, källa 3</strong></td><td>Samma mönster. Ett citat i den källa där en formulering är särskilt avgörande.</td><td>ca 15 procent</td></tr>
+      <tr><td><strong>Jämförelse och diskussion</strong></td><td>Två till tre stycken: likheter, skillnader och en nyansering (invändning eller förklaring till skillnaden). Bygg på det du redan refererat.</td><td>ca 30 procent</td></tr>
+      <tr><td><strong>Slutsats</strong></td><td>Svara direkt på frågeställningen i 4 till 6 meningar. Inga nya källor eller fakta.</td><td>ca 10 procent</td></tr>
+      <tr><td><strong>Källförteckning</strong></td><td>Se längst ned.</td><td>kort</td></tr>
+    </tbody></table></div>
+  <div class="grid2">
+    <div class="card"><h3>Vilken källa först?</h3><p>Börja med den som sätter scenen: den historiska (Kahle, Ahlborg) eller den teoretiska (Bettelheim). Avsluta med den mest aktuella (Fahl, Börjesson) eftersom den ofta ger den bästa övergången till jämförelsen.</p></div>
+    <div class="card"><h3>Två, tre eller fyra källor?</h3><p>Två är minimum och gör det svårt att nå nyanserade slutsatser. Tre ger bäst balans mellan djup och överblick. Fyra ger fler jämförelser men riskerar tunna referat. Välj fyra bara om du hinner referera skickligt.</p></div>
+    <div class="card"><h3>Tidsplan (räkna om efter provets längd)</h3><ul>
+      <li>Första 10 procent: bestäm ämnestyp, källor och frågeställning. Skriv slutsatsen i stödord.</li>
+      <li>Nästa 60 procent: skriv inledning och referat, sedan jämförelse.</li>
+      <li>Sista 30 procent: slutsats, källförteckning och två genomläsningar.</li></ul></div>
+    <div class="card"><h3>Öva så här</h3><ul>
+      <li>Pass 1: välj ämne, skriv frågeställning och stödord för tre källor. 10 minuter.</li>
+      <li>Pass 2: skriv jämförelse och slutsats för samma ämne utan att titta i kompendiet.</li>
+      <li>Pass 3: skriv ett helt PM på tid för ett annat ämne.</li></ul></div>
+  </div>
+</section>
+
+<section id="kontroll">
+  <h2>Kontrolllista mot bedömningsmatrisen</h2>
+  <p class="lead">Kryssa av i tur och ordning. Punkterna är hämtade ur matrisen (Skolverket, delprov A, svenska 3) och avser den högsta aspektnivån.</p>
+  <div class="grid2">
+    <div class="card check">
+      <h3>Innehåll (nivå 3)</h3>
+      <ul>
+        <li><label><input type="checkbox"> Frågeställningen motsvarar den som ges i uppgiften.</label></li>
+        <li><label><input type="checkbox"> Beskrivningen har tydligt fokus på frågeställningen och bygger på flera relevanta källor.</label></li>
+        <li><label><input type="checkbox"> Referaten är skickligt utförda och i egna ord.</label></li>
+        <li><label><input type="checkbox"> Jämförelsen och slutsatsen är utvecklad, nyanserad och bygger tydligt på textreferaten.</label></li>
+        <li><label><input type="checkbox"> Texten är genomgående objektiv och saklig, utan ”jag tycker”.</label></li>
+        <li><label><input type="checkbox"> Citat och referat fungerar: rätt källa, rätt person, korta ordagranna citat.</label></li>
+      </ul>
+    </div>
+    <div class="card check">
+      <h3>Disposition (högsta nivå)</h3>
+      <ul>
+        <li><label><input type="checkbox"> Inledning, huvudtext och avslutning finns och fyller sina funktioner.</label></li>
+        <li><label><input type="checkbox"> Stoffet är organiserat utifrån uppgiftens syfte.</label></li>
+        <li><label><input type="checkbox"> Styckeindelningen fungerar: ett stycke, en tanke, tydlig inledande mening.</label></li>
+        <li><label><input type="checkbox"> Textbindningen är väl fungerande, med övergångar mellan källor och mellan referat och jämförelse.</label></li>
+      </ul>
+    </div>
+    <div class="card check">
+      <h3>Språk och stil (nivå 3)</h3>
+      <ul>
+        <li><label><input type="checkbox"> Språket följer skriftspråkets normer: stavning, skiljetecken, ordföljd.</label></li>
+        <li><label><input type="checkbox"> Ordvalen är precisa och språket varierat, med olika verb för referat.</label></li>
+        <li><label><input type="checkbox"> Stilen är vetenskaplig: formell, saklig, utan talspråk.</label></li>
+        <li><label><input type="checkbox"> Meningarna bär upp resonemanget och är inte onödigt långa.</label></li>
+      </ul>
+    </div>
+    <div class="card check">
+      <h3>Sista kollen</h3>
+      <ul>
+        <li><label><input type="checkbox"> Slutsatsen svarar direkt på frågeställningen.</label></li>
+        <li><label><input type="checkbox"> Inget står som påstående som i själva verket är en källas åsikt.</label></li>
+        <li><label><input type="checkbox"> Källförteckningen finns och stämmer med det du refererat.</label></li>
+        <li><label><input type="checkbox"> Antalet källor ligger inom det som uppgiften tillåter.</label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="fallgropar">
+  <h2>Fallgropar i just de här texterna</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Intervjuade personer:</strong> i Börjessons text är åsikterna Hardwickes, i Fahls text Arnmans, Ormes och Gidwitz. Skriv ”Hardwicke menar, i en intervju med Börjesson” och inte att Börjesson själv tycker det.</li>
+      <li><strong>Årtal för Bettelheim:</strong> Bettelheim-texten anger 1976, Börjesson skriver 1975. Använd året under texten och nämn inte båda.</li>
+      <li><strong>Kahles namn:</strong> i filen står ”Khale” och ”ÖsterLand”. Kolla stavningen på provpappret och kopiera den därifrån.</li>
+      <li><strong>Hedgningar:</strong> Ahlborg skriver att Törnrosa ”lär” ha sitt ursprung i Perceforest. Skriv därför ”enligt Ahlborg” eller ”kan spåras till”, inte att det är bevisat.</li>
+      <li><strong>Snyders tes:</strong> Ahlborg återger den men skriver att de flesta forskare avfärdar den. Presentera den aldrig som fakta.</li>
+      <li><strong>Två sorters sagor:</strong> Bettelheim skriver om folksagor. Kahle skriver att Tusen och en natt varken är fin litteratur eller enkla folksagor. Blanda inte ihop dem när du generaliserar.</li>
+      <li><strong>Tidsord i texterna:</strong> ”nästa år”, ”förra året” och ”just nu” är relativa till publiceringsdatum. Skriv ut åren (2011, 2012).</li>
+      <li><strong>Tonen:</strong> Ahlborg och Fahl skriver som journalister. Kopiera aldrig deras ledighet, håll dig till vetenskaplig stil.</li>
+      <li><strong>Referatet som sammanfattning:</strong> återge inte hela texten. Välj det som svarar på frågeställningen.</li>
+      <li><strong>Jämförelsen blir ett nytt referat:</strong> jämförelsen ska sätta källorna mot varandra, inte återberätta dem igen.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="fakta">
+  <h2>Snabbfakta att kunna utantill</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Källa</th><th>Fakta som ofta kommer väl till pass</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip bet"><i class="dot"></i>Bettelheim</span></td><td>Sagans förtrollade värld, 1976. Begrepp: medvetet, förmedvetet, omedvetet. Folksagor mot ”snälla” sagor. Barnet bearbetar via fantasi.</td></tr>
+      <tr><td><span class="chip ahl"><i class="dot"></i>Ahlborg</span></td><td>Grimm: första utgåvan 1812, 17 utgåvor på 52 år, översatt till 160 språk. Ungefär 200 furstendömen. Perceforest 1528. Louis Snyder 1978. Emil Grimm lade till kristna symboler. Pullman skriver om.</td></tr>
+      <tr><td><span class="chip bor"><i class="dot"></i>Börjesson</span></td><td>Catherine Hardwicke (Twilight, Red Riding Hood). Amanda Seyfried. Perrault och Angela Carter som andra Rödluvan-versioner. Hänvisar till Bettelheim.</td></tr>
+      <tr><td><span class="chip kah"><i class="dot"></i>Kahle</span></td><td>Bagdad grundades 762. al-Mas’udi 956, al-Nadim 987. 1100-talet: hela titeln. 1200-talet: fast form. Galland 1704–1717. Burton 1885–88. Sandström (svenska) 1836–51. Mahdi 1984: elva berättelser, 282 nätter.</td></tr>
+      <tr><td><span class="chip fah"><i class="dot"></i>Fahl</span></td><td>Grimm och Once Upon a Time (tv), Red Riding Hood (film). Anna Arnman (Linnéuniversitetet), Nene Ormes (Udda verklighet), Adam Gidwitz, Adam Horowitz. Disneys Snövit 1937.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="kallforteckning">
+  <h2>Källförteckning (färdig att anpassa)</h2>
+  <p class="lead">Kontrollera med din lärare vilket format som gäller och stäm av stavning mot provpappret.</p>
+  <div class="card">
+    <div id="refs">
+      <p>Ahlborg, Karin (2013-03-05). ”Barnvänliga – efter stor sexrensning”. <em>Aftonbladet</em>.</p>
+      <p>Bettelheim, Bruno (1976). <em>Sagans förtrollade värld</em>.</p>
+      <p>Börjesson, Robert (2011-04-19). ”En Rödluvan för vår tid”. <em>Dagens Nyheter</em>.</p>
+      <p>Fahl, Hanna (2011-12-02). ”Sagolika klassiker hittar nya roller i populärkulturen”. <em>Dagens Nyheter</em>.</p>
+      <p>Kahle, Sigrid (2001). ”Tusen och en natt: arabisk texthistoria”. I: <em>Gåvor från Österland</em>.</p>
+    </div>
+    <button type="button" data-copy="refs">Kopiera källförteckningen</button>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Kopiera-knappar */
+  function copyText(text, btn){
+    var done = function(){
+      var old = btn.textContent;
+      btn.textContent = "Kopierat";
+      setTimeout(function(){ btn.textContent = old; }, 1400);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+    } else { fallback(text); done(); }
+  }
+  function fallback(text){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target.closest("[data-copy]");
+    if (!b) return;
+    var el = document.getElementById(b.getAttribute("data-copy"));
+    if (el) copyText(el.innerText.trim(), b);
+  });
+
+  /* Öppna ämnesdetaljen när man länkar dit */
+  function openFromHash(){
+    var id = location.hash.slice(1);
+    var el = id && document.getElementById(id);
+    if (el && el.tagName === "DETAILS") el.open = true;
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
+  document.addEventListener("click", function(e){
+    var a = e.target.closest('a[href^="#t"]');
+    if (!a) return;
+    var el = document.getElementById(a.getAttribute("href").slice(1));
+    if (el && el.tagName === "DETAILS") el.open = true;
+  });
+
+  /* Skriv ut: öppna allt */
+  window.addEventListener("beforeprint", function(){
+    document.querySelectorAll("details").forEach(function(d){ d.open = true; });
+  });
+
+  /* Kombinationsväljare */
+  var ORDER = ["bet","ahl","bor","kah","fah"];
+  var NAMES = {bet:"Bettelheim",ahl:"Ahlborg",bor:"Börjesson",kah:"Kahle",fah:"Fahl"};
+  var FIT = {
+    t1:{bet:1,ahl:2,bor:2,kah:2,fah:1},
+    t2:{bet:2,ahl:2,bor:1,kah:2,fah:2},
+    t3:{bet:2,ahl:0,bor:2,kah:1,fah:2},
+    t4:{bet:2,ahl:2,bor:2,kah:1,fah:1},
+    t5:{bet:1,ahl:2,bor:2,kah:1,fah:2},
+    t6:{bet:1,ahl:2,bor:1,kah:2,fah:1},
+    t7:{bet:0,ahl:1,bor:2,kah:1,fah:2},
+    t8:{bet:2,ahl:1,bor:1,kah:0,fah:1},
+    t9:{bet:2,ahl:2,bor:0,kah:1,fah:0}
+  };
+  var boxes = Array.prototype.slice.call(document.querySelectorAll("#finder input"));
+  var msg = document.getElementById("finder-msg");
+  var out = document.getElementById("finder-out");
+  var pairsOut = document.getElementById("finder-pairs");
+
+  function label(p){
+    if (p >= 80) return "Mycket bra";
+    if (p >= 60) return "Bra";
+    if (p >= 40) return "Möjlig";
+    return "Svag";
+  }
+  function render(){
+    var sel = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.value; });
+    out.innerHTML = ""; pairsOut.innerHTML = "";
+    if (sel.length < 2){
+      msg.textContent = sel.length === 0 ? "Välj minst två källor." : "Välj en källa till (minst två krävs).";
+      msg.className = "small";
+      return;
+    }
+    msg.textContent = sel.length === 4 ? "Fyra är maxgränsen. Se till att du hinner referera alla skickligt." : "";
+    msg.className = "small";
+
+    var rows = Object.keys(FIT).map(function(t){
+      var sum = 0;
+      sel.forEach(function(s){ sum += FIT[t][s]; });
+      var pct = Math.round(sum / (2 * sel.length) * 100);
+      var title = document.querySelector("#" + t + " summary").textContent;
+      return {id:t, pct:pct, title:title};
+    }).sort(function(a,b){ return b.pct - a.pct; });
+
+    var html = "<h3>Så väl täcker kombinationen ämnena</h3>";
+    rows.forEach(function(r){
+      html += '<div class="res"><a href="#' + r.id + '">' + r.title + '</a> <span class="small">(' + label(r.pct) + ', ' + r.pct + ' procent)</span>' +
+              '<div class="bar" role="img" aria-label="' + r.pct + ' procent"><i style="width:' + r.pct + '%"></i></div></div>';
+    });
+    out.innerHTML = html;
+
+    var ph = "<h3>Så hänger dina källor ihop</h3>";
+    for (var i = 0; i < ORDER.length; i++){
+      for (var j = i + 1; j < ORDER.length; j++){
+        if (sel.indexOf(ORDER[i]) > -1 && sel.indexOf(ORDER[j]) > -1){
+          var el = document.getElementById("pair-" + ORDER[i] + "-" + ORDER[j]);
+          if (el) ph += '<div class="pair">' + el.innerHTML + '</div>';
+        }
+      }
+    }
+    pairsOut.innerHTML = ph;
+  }
+  boxes.forEach(function(b){
+    b.addEventListener("change", function(){
+      var n = boxes.filter(function(x){ return x.checked; }).length;
+      if (n > 4){
+        b.checked = false;
+        msg.textContent = "Max fyra källor. Avmarkera en först.";
+        msg.className = "warn";
+        return;
+      }
+      render();
+    });
+  });
+})();
+</script>
+</body>
+</html>
