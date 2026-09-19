@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PM-förberedelse: Sagor – Svenska 3</title>
+<style>
+:root {
+  --bg: #f5f4ef;
+  --surface: #ffffff;
+  --ink: #0d1b2a;
+  --mid: #4a5568;
+  --border: #dde3eb;
+  --nav: #0d1b2a;
+
+  --s1: #1e3a5f;
+  --s2: #2e5e4e;
+  --s3: #6b2d3e;
+  --s4: #7a5c1e;
+  --s5: #3d2b6e;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* === NAV === */
+.nav {
+  position: sticky;
+  top: 0;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 200;
+  background: var(--nav);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav button {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255,255,255,0.55);
+  padding: 12px 14px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  transition: color .15s, border-color .15s;
+}
+.nav button:hover { color: rgba(255,255,255,.85); }
+.nav button.active { color: #fff; border-bottom-color: #60a5fa; }
+
+/* === SECTIONS === */
+.section {
+  display: none;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 22px 16px 60px;
+}
+.section.active { display: block; }
+
+.section-head {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+}
+.section-head h1 {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.section-head p {
+  font-size: 13px;
+  color: var(--mid);
+}
+
+/* === SOURCE CARDS === */
+.source-card {
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: box-shadow .15s;
+}
+.source-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+
+.source-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 14px 15px;
+  cursor: pointer;
+  user-select: none;
+}
+.source-dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.source-label { flex: 1; }
+.source-title-text { font-weight: 700; font-size: 14.5px; line-height: 1.3; }
+.source-byline { font-size: 12px; color: var(--mid); margin-top: 2px; }
+.chevron { font-size: 11px; color: var(--mid); margin-top: 4px; transition: transform .2s; }
+.source-card.open .chevron { transform: rotate(180deg); }
+
+.source-body {
+  display: none;
+  padding: 0 15px 16px;
+  border-top: 1px solid var(--border);
+}
+.source-card.open .source-body { display: block; }
+
+/* inner labels */
+.inner-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--mid);
+  margin: 14px 0 6px;
+}
+
+/* ref box */
+.ref-box {
+  background: #f0f4f8;
+  border-left: 3px solid;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 13px;
+  font-size: 13px;
+  line-height: 1.75;
+  margin-bottom: 8px;
+}
+.ref-box em { font-style: italic; }
+.ref-note {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+  padding: 6px 10px;
+  background: #fffbea;
+  border: 1px solid #e8d96b;
+  border-radius: 5px;
+}
+
+/* key points */
+.kp { margin: 4px 0; }
+.kp li {
+  list-style: none;
+  padding: 3px 0 3px 18px;
+  position: relative;
+  font-size: 13.5px;
+}
+.kp li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* quote */
+.quote {
+  font-style: italic;
+  font-size: 13px;
+  color: #2d3748;
+  border-left: 2px solid;
+  padding: 8px 12px;
+  margin: 6px 0;
+  background: #fafaf9;
+  border-radius: 0 5px 5px 0;
+  line-height: 1.7;
+}
+.quote small {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--mid);
+  margin-top: 4px;
+}
+
+/* === THEMES === */
+.theme-card {
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 15px;
+  margin-bottom: 12px;
+}
+.theme-card .t-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+.pill {
+  font-size: 11px; font-weight: 600;
+  padding: 2px 9px; border-radius: 20px; color: #fff;
+}
+.t-desc { font-size: 13.5px; color: #2d3748; margin-bottom: 8px; }
+.t-q {
+  font-size: 13px; color: var(--mid);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+
+/* === PHRASES === */
+.phrase-group {
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.pg-head {
+  background: #0d1b2a;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 8px 14px;
+}
+.phrase { padding: 8px 14px; font-size: 13.5px; border-bottom: 1px solid #f0f0f0; color: #1a2a3a; }
+.phrase:last-child { border-bottom: none; }
+.phrase em { font-style: italic; color: var(--mid); }
+
+/* === STRUCTURE === */
+.step { display: flex; gap: 14px; margin-bottom: 18px; }
+.step-num {
+  width: 34px; height: 34px;
+  background: #0d1b2a; color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; flex-shrink: 0;
+}
+.step-body {}
+.step-title { font-weight: 700; font-size: 14.5px; margin-bottom: 5px; }
+.step-desc { font-size: 13.5px; color: #2d3748; }
+.step-desc em { font-style: italic; }
+
+/* === GRADE CRITERIA === */
+.crit-section-title {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--mid); margin: 18px 0 6px;
+}
+.crit-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.crit-row:last-of-type { border-bottom: none; }
+.crit-key { font-weight: 700; color: #0d1b2a; }
+.crit-val { color: #2d3748; }
+
+/* === CALLOUTS === */
+.callout {
+  border-radius: 8px;
+  padding: 13px 14px;
+  font-size: 13.5px;
+  margin: 12px 0;
+}
+.callout-warn { background: #fffbea; border: 1px solid #e8d96b; }
+.callout-tip { background: #e8f5e9; border: 1px solid #66bb6a; }
+.callout-info { background: #e8f0fd; border: 1px solid #5b8def; }
+.callout strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <button class="active" onclick="show('sources',this)">📚 Källorna</button>
+  <button onclick="show('themes',this)">🔗 Teman</button>
+  <button onclick="show('phrases',this)">✍️ Fraser</button>
+  <button onclick="show('structure',this)">📋 PM-mall</button>
+  <button onclick="show('grades',this)">🎯 A-krav</button>
+</nav>
+
+<!-- ============================= SOURCES ============================= -->
+<div id="sources" class="section active">
+  <div class="section-head">
+    <h1>Källorna</h1>
+    <p>Klicka på en källa. Lär dig referensformeln för varje källa utantill – det är det enda du behöver ha i huvudet under provet.</p>
+  </div>
+
+  <!-- S1: Bettelheim -->
+  <div class="source-card" id="c1" style="--accent:#1e3a5f">
+    <div class="source-header" onclick="toggle('c1')">
+      <div class="source-dot" style="background:#1e3a5f"></div>
+      <div class="source-label">
+        <div class="source-title-text">Sagans förtrollade värld</div>
+        <div class="source-byline">Bruno Bettelheim · Bok · 1976</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="source-body">
+      <div class="inner-label">Referensformeln – lär dig denna</div>
+      <div class="ref-box" style="border-color:#1e3a5f">
+        I sin bok <em>Sagans förtrollade värld</em>, utgiven 1976, skriver barnpsykologen Bruno Bettelheim om folksagornas psykologiska värde för barns utveckling. Bettelheim menar att…
+      </div>
+      <div class="ref-box" style="border-color:#1e3a5f">
+        <strong>Alternativ:</strong> Den amerikanske barnpsykologen Bruno Bettelheim argumenterar i <em>Sagans förtrollade värld</em> (1976) för att folksagor är unikt lämpliga för barns psykologiska mognad. Bettelheim redogör för…
+      </div>
+
+      <div class="inner-label">Vad texten handlar om</div>
+      <ul class="kp">
+        <li>Folksagor är det <strong>mest berikande</strong> som finns i barnlitteraturen – inget annat kan mäta sig med dem</li>
+        <li>Talar till barnets <strong>medvetna, förmedvetna och omedvetna</strong> sinne simultaneously (psykoanalys)</li>
+        <li>Hjälper barn bearbeta: narcissistiska besvikelser, oidipusbekymmer, syskonrivalitet</li>
+        <li>Föräldrar har fel när de skyddar barn från det mörka – ger "ensidig näring åt själen"</li>
+        <li>Budskapet i sagor: livet är hårt, men om man inte väjer vinner man till sist</li>
+        <li>Moderna barnberättelser misslyckas – undviker döden, åldrandet, genuina konflikter</li>
+        <li>Fantasin är barnets väg till det omedvetna – inte förnuftet</li>
+      </ul>
+
+      <div class="inner-label">Citat att använda</div>
+      <div class="quote" style="border-color:#1e3a5f">
+        "man kan inte slippa undan hårda strider i livet, de ingår i vår mänskliga tillvaro – men om man inte väjer utan tappert möter oväntade och ofta orättvisa prövningar, kommer man att övervinna alla hinder och till slut stå som segrare."
+        <small>→ Sagans kärnbudskap enligt Bettelheim</small>
+      </div>
+      <div class="quote" style="border-color:#1e3a5f">
+        "en så ensidig kost ger själen ensidig näringstillförsel, och verkliga livet är inte alltidigenom soligt."
+        <small>→ Om föräldrars misstag att skydda barn från mörkret</small>
+      </div>
+      <div class="quote" style="border-color:#1e3a5f">
+        "Det finns en djupare mening i de sagor jag fick höra som barn, än i den sanning livet lär."
+        <small>→ Friedrich Schiller, citeras av Bettelheim. Referera: <em>Bettelheim citerar Friedrich Schiller som sagt att…</em></small>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: Ahlborg -->
+  <div class="source-card" id="c2" style="--accent:#2e5e4e">
+    <div class="source-header" onclick="toggle('c2')">
+      <div class="source-dot" style="background:#2e5e4e"></div>
+      <div class="source-label">
+        <div class="source-title-text">Barnvänliga – efter stor sexrensning</div>
+        <div class="source-byline">Karin Ahlborg · Aftonbladet · 5 mars 2013</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="source-body">
+      <div class="inner-label">Referensformeln – lär dig denna</div>
+      <div class="ref-box" style="border-color:#2e5e4e">
+        I sin artikel "Barnvänliga – efter stor sexrensning", publicerad i Aftonbladet den 5 mars 2013, skriver Karin Ahlborg om Bröderna Grimms sagor och deras ursprungliga, vuxna innehåll. Ahlborg redogör för…
+      </div>
+
+      <div class="inner-label">Vad texten handlar om</div>
+      <ul class="kp">
+        <li>Originalen var inte barnvänliga: Törnrosa = våldtäktsoffer, Rapunzel = oplanerat gravid, Snövit = sadistisk</li>
+        <li>Grimm-brödernas egentliga mål: <strong>att ena Tyskland som nation</strong> – inte underhålla barn</li>
+        <li>Anklagades för forskningsfusk – samlade inte in sagor direkt från allmogen</li>
+        <li>17 utgåvor under 52 år: våldet mildrades, sexet försvann, kristna symboler lades till</li>
+        <li>Ursprungligen: bara för rika barn (fattiga ungar "fick inte planteras drömmar")</li>
+        <li>Anklagelse (Snyder 1978): sagorna skapade mentaliteten som möjliggjorde Nazityskland</li>
+        <li>Motsvar från forskare: sagorna är universella – finns i Grekland, Persien, Kina m.fl.</li>
+        <li>Idag: Philip Pullman renskriver sagorna; översatta till 160 språk</li>
+      </ul>
+
+      <div class="inner-label">Citat att använda</div>
+      <div class="quote" style="border-color:#2e5e4e">
+        "Bröderna Grimm hade aldrig tänkt sig att underhålla barn, deras mission med att samla in gamla folksagor var ett helt annat: att ena Tyskland till en nation."
+        <small>→ Grimm-brödernas verkliga syfte</small>
+      </div>
+      <div class="quote" style="border-color:#2e5e4e">
+        "Sagorna innehåller inte andra ingredienser än sagor som berättats i det antika Grekland, Persien, Egypten, Kina eller vilken del av världen som helst."
+        <small>→ Forskarnas motargument mot naziteorin – om sagornas universalitet</small>
+      </div>
+      <div class="quote" style="border-color:#2e5e4e">
+        "[…] bröderna Grimms sagor hade skapat ett ideal av disciplin, hängivenhet och våldsromantik och att de karaktärsdragen var precis vad som behövdes för att möjliggöra Nazityskland"
+        <small>→ Louis Snyder 1978, citeras i Ahlborgs artikel. Referera: <em>Ahlborg refererar den amerikanske författaren Louis Snyder som 1978 hävdade att…</em></small>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: Börjesson -->
+  <div class="source-card" id="c3" style="--accent:#6b2d3e">
+    <div class="source-header" onclick="toggle('c3')">
+      <div class="source-dot" style="background:#6b2d3e"></div>
+      <div class="source-label">
+        <div class="source-title-text">En Rödluvan för vår tid</div>
+        <div class="source-byline">Robert Börjesson · Dagens Nyheter · 19 april 2011</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="source-body">
+      <div class="inner-label">Referensformeln – lär dig denna</div>
+      <div class="ref-box" style="border-color:#6b2d3e">
+        I sin artikel "En Rödluvan för vår tid", publicerad i Dagens Nyheter den 19 april 2011, skriver Robert Börjesson om regissören Catherine Hardwickes moderna Rödluvan-film. Börjesson refererar Hardwicke som menar att…
+      </div>
+      <div class="ref-note">⚠️ OBS: Det är en intervju. Alla åsikter är Hardwickes, inte Börjessons. Skriv: "I artikeln framhåller regissören Catherine Hardwicke att…" eller bara "Hardwicke menar att…"</div>
+
+      <div class="inner-label">Vad texten handlar om</div>
+      <ul class="kp">
+        <li>Regissören Hardwicke gör en modern Rödluvan-film (2011) – inspirerad av Bettelheims idéer</li>
+        <li>Sagor uppdateras alltid för sin tids moral – det <em>är</em> traditionen</li>
+        <li>Äldre versioner: Rödluvan räddade sig själv. Senare: en man lades till som räddare</li>
+        <li>Hardwicke ville fånga modern paranoia och terrorrädsla i sin version</li>
+        <li>Sagors lager: som <strong>barn</strong> = rädsla / som <strong>vuxen</strong> = sexuell underton → man återvänder</li>
+        <li>Sagan hjälper dig konfrontera rädsla och lust istället för att "sopa under mattan"</li>
+      </ul>
+
+      <div class="inner-label">Citat att använda (Hardwickes ord via artikeln)</div>
+      <div class="quote" style="border-color:#6b2d3e">
+        "Eftersom sagor har olika betydelser för olika åldrar kommer människor alltid att vara intresserade av dem. När du är liten handlar 'Rödluvan' om rädsla. Men när du blir äldre upptäcker du att sagan också har en sexuell underton."
+        <small>→ Om sagornas fleråldriga och tidlösa dragningskraft</small>
+      </div>
+      <div class="quote" style="border-color:#6b2d3e">
+        "Sagan hjälper dig i dina strider i livet. Den hjälper dig att konfrontera rädsla och lust i stället för att sopa sådant under mattan."
+        <small>→ Stämmer in direkt på Bettelheims psykologiska argument</small>
+      </div>
+      <div class="quote" style="border-color:#6b2d3e">
+        "En intressant sak med sagor är att de hela tiden uppdateras för att överensstämma med sin tid och dess moral."
+        <small>→ Om sagornas ständiga anpassning</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: Tusen och en natt -->
+  <div class="source-card" id="c4" style="--accent:#7a5c1e">
+    <div class="source-header" onclick="toggle('c4')">
+      <div class="source-dot" style="background:#7a5c1e"></div>
+      <div class="source-label">
+        <div class="source-title-text">Tusen och en natt – arabisk texthistoria</div>
+        <div class="source-byline">Okänd författare · Kursmaterial (referensverk)</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="source-body">
+      <div class="inner-label">Referensformeln – lär dig denna</div>
+      <div class="ref-box" style="border-color:#7a5c1e">
+        I texten "Tusen och en natt – arabisk texthistoria" redogörs för sagornas historiska ursprung och väg från muntlig berättartradition till världslitteratur. Texten beskriver hur…
+      </div>
+      <div class="ref-note">⚠️ Ingen angiven författare → Referera texten, inte en person. Skriv "I texten redogörs för…" / "Texten beskriver hur…"</div>
+
+      <div class="inner-label">Vad texten handlar om</div>
+      <ul class="kp">
+        <li>Ursprung: 700-talets Irak (abbasidiska riket) – smältdegel för persisk, indisk, grekisk och arabisk kultur</li>
+        <li>Började som <strong>muntlig tradition</strong>, gradvis fixerad i skrift från 900-talet</li>
+        <li>Ramberättelsen om Shahrazad och kungen är konstant genom alla versioner</li>
+        <li>Första fullständiga handskriften: 1400-talet (äldst och mest autentisk = syrisk kopia från 1300-t)</li>
+        <li>Antoine Galland 1704–1717: "fri tolkning" till franska → <strong>sensation i Europa</strong>, översatt till alla europeiska språk</li>
+        <li>Berömda historier (Aladdin, Ali Baba) lades till av Galland – finns ej i arabiska originalkällor</li>
+        <li>I arabvärlden historiskt: varken fin litteratur <em>eller</em> barnläsning – men nu fullt accepterade</li>
+        <li>"Tusen och en" = inte ett exakt tal, utan metafor för något oföreställbart stort</li>
+      </ul>
+
+      <div class="inner-label">Nyckelbegrepp att kunna</div>
+      <ul class="kp">
+        <li><strong>Shahrazad</strong> – berätterskans namn, hela ramberättelsens nav</li>
+        <li><strong>Antoine Galland</strong> – fransmannen som förde sagorna till Europa 1704</li>
+        <li><strong>Hazar afsane</strong> – den persiska ursamlingen ("Tusen nätter")</li>
+        <li><strong>Alf Layla wa Layla</strong> – arabiska titeln (Tusen och en natt)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S5: Fahl -->
+  <div class="source-card" id="c5" style="--accent:#3d2b6e">
+    <div class="source-header" onclick="toggle('c5')">
+      <div class="source-dot" style="background:#3d2b6e"></div>
+      <div class="source-label">
+        <div class="source-title-text">Sagolika klassiker hittar nya roller i populärkulturen</div>
+        <div class="source-byline">Hanna Fahl · Dagens Nyheter · 2 december 2011</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="source-body">
+      <div class="inner-label">Referensformeln – lär dig denna</div>
+      <div class="ref-box" style="border-color:#3d2b6e">
+        I sin artikel "Sagolika klassiker hittar nya roller i populärkulturen", publicerad i Dagens Nyheter den 2 december 2011, skriver Hanna Fahl om sagotrendens explosion inom film och tv. Fahl redogör för…
+      </div>
+
+      <div class="inner-label">Vad texten handlar om</div>
+      <ul class="kp">
+        <li>2011: sagovåg i film/tv – Grimm, Once Upon a Time, Red Riding Hood, Snövit (x2)</li>
+        <li>Fantasy har dominerat bio ett decennium: Marvel, DC, Twilight, Harry Potter, Game of Thrones</li>
+        <li>Adam Gidwitz: fascinationen = "allra mest grundläggande behov" – törst efter magi när världen känns magibefriad</li>
+        <li>Anna Arnman (filmvetare): i orostider söker vi trygghet och traditioner</li>
+        <li><strong>"Urban fantasy"</strong>: sagor i nutida realistisk miljö (Grimm = mordutredare; Once upon a time = Snövit som lågstadielärare)</li>
+        <li>Snövit = mest filmade sagan i historien</li>
+        <li>Nene Ormes (motargument): sagor har <em>alltid</em> funnits – Hollywood har bara "återupptäckt" dem</li>
+        <li>Ekonomisk förklaring: sagogestalter = riskfria kulturella ikoner med inbyggd symbolik</li>
+      </ul>
+
+      <div class="inner-label">Citat att använda (röster i artikeln – markera vems)</div>
+      <div class="quote" style="border-color:#3d2b6e">
+        "Vi söker oss mycket till trygghet och trygga mönster. I orostider vill vi ha det traditionella."
+        <small>→ Anna Arnman, film- och konstvetare. Referera: <em>Fahl refererar filmvetaren Anna Arnman som menar att…</em></small>
+      </div>
+      <div class="quote" style="border-color:#3d2b6e">
+        "Det är helt okej att sagorna görs om igen och igen. Det passar väldigt väl in i sagoberättandets tradition, lägga till och dra ifrån så att det passar ens samtid."
+        <small>→ Nene Ormes, SF-författare. Referera: <em>Fahl citerar SF-författaren Nene Ormes som anser att…</em></small>
+      </div>
+      <div class="quote" style="border-color:#3d2b6e">
+        "Vi har alltid haft ett behov av att dra en cool historia och förskräcka folk. Sagor har alltid funnits, och jag är inte särskilt förvånad över att Hollywood har upptäckt det igen."
+        <small>→ Nene Ormes – motargument mot att sagor återkommer p.g.a. samhällsoro</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= THEMES ============================= -->
+<div id="themes" class="section">
+  <div class="section-head">
+    <h1>Teman & källkombinationer</h1>
+    <p>Du vet inte frågeställningen i förväg. Välj rätt kombination av tre källor beroende på vad frågan handlar om.</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>💡 Universalkombinationen</strong> – om du är osäker, välj denna:<br>
+    <span style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+      <span class="pill" style="background:#1e3a5f">Bettelheim</span>
+      <span class="pill" style="background:#2e5e4e">Ahlborg</span>
+      <span class="pill" style="background:#3d2b6e">Fahl</span>
+    </span>
+    <br>Täcker: psykologi + historia + nutid. Kan vinklas mot nästan vilket sagotema som helst.
+  </div>
+
+  <div class="theme-card">
+    <div class="t-title">🧠 Sagornas psykologiska funktion</div>
+    <div class="pills">
+      <span class="pill" style="background:#1e3a5f">Bettelheim (primär)</span>
+      <span class="pill" style="background:#6b2d3e">Börjesson / Hardwicke</span>
+      <span class="pill" style="background:#3d2b6e">Fahl (Gidwitz)</span>
+    </div>
+    <div class="t-desc">Bettelheim = teorifundamentet. Hardwicke bekräftar och populariserar Bettelheims idéer i en modern kontext. Fahl visar att det psykologiska behovet lever kvar idag (Gidwitz: "mest grundläggande behovet").</div>
+    <div class="t-q">Frågeställningar: <em>"Vad har sagor för funktion för barn?"</em> / <em>"Varför behöver vi sagor?"</em></div>
+  </div>
+
+  <div class="theme-card">
+    <div class="t-title">⏳ Sagornas förändring och anpassning</div>
+    <div class="pills">
+      <span class="pill" style="background:#2e5e4e">Ahlborg (primär)</span>
+      <span class="pill" style="background:#6b2d3e">Börjesson / Hardwicke</span>
+      <span class="pill" style="background:#3d2b6e">Fahl / Nene Ormes</span>
+    </div>
+    <div class="t-desc">Ahlborg visar att Grimms sagor alltid förändrats (17 utgåvor, censur). Börjesson/Hardwicke: moderna filmversioner är nästa steg i samma tradition. Fahl/Ormes: omberättande <em>är</em> sagotraditionen – inget nytt.</div>
+    <div class="t-q">Frågeställningar: <em>"Hur har synen på sagor förändrats?"</em> / <em>"Varför görs sagor om gång på gång?"</em></div>
+  </div>
+
+  <div class="theme-card">
+    <div class="t-title">🌍 Sagornas universella ursprung och spridning</div>
+    <div class="pills">
+      <span class="pill" style="background:#7a5c1e">Tusen och en natt (primär)</span>
+      <span class="pill" style="background:#2e5e4e">Ahlborg</span>
+      <span class="pill" style="background:#3d2b6e">Fahl</span>
+    </div>
+    <div class="t-desc">Tusen och en natt: multinationellt ursprung (persisk, indisk, arabisk, grekisk kultur). Ahlborg: Grimm-sagornas ingredienser finns i alla kulturer. Fahl: det globala arvet lever nu i Hollywood.</div>
+    <div class="t-q">Frågeställningar: <em>"Vad berättar sagornas ursprung om mänskligheten?"</em> / <em>"Hur har sagor spridits?"</em></div>
+  </div>
+
+  <div class="theme-card">
+    <div class="t-title">🎬 Sagor i modern populärkultur</div>
+    <div class="pills">
+      <span class="pill" style="background:#3d2b6e">Fahl (primär)</span>
+      <span class="pill" style="background:#6b2d3e">Börjesson</span>
+      <span class="pill" style="background:#1e3a5f">Bettelheim (grund)</span>
+    </div>
+    <div class="t-desc">Fahl analyserar sagotrendens orsaker: eskapism, oro, ekonomi. Börjesson ger ett konkret filmexempel. Bettelheim ger den teoretiska grunden till varför vi alltid återvänder till sagor.</div>
+    <div class="t-q">Frågeställningar: <em>"Varför är sagor populära idag?"</em> / <em>"Vad fyller sagor för funktion i modern tid?"</em></div>
+  </div>
+
+  <div class="theme-card">
+    <div class="t-title">🌑 Det mörka i sagor – censur och konsekvenser</div>
+    <div class="pills">
+      <span class="pill" style="background:#2e5e4e">Ahlborg (primär)</span>
+      <span class="pill" style="background:#1e3a5f">Bettelheim</span>
+      <span class="pill" style="background:#3d2b6e">Fahl / Nene Ormes</span>
+    </div>
+    <div class="t-desc">Ahlborg: ursprungsversioner censurerades hårt. Bettelheim: det mörka <em>är nödvändigt</em> – att ta bort det skadar barns psykologiska utveckling. Fahl/Ormes: nutida sagor återvänder till det mörkare originalet.</div>
+    <div class="t-q">Frågeställningar: <em>"Varför behöver sagor ett mörkt element?"</em> / <em>"Vad händer när sagor rensas på sin mörka sida?"</em></div>
+  </div>
+</div>
+
+<!-- ============================= PHRASES ============================= -->
+<div id="phrases" class="section">
+  <div class="section-head">
+    <h1>Färdiga fraser</h1>
+    <p>Anpassa [PARENTES]-fälten till din frågeställning. Blanda och välj fritt.</p>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">INLEDNING – fånga läsaren & presentera frågeställningen</div>
+    <div class="phrase">Sagor har fascinerat människan i årtusenden och dyker ständigt upp i nya former. I detta PM undersöks [FRÅGESTÄLLNING] utifrån tre perspektiv: [kort om källa 1], [kort om källa 2] och [kort om källa 3].</div>
+    <div class="phrase">Syftet med detta PM är att analysera [ÄMNE]. Med stöd i tre källor – [K1], [K2] och [K3] – kommer nedan en beskrivning och analys av [ÄMNE].</div>
+    <div class="phrase">Varför har sagor, trots sina månghundraåriga rötter, aldrig slutat beröra oss? I detta PM undersöks [FRÅGESTÄLLNING]. Underlaget utgörs av [K1], [K2] och [K3].</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">REFERAT – introduktion och löpande referensverb</div>
+    <div class="phrase"><em>Verb att rotera:</em> redogör för / argumenterar för / menar att / påstår att / betonar att / pekar på att / konstaterar att / fastslår att / framhåller att / lyfter fram att / visar att / hävdar att</div>
+    <div class="phrase">Vidare lyfter [EFTERNAMN] fram att… / Därtill framhåller [EFTERNAMN] att…</div>
+    <div class="phrase">[EFTERNAMN] exemplifierar detta när [hon/han] beskriver hur…</div>
+    <div class="phrase">En central poäng i [KÄLLANS] resonemang är att…</div>
+    <div class="phrase">Till detta lägger [EFTERNAMN] att…</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">SEKUNDÄRKÄLLOR – när du citerar röster inifrån artiklarna</div>
+    <div class="phrase">Fahl refererar filmvetaren Anna Arnman som menar att…</div>
+    <div class="phrase">Fahl citerar SF-författaren Nene Ormes som anser att…</div>
+    <div class="phrase">Börjesson refererar regissören Catherine Hardwicke som framhåller att…</div>
+    <div class="phrase">Ahlborg nämner den amerikanske författaren Louis Snyder (1978) som hävdade att…</div>
+    <div class="phrase">Bettelheim citerar Friedrich Schiller som en gång sagt att "[CITAT]"</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">CITAT – integrering i texten</div>
+    <div class="phrase">Bettelheim sammanfattar sagans kärnbudskap: "[CITAT]"</div>
+    <div class="phrase">Hardwicke, refererad av Börjesson, uttrycker det träffande: "[CITAT]"</div>
+    <div class="phrase">Nene Ormes, citerad av Fahl, hävdar att "[CITAT]"</div>
+    <div class="phrase">Ahlborg slår fast att "[CITAT]"</div>
+    <div class="phrase"><em>Formel efter citat:</em> "[CITAT]" – detta tyder på att… / – med detta avses att…</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">ANALYS – jämföra och koppla källor</div>
+    <div class="phrase">Detta stämmer väl överens med det Bettelheim skriver om [X], nämligen att…</div>
+    <div class="phrase">Ahlborg och Fahl är ense om att [X], men de skiljer sig åt vad gäller [Y].</div>
+    <div class="phrase">Här finns en tydlig parallell: såväl [K1] som [K2] menar att…</div>
+    <div class="phrase">Till skillnad från [K1] hävdar [K2] att…</div>
+    <div class="phrase">Bettelheims psykologiska perspektiv fördjupas av det Hardwicke (via Börjesson) framhåller, nämligen att…</div>
+    <div class="phrase">Ahlborg belyser den historiska dimensionen, medan Fahl visar hur detta tar sig uttryck i dag.</div>
+    <div class="phrase">Trots att texterna har olika infallsvinklar – [K1] utgår från [X], [K2] från [Y] – landar de i en gemensam slutsats: att…</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">SLUTSATS – besvara frågeställningen</div>
+    <div class="phrase">Sammantaget visar de tre källorna att [SLUTSATS].</div>
+    <div class="phrase">Utifrån ovanstående kan man dra slutsatsen att [SLUTSATS].</div>
+    <div class="phrase">De tre källorna belyser [ÄMNE] från skilda perspektiv men landar i en gemensam bild: [SLUTSATS].</div>
+    <div class="phrase">Det råder alltså en samsyn om att [X], även om [K2] tillför nyanssen att [Y].</div>
+    <div class="phrase">En rimlig slutsats är att sagor [VARFÖR LEVER DE VIDARE] – vilket bekräftas av Bettelheims psykologiska analys, Ahlborgs historiska perspektiv och Fahls samtida kartläggning.</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="pg-head">OBJEKTIV TON – undvik dessa, byt ut mot dessa</div>
+    <div class="phrase"><em>"jag tycker att"</em> → <strong>av texterna framgår att / detta tyder på att / en rimlig tolkning är att</strong></div>
+    <div class="phrase"><em>"intressant"</em> → <strong>anmärkningsvärt / värt att notera / påfallande</strong></div>
+    <div class="phrase"><em>"tydligen" / "visst"</em> → <strong>framgår av / kan konstateras / visar sig</strong></div>
+    <div class="phrase"><em>Konnektiver att rotera:</em> dock / emellertid / å andra sidan / däremot / samtidigt / trots detta / mot bakgrund av detta</div>
+  </div>
+</div>
+
+<!-- ============================= PM STRUCTURE ============================= -->
+<div id="structure" class="section">
+  <div class="section-head">
+    <h1>PM-mall</h1>
+    <p>Anpassa strukturen till frågeställningen. Proportionerna nedan är riktlinjer, inte regler.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">Inledning (~10 % av texten)</div>
+      <div class="step-desc">
+        Börja med en mening som knyter an till ämnet och fångar läsarens uppmärksamhet. Presentera sedan din frågeställning tydligt. Nämn kort vilka tre källor du använder och vad de representerar. Avsluta med en övergångsmening som leder in i beskrivningsdelen.<br><br>
+        <em>Mall: "Sagor har i årtusenden betytt [X] för mänskligheten. I detta PM undersöks [FRÅGESTÄLLNING]. Underlaget utgörs av [K1], [K2] och [K3]."</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">Beskrivning / Referat (~40–45 % av texten)</div>
+      <div class="step-desc">
+        Presentera varje källa separat – vad säger de om <em>din</em> frågeställning? Inled varje källas stycke med referensformeln (se Källorna-fliken). Byt källa med tydlig styckebrytning. Inkludera ett eller två direktcitat per källa om det stärker argumentet. Håll ett objektivt förhållningssätt – redovisa, värdera inte här.<br><br>
+        <em>Tips: Börja med den källa som bäst introducerar ämnet (oftast Bettelheim). Avsluta med den som ger nutidsperspektivet (oftast Fahl).</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">Analys / Jämförelse (~35–40 % av texten)</div>
+      <div class="step-desc">
+        Här vinns eller förloras A-betyget. Jämför källorna: Var är de eniga? Var skiljer de sig? Vad tillför varje källa som de andra inte ger? Resonera nyanserat – undvik svart-vitt. Koppla analysens slutsatser tydligt tillbaka till frågeställningen. Citera sparsamt här – det mesta ska vara ditt eget formulerade resonemang som <em>vilar på</em> källorna.<br><br>
+        <em>Struktur: Likhet 1 → Likhet 2 → Skillnad eller nyans → Koppling tillbaka till frågeställningen.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-title">Avslutning (~10 % av texten)</div>
+      <div class="step-desc">
+        Summera slutsatserna i en-två meningar. Besvara frågeställningen direkt. Avsluta gärna med ett bredare perspektiv eller en öppen fråga – vad är implikationerna? Vad är fortfarande oklart?<br><br>
+        <em>Undvik att bara upprepa det du redan sagt. Lägg till ett nytt steg i sista meningen.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>⚠️ Vanligaste misstagen:</strong><br>
+    • Referat som inte kopplas till frågeställningen – varje stycke bör bidra till ditt svar<br>
+    • Analys som är för kort – det är resonemanget som skiljer betyg<br>
+    • "Jag tycker att..." – alltid objektiv formulering<br>
+    • Citat utan ordentlig inledning – introducera alltid ett citat med vem som sagt det och varför det är relevant
+  </div>
+</div>
+
+<!-- ============================= GRADE CRITERIA ============================= -->
+<div id="grades" class="section">
+  <div class="section-head">
+    <h1>Vad krävs för A?</h1>
+    <p>Baserat på Skolverkets bedömningsmatris. Konkretiserat till vad du faktiskt måste skriva.</p>
+  </div>
+
+  <div class="crit-section-title">INNEHÅLL</div>
+  <div class="crit-row">
+    <div class="crit-key">Beskrivning</div>
+    <div class="crit-val"><strong>Skickligt utförd</strong> – inte bara korrekt, utan välformulerad och fokuserad direkt på frågeställningen. Varje refererad källas poäng ska svara på <em>just din</em> fråga.</div>
+  </div>
+  <div class="crit-row">
+    <div class="crit-key">Resonemang</div>
+    <div class="crit-val"><strong>Väl utvecklat och nyanserat</strong>. Bygg på textreferaten – inte allmänna kunskaper. "Nyanserat" = du ser spänningar, nyanser, undantag och skillnader, inte bara det du håller med om.</div>
+  </div>
+  <div class="crit-row">
+    <div class="crit-key">Objektivitet</div>
+    <div class="crit-val">Texten <strong>utmärks</strong> av objektiv saklighet – inga värdeomdömen, inga "jag tycker", inga känsloord.</div>
+  </div>
+  <div class="crit-row">
+    <div class="crit-key">Citat/referat</div>
+    <div class="crit-val"><strong>Väl fungerande teknik</strong>: korrekt referensformel, citat i citattecken och introducerade ordentligt, sekundärkällor tydligt markerade (ex. "Fahl citerar Arnman som…").</div>
+  </div>
+
+  <div class="crit-section-title">DISPOSITION</div>
+  <div class="crit-row">
+    <div class="crit-key">Organisation</div>
+    <div class="crit-val">Lämplig utifrån frågeställningens syfte. Inledning och avslutning fyller sina funktioner – inledningen ställer frågan, avslutningen besvarar den.</div>
+  </div>
+  <div class="crit-row">
+    <div class="crit-key">Stycken & bindning</div>
+    <div class="crit-val">Styckeindelning med tydliga styckemarkeringar. Textbindning är väl fungerande – texten flödar, inte hackig. <em>(OBS: A3 = A2 på disposition enligt matrisen.)</em></div>
+  </div>
+
+  <div class="crit-section-title">SPRÅK OCH STIL</div>
+  <div class="crit-row">
+    <div class="crit-key">Formulering</div>
+    <div class="crit-val"><strong>Välformulerat med precision i ordval</strong>. Inga vaga ord. Välj hellre ett exakt ord än en omskrivning. Variera dina referensverb.</div>
+  </div>
+  <div class="crit-row">
+    <div class="crit-key">Stil</div>
+    <div class="crit-val"><strong>Väl anpassad</strong> till vetenskapligt skrivande – formell, saklig, distanserad. Inga informella uttryck. Inga pratspråksformer.</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:16px">
+    <strong>💡 B → A:</strong> Det enda som skiljer B från A är att beskrivningen är <em>skickligt</em> utförd (inte bara korrekt) och att resonemanget är <em>nyanserat</em>. Nyanserat = du ser motargument, undantag, spänningar mellan källorna och tillstår dem utan att tappa din röd tråd.
+  </div>
+
+  <div class="callout callout-info" style="margin-top:8px">
+    <strong>✅ Checklista innan du lämnar in:</strong><br>
+    □ Frågeställningen är tydligt formulerad i inledningen<br>
+    □ Varje källa introduceras med korrekt referensformel<br>
+    □ Alla citat har citattecken och källhänvisning<br>
+    □ Sekundärkällor är tydligt markerade som sekundärkällor<br>
+    □ Jag har inga "jag tycker"-formuleringar<br>
+    □ Analysen jämför källorna, inte bara listar dem<br>
+    □ Avslutningen besvarar frågeställningen direkt<br>
+    □ Tydliga styckebrytningar och styckemarkeringar
+  </div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function toggle(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+</script>
+</body>
+</html>
