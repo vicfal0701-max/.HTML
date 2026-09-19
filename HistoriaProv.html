@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antiken – A-svar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1c2a4a;
+    --gold: #b8942a;
+    --gold-light: #d4aa3a;
+    --parchment: #f7f3eb;
+    --parchment-dark: #ede7d9;
+    --ink: #1a1612;
+    --ink-soft: #3d3530;
+    --accent-red: #8b2e2e;
+    --border: #c8baa0;
+    --white: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --parchment: #1a1814;
+      --parchment-dark: #23201c;
+      --ink: #ede7d9;
+      --ink-soft: #c4b89e;
+      --border: #3d3832;
+      --white: #1a1814;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+
+  header {
+    background: var(--navy);
+    color: #f7f3eb;
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    border-bottom: 4px solid var(--gold);
+  }
+
+  header .kurs {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+    font-style: italic;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #f7f3eb;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    color: #c4b89e;
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  .grade-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.3rem 1.1rem;
+    border-radius: 2px;
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  nav {
+    background: var(--navy);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: #c4b89e;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    padding: 0.9rem 1.8rem;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    border-bottom: 3px solid transparent;
+    font-style: italic;
+  }
+
+  nav button.active,
+  nav button:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+    background: rgba(255,255,255,0.04);
+  }
+
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  .section-intro {
+    background: var(--parchment-dark);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .q-block {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2.5rem;
+  }
+  .q-block:last-child {
+    border-bottom: none;
+  }
+
+  .q-label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .q-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 2rem;
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+  @media (prefers-color-scheme: dark) {
+    .q-text { color: var(--gold-light); }
+  }
+
+  .answer {
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+
+  .answer p {
+    margin-bottom: 1rem;
+    max-width: 72ch;
+  }
+
+  .answer h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    margin: 1.4rem 0 0.5rem;
+    font-style: italic;
+  }
+  @media (prefers-color-scheme: dark) {
+    .answer h3 { color: #c98080; }
+  }
+
+  .answer ul {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .answer ul li {
+    margin-bottom: 0.4rem;
+    max-width: 70ch;
+  }
+
+  .answer strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  @media (prefers-color-scheme: dark) {
+    .answer strong { color: var(--gold-light); }
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .compare-table th {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    padding: 0.55rem 0.85rem;
+    text-align: left;
+    font-style: italic;
+  }
+  .compare-table td {
+    padding: 0.5rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td {
+    background: var(--parchment-dark);
+  }
+
+  .insight {
+    background: linear-gradient(135deg, #eef3f9, #f0ecf7);
+    border: 1px solid #c5d0e0;
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-style: italic;
+    font-size: 0.93rem;
+    color: var(--navy);
+    position: relative;
+  }
+  @media (prefers-color-scheme: dark) {
+    .insight {
+      background: #1e2533;
+      border-color: #2e3a50;
+      color: #a0b8d8;
+    }
+  }
+  .insight::before {
+    content: '💡';
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .def-block {
+    background: var(--parchment-dark);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+  }
+  .def-block .def-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-style: italic;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .def-block .def-title { color: var(--gold-light); }
+  }
+
+  .timeline {
+    border-left: 2px solid var(--gold);
+    margin: 1rem 0 1rem 0.5rem;
+    padding-left: 1.2rem;
+  }
+  .timeline-event {
+    margin-bottom: 0.8rem;
+    position: relative;
+  }
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.4rem;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .timeline-date {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 0.88rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kurs">Historia — NATE24B · Gymnasiet åk 3</div>
+  <h1>Antiken<br><em style="font-style:italic;font-weight:400;font-size:0.6em;color:#c4b89e;">Grekland &amp; Rom</em></h1>
+  <p>Fullständiga svar för instuderingsfrågorna</p>
+  <div class="grade-badge">A-nivå</div>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('grekland', this)">Grekland</button>
+  <button onclick="showTab('rom', this)">Romarriket</button>
+  <button onclick="showTab('analys', this)">Analysfråga</button>
+</nav>
+
+<main>
+
+<!-- ========== GREKLAND ========== -->
+<section class="tab-section active" id="tab-grekland">
+  <div class="section-intro">
+    Frågorna nedan täcker antikens Aten och Sparta — styrelseskick, demokrati, filosofi och jämförelser med vår tid. Svaren är skrivna på A-nivå: utförligt, nyanserat och med orsak–verkan-resonemang.
+  </div>
+
+  <!-- G1 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">1</span>
+      <span class="q-text">Vad var en stadsstat? Beskriv Aten och Sparta och förklara viktiga skillnader.</span>
+    </div>
+    <div class="answer">
+      <p>En <strong>stadsstat</strong> (på grekiska: <em>polis</em>) var en självständig politisk enhet bestående av en stad och dess omgivande landområden. Varje stadsstat styrde sig självt med egna lagar, institutioner och ofta egen valuta. Under antiken präglade denna statsform hela Medelhavsvärlden — på den grekiska halvön och vid kolonierna utomlands fanns hundratals sådana enheter.</p>
+
+      <h3>Aten</h3>
+      <p>Aten låg vid Attikas kust och byggde sin makt på <strong>handel och sjöfart</strong>. Den hade en stark flotta och ledde det Deliska förbundet — en allians av stadsstater mot perserna. Det som framför allt utmärkte Aten var dess <strong>demokratiska styrform</strong>: folkförsamlingen (ekklesia) gav fria, vuxna manliga medborgare direkt inflytande i lagstiftning och utrikespolitik. Utbildning, retorik och filosofi stod högt i kurs. Perikles kallade under 400-talets f.Kr. Aten för <em>"Hellas skola"</em> — ett centrum för konst, teater och vetenskap.</p>
+
+      <h3>Sparta</h3>
+      <p>Sparta låg på Peloponnesos och var ett utpräglat <strong>militärsamhälle</strong>. Styrelseskicket var blandad oligarki: makten delades av <em>två kungar</em> (en militärisk, en administrativ), ett <em>äldreråd</em> (gerousia, 28 äldste över 60 år) och fem folkvalda <em>ämbetsmän</em> (ephorer) med tillsyn över kungarna. Sparta saknade stadsmur — medborgarna var själva murarna. Spartiatiska pojkar togs vid sju års ålder till militär fostran (<em>agoge</em>) och levde under kasernlikt styre fram till vuxen ålder. Ekonomin bars upp av en underkuvad slavklass, <strong>heloterna</strong>, som odlade mark åt medborgarna men vars potential till uppror Sparta ständigt fruktade.</p>
+
+      <h3>Viktiga skillnader</h3>
+      <table class="compare-table">
+        <tr><th>Aspekt</th><th>Aten</th><th>Sparta</th></tr>
+        <tr><td>Styrelseskick</td><td>Direktdemokrati</td><td>Oligarki med dubbla kungar</td></tr>
+        <tr><td>Ekonomi</td><td>Handel och sjöfart</td><td>Jordbruk via heloter</td></tr>
+        <tr><td>Kultur</td><td>Filosofi, konst, teater</td><td>Militär disciplin och lydnad</td></tr>
+        <tr><td>Utbildning</td><td>Retorik, matematik, filosofi</td><td>Krigskonst, uthållighet</td></tr>
+        <tr><td>Slaveri</td><td>Hushållsslavar</td><td>Heloter — ett helt folk i träldom</td></tr>
+        <tr><td>Öppenhet</td><td>Öppen handelssstad</td><td>Sluten, isolerad militärstat</td></tr>
+      </table>
+
+      <div class="insight">Trots sina extrema olikheter kompletterade Aten och Sparta varandra i perserkrigen (490–479 f.Kr.): Atens flotta slog perserna vid Salamis, Spartas infanteri vid Thermopylae och Plataiai. Tillsammans stoppade de Xerxes expansion västerut — ett av historiens mest avgörande slag.</div>
+    </div>
+  </div>
+
+  <!-- G2 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">2</span>
+      <span class="q-text">Vad hade stadsstaterna gemensamt? Vad fick folk att uppfatta sig som greker?</span>
+    </div>
+    <div class="answer">
+      <p>Trots att de hundratals stadsstaterna var politiskt självständiga — och ofta i krig med varandra — band en gemensam <strong>panhellenisk identitet</strong> dem samman. Denna identitet byggde på kultur snarare än politik.</p>
+
+      <ul>
+        <li><strong>Gemensamt språk:</strong> Alla greker talade dialekter av samma språk (doriska, joniska, eoliska m.fl.) och förstod varandra. Att tala "barbariska" — dvs. icke-grekiska — språk var det som skilde en grek från en "barbar".</li>
+        <li><strong>Gemensam religion:</strong> Samma pantheon dyrkades överallt: Zeus, Athena, Apollon, Poseidon och de övriga olympiska gudarna. Templet i Delfi med Apollons orakel var ett gemensamt religiöst centrum dit pilgrimer vallfärdade från hela den grekiska världen.</li>
+        <li><strong>Olympiska spelen:</strong> Spelen hölls vart fjärde år i Olympia till Zeus ära. Under speltiden rådde vapenvila (ekecheria) och tävlande från alla stadsstater möttes. Det var ett återkommande rituellt möte som förstärkte känslan av ett gemensamt folk.</li>
+        <li><strong>Delade myter och berättelser:</strong> Homeros Iliaden och Odysséen lästes och reciterades i hela den grekiska världen. Hjältar som Herakles, Akilles och Odysseus var gemensamma kulturella referenspunkter oavsett stadsstat.</li>
+        <li><strong>Det gemensamma yttre hotet:</strong> Perserkrigen (490–479 f.Kr.) tvingade fram en allians och stärkte känslan av att vara ett folk mot ett gemensamt hot. Att gemensamt ha besegrat den enorma perserarmén skapade en delad stolthet och mytologisering av det grekiska frihetsbegreppet.</li>
+      </ul>
+
+      <div class="insight">Det paradoxala med den grekiska identiteten är att den aldrig ledde till politisk enhet. Poleis slogs sig emellan ständigt — det peloponnesiska kriget (431–404 f.Kr.) var i praktiken ett inbördeskrig som försvagade hela den grekiska världen. Det kulturella bandet var starkt; den politiska sammanhållningen var svag.</div>
+    </div>
+  </div>
+
+  <!-- G3 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">3</span>
+      <span class="q-text">Hur fungerade demokratin i Aten? Vilka hade inflytande och vilka stod utanför?</span>
+    </div>
+    <div class="answer">
+      <p>Demokratin i Aten var en <strong>direktdemokrati</strong> — medborgarna deltog personligen i politiken utan folkvalda representanter emellan. Systemet byggdes stegvis upp: Kleisthenes lade grunden 508 f.Kr., och under Perikles på 400-talet nådde det sin fulla form.</p>
+
+      <h3>Hur det fungerade</h3>
+      <ul>
+        <li><strong>Folkförsamlingen (ekklesia):</strong> Det viktigaste organet. Alla manliga medborgare över 20 år hade rätt att närvara, tala och rösta på Pnyx-kullen. Man beslutade om lagar, krig, fred och utrikespolitik — oftast via handuppräckning.</li>
+        <li><strong>Rådet (boule):</strong> 500 medborgare valda via lottning, 50 från varje av de tio stammarna (filerna). De förberedde ärenden till folkförsamlingen och skötte den löpande administrationen.</li>
+        <li><strong>Domstolarna (dikasterier):</strong> Stora juryer på 200–1 500 medborgare (lottade) avgjorde rättsliga tvister. Ingen yrkesdomarkår existerade — vanliga medborgare var dömarna.</li>
+        <li><strong>Lottning som princip:</strong> De flesta ämbetsmän utsågs via lottning (<em>sortition</em>) för att undvika maktkoncentration. Undantaget var de militärt valda strategerna (som Perikles), som krävde kompetens och valdes av folket.</li>
+        <li><strong>Medborgarlön:</strong> Perikles införde lön för deltagande i råd och domstolar — vilket delvis möjliggjorde politiskt deltagande även för fattigare medborgare.</li>
+      </ul>
+
+      <h3>Vilka hade inflytande?</h3>
+      <p>Fria, vuxna, manliga medborgare med atenska föräldrar. Av Atens ca 300 000 invånare var uppskattningsvis 30 000–40 000 fullvärdiga medborgare — ungefär 10–15 % av befolkningen.</p>
+
+      <h3>Vilka stod utanför?</h3>
+      <ul>
+        <li><strong>Kvinnor:</strong> Totalt utestängda. De saknade rösträtt, fick inte tala i folkförsamlingen och var beroende av en manlig förmyndare (<em>kyrios</em>) i alla rättsliga sammanhang.</li>
+        <li><strong>Slavar:</strong> Ca en tredjedel av befolkningen. De var juridiskt sett egendom utan några som helst politiska rättigheter — och det var deras arbete som gav medborgarna den fritid som krävdes för att delta i politiken.</li>
+        <li><strong>Metoiker (metics):</strong> Utlänningar bosatta i Aten. Många var välbärgade hantverkare och köpmän som betalade skatt och tjänstgjorde i armén — men hade ingen rösträtt och fick inte äga mark.</li>
+      </ul>
+
+      <div class="insight">Atens demokrati är en av historiens mest slående paradoxer: den skapade idéerna om folkstyre, yttrandefrihet och medborgarrätt — men vilade på slaveriets fundament. Utan slavarnas arbete hade medborgarna inte haft tid att delta i politiken. Frihetens ideal och ofrihetens verklighet existerade sida vid sida.</div>
+    </div>
+  </div>
+
+  <!-- G4 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">4</span>
+      <span class="q-text">Varför utvecklades filosofi och vetenskap i det antika Grekland? Hur förändrades sättet att förstå världen?</span>
+    </div>
+    <div class="answer">
+      <p>Antikens Aten — och det grekiska kulturområdet i stort — blev vaggan för västerländsk filosofi och naturvetenskap. Flera samverkande faktorer möjliggjorde detta.</p>
+
+      <h3>Varför just Grekland?</h3>
+      <ul>
+        <li><strong>Handelsnätverk och kulturmöten:</strong> Greker kom i kontakt med Egyptens geometri, Babylons astronomi och persiska civilisationens kunskaper. De tog till sig, ifrågasatte och byggde vidare.</li>
+        <li><strong>Den demokratiska atmosfären:</strong> I Aten accepterades och uppmuntrades öppen debatt och argumentation. Man var van att ifrågasätta auktoriteter — ett klimat som gynnade kritiskt tänkande.</li>
+        <li><strong>Fritid via slaveri:</strong> Slavekonomin gav medborgarna tid och utrymme att ägna sig åt intellektuell verksamhet.</li>
+        <li><strong>Konkurrensskultur:</strong> Precis som i idrottens olympiska spel skapade den intellektuella kulturen tävlingsanda — filosofer debatterade offentligt och vann prestige genom argument.</li>
+      </ul>
+
+      <h3>Från myt till logos — hur förändrades synen på världen?</h3>
+      <p>Tidigare förklarades naturliga fenomen med mytologin: åskan var Zeus vapen, jordbävningar Poseidons vrede, sjukdomar gudarnas straff. De <strong>försokratiska filosoferna</strong> på 500-talet f.Kr. bröt med detta:</p>
+
+      <div class="timeline">
+        <div class="timeline-event">
+          <div class="timeline-date">Thales (ca 600 f.Kr.)</div>
+          <p>Menade att <em>vatten</em> var urämnet bakom all materia — en naturlig, inte gudomlig förklaring till tingens grund.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">Anaximander</div>
+          <p>Föreslog att urämnet var det obestämda (<em>apeiron</em>) — ett mer abstrakt och filosofiskt resonemang.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">Empedokles</div>
+          <p>Hävdade att världen bestod av fyra element — jord, vatten, eld och luft — styrda av kärlek och strid.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">Demokritos</div>
+          <p>Föreslog att all materia bestod av oskiljbara partiklar — <em>atomer</em>. En förvånansvärt modern insikt.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">Sokrates, Platon, Aristoteles (400-talet)</div>
+          <p>Vände fokus mot etik, logik och politisk filosofi. Aristoteles klassificerade djur, undersökte stjärnorna och lade grunden för logiken som disciplin.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">Hippokrates</div>
+          <p>Betonade att sjukdomar hade naturliga — inte gudomliga — orsaker. Grundlade medicinen som vetenskap baserad på observation.</p>
+        </div>
+      </div>
+
+      <div class="insight">Övergången kan sammanfattas som: <strong>från myt till logos</strong> — från berättelse och gudarnas vilja till förnuft, observation och argument. Det var inte att gudarna försvann ur livet, utan att man började söka naturliga orsaker parallellt. Denna intellektuella rörelse lade grunden för hela den västerländska vetenskapliga traditionen.</div>
+    </div>
+  </div>
+
+  <!-- G5 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">5</span>
+      <span class="q-text">Jämför Atens direktdemokrati med Sveriges representativa demokrati. Likheter, skillnader, styrkor och svagheter.</span>
+    </div>
+    <div class="answer">
+      <p>Trots att 2 500 år skiljer de åt delar Atens direktdemokrati och Sveriges representativa demokrati en gemensam grundidé: att makten ska utgå från folket. Genomförandet skiljer sig dock radikalt.</p>
+
+      <h3>Likheter</h3>
+      <ul>
+        <li>Båda systemen bygger på folkstyre och majoritetsbeslut.</li>
+        <li>Yttrandefrihet och rätten att delta är grundläggande i båda.</li>
+        <li>Makten ska vara begränsad — inga envåldshärskare.</li>
+        <li>Medborgarskapets rättigheter ger delaktighet i styrningen.</li>
+      </ul>
+
+      <h3>Skillnader</h3>
+      <table class="compare-table">
+        <tr><th>Aspekt</th><th>Aten (direktdemokrati)</th><th>Sverige (representativ demokrati)</th></tr>
+        <tr><td>Beslutsform</td><td>Medborgarna beslutar direkt</td><td>Medborgarna väljer representanter</td></tr>
+        <tr><td>Vem deltar?</td><td>Fria manliga medborgare (~30 000)</td><td>Alla medborgare över 18 (~8 miljoner)</td></tr>
+        <tr><td>Utestängda</td><td>Kvinnor, slavar, utlänningar</td><td>Ingen formellt utestängd</td></tr>
+        <tr><td>Skala</td><td>Stadsstat, tusentals</td><td>Nation, miljoner</td></tr>
+        <tr><td>Frekvens</td><td>Löpande folkförsamlingar</td><td>Val vart fjärde år</td></tr>
+        <tr><td>Ämbetsmän</td><td>Lottning (sortition)</td><td>Val och utnämning</td></tr>
+      </table>
+
+      <h3>Styrkor och svagheter</h3>
+      <p><strong>Atens direktdemokrati — styrkor:</strong> Stark känsla av ägarskap och ansvar hos medborgarna. Nära koppling mellan person och beslut — inga mellanhänder. Hög politisk bildning krävdes, vilket fostrade aktiva medborgare.</p>
+      <p><strong>Atens direktdemokrati — svagheter:</strong> Exkluderade majoriteten av befolkningen. Fungerar bara i liten skala. Riskerade "tyranni av majoriteten" (Sokrates dömdes till döden av folkförsamlingen!). Populistiska talare kunde manipulera församlingen.</p>
+      <p><strong>Sveriges representativa demokrati — styrkor:</strong> Hanterar stora befolkningar och komplexa frågor. Skyddar minoriteter via grundlag och domstolar. Kontinuitet och stabilitet i institutionerna.</p>
+      <p><strong>Sveriges representativa demokrati — svagheter:</strong> Medborgare kan känna sig fjärrade från makten. Partipolitiska intressen kan trumfa folkviljan. Fyraårscykeln skapar incitament för kortsiktiga beslut.</p>
+
+      <div class="insight">Kopplingen till nutiden: Debatten om direktdemokrati lever i dag — folkomröstningar, medborgarförslag och digitala plattformar är moderna försök att minska gapet mellan medborgare och beslut. Brexit-omröstningen 2016 visade både direktdemokratins styrka (folkviljan hördes) och svaghet (ett komplext flerårigt beslut fattades på en enkel ja/nej-fråga). Frågan Aten ställde — vem tillhör demos? — är fortfarande aktuell.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ROM ========== -->
+<section class="tab-section" id="tab-rom">
+  <div class="section-intro">
+    Frågorna täcker den romerska republiken och kejsartiden — styrelseskick, sociala konflikter, individers historiska roll och rikets fall. Svaren kräver nyanserade orsaksresonemang och flerperspektivsanalys.
+  </div>
+
+  <!-- R1 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">1</span>
+      <span class="q-text">Jämför hur Aten, Sparta och den romerska republiken styrdes.</span>
+    </div>
+    <div class="answer">
+      <p>Alla tre samhällena begränsade formellt den politiska makten till fria manliga medborgare — men fördelade den på fundamentalt olika sätt.</p>
+
+      <table class="compare-table">
+        <tr><th>Aspekt</th><th>Aten</th><th>Sparta</th><th>Romerska republiken</th></tr>
+        <tr><td>Grundform</td><td>Direktdemokrati</td><td>Oligarki/blandad</td><td>Blandad konstitution</td></tr>
+        <tr><td>Verkst. makt</td><td>Folkförsamlingen</td><td>Ephorer + kungar</td><td>Två konsuler (1 år)</td></tr>
+        <tr><td>Råd/senat</td><td>Boule (500, lottade)</td><td>Gerousia (28 äldste)</td><td>Senaten (patricier)</td></tr>
+        <tr><td>Folk</td><td>Ekklesia (alla manl. medb.)</td><td>Apella (röstade ja/nej)</td><td>Comitia/Concilium plebis</td></tr>
+        <tr><td>Vem dominerar?</td><td>Folket direkt</td><td>Militäreliten</td><td>Patricisk aristokrati</td></tr>
+        <tr><td>Rekr. till ämbete</td><td>Lottning (sortition)</td><td>Arv + val</td><td>Cursus honorum + val</td></tr>
+      </table>
+
+      <p>En viktig skillnad: I <strong>Aten</strong> hade alla (manliga) medborgare formellt lika röstvikt. I <strong>Sparta</strong> initierade folket inga förslag — det var ett veto-organ snarare än en aktiv lagstiftare. I <strong>Rom</strong> var Senaten länge den faktiska makthavaren: folkförsamlingarna stiftade lagar men Senatens auctoritas (auktoritet) var avgörande i praktiken, och välbärgade medborgare hade mer röstvikt i vissa församlingar (comitia centuriata var organiserad efter förmögenhet).</p>
+
+      <div class="insight">Aristoteles kallade den romerska republiken för en idealisk "blandad konstitution" — med inslag av monarki (konsuler), aristokrati (senaten) och demokrati (folkförsamlingarna). Han menade att balansen mellan dessa element var det som gav stabilitet. Historien visade att balansen var bräcklig.</div>
+    </div>
+  </div>
+
+  <!-- R2 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">2</span>
+      <span class="q-text">Patricierna och plebejerna — hur förändrades maktförhållandet, och hur kan det ha uppfattats ur de två gruppernas perspektiv?</span>
+    </div>
+    <div class="answer">
+      <p><strong>Patricierna</strong> var den gamla ärftliga aristokratin — de som härstammade från Roms ursprungliga grundarfamiljer. I republikens begynnelse hade de monopol på konsulat, prästtjänster och senatsplatser. De tolkade dessutom lagen, som länge var muntlig och oskriven, och använde den till sin fördel.</p>
+      <p><strong>Plebejerna</strong> var "vanliga" fria medborgare: bönder, hantverkare, köpmän. De utgjorde befolkningens majoritiet, tjänstgjorde i armén — men saknade inledningsvis politiskt inflytande.</p>
+
+      <h3>Maktskiftets steg</h3>
+      <div class="timeline">
+        <div class="timeline-event">
+          <div class="timeline-date">494 f.Kr. — Första secessionen</div>
+          <p>Plebejerna "strejkade" och drog sig tillbaka utanför Rom till det Heliga berget. Utan dem kollapsade ekonomin och armén. Resultatet: <strong>folktribuner</strong> (tribuni plebis) skapades med rätt att lägga veto (intercessio) mot patriciska beslut.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">450 f.Kr. — Tolv tavlorna</div>
+          <p>Lagarna skrevs ner och offentliggjordes. Patricier kunde inte längre tolka lagen godtyckligt.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">367 f.Kr. — Licinisk-Sextinska lagarna</div>
+          <p>En av de två konsulerna måste vara plebejer. Politisk elit öppnas för folket.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">287 f.Kr. — Lex Hortensia</div>
+          <p>Plebejernas folkförsamlingsbeslut (plebisciter) fick lagkraft för hela det romerska folket — utan patriciskt godkännande. Det formella maktskiftet fullbordas.</p>
+        </div>
+      </div>
+
+      <h3>Perspektiv</h3>
+      <p><strong>Ur plebejernas synvinkel</strong> var varje reform en seger i en lång och bitter kamp mot aristokratins godtycke. Strejken 494 f.Kr. var ett drisket slag — att lämna Rom och vägra tjänstgöra var en existentiell risk. Lex Hortensia var historisk: för första gången behövde folket inte tigga om patricisk välvilja för att deras beslut skulle gälla. Det var ett erkännande av att det romerska folket — inte bara eliten — ägde rätten att styra.</p>
+      <p><strong>Ur patriciers synvinkel</strong> var reformerna en motvillig kapitulation under yttre tryck. Men efterhand insåg kloka patricier att reformerna var nödvändiga för att undvika revolution och bevara republiken. Det uppstod dessutom en ny gemensam elit — <em>nobilitas</em> — bestående av välbärgade plebejer och gamla patricier, förenade av gemensamma ekonomiska intressen. Den sociala klyftan ersattes alltså av en ny elitgemensam maktbas.</p>
+
+      <div class="insight">Patricier-plebejer-konflikten är ett tidigt exempel på det vi idag kallar "social rörlighet" — möjligheten att ta sig uppåt i samhällshierarkin. Men det är värt att notera: det var de rikare plebejerna som gynnades mest av reformerna. De allra fattigaste förblev ekonomiskt utsatta, vilket kom att spela roll i republikens senare kris.</div>
+    </div>
+  </div>
+
+  <!-- R3 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">3</span>
+      <span class="q-text">Julius Caesar — förklara hur han kan bedömas ur olika gruppers perspektiv.</span>
+    </div>
+    <div class="answer">
+      <p>Julius Caesar (100–44 f.Kr.) är en av historiens mest debatterade gestalter — hjälte eller tyrann beror fullständigt på vem man frågar.</p>
+
+      <h3>Reformer</h3>
+      <ul>
+        <li>Gav medborgarskap åt folk norr om Po-floden (utvidgade det romerska folket).</li>
+        <li>Skapade kolonier åt veteransoldater (land som pension och belöning).</li>
+        <li>Utökade senaten från 600 till 900 ledamöter — inkl. provinsiella eliter.</li>
+        <li>Reformerade kalendern (den julianska kalendern, 46 f.Kr.) — föregångaren till vår egen gregorianska.</li>
+        <li>Minskade antalet brödmottagare i Rom men skapade nya kolonier för de fattiga utanför staden.</li>
+      </ul>
+
+      <h3>Ur soldaternas och veteranernas perspektiv</h3>
+      <p>Caesar var en hjälte utan like. Han delade ut mark och krigsbyte generöst, stannade med sina trupper i läger och visade personlig lojalitet. Hans gallienkampanj (58–50 f.Kr.) skapade rika legionärer och stolta veteraner. Hans landreformer gav många fattiga soldater ett nytt liv. För dem var Caesar det romerska idealet: en krigisk ledare som vann och delade vinsten.</p>
+
+      <h3>Ur de fattigas och provinsbefolkningens perspektiv</h3>
+      <p>En välgörare. Medborgarskapsutvidgningen gav inkludering åt folk som länge stått utanför. Kolonierna erbjöd fattigaste stadsbon ett alternativ till Roms trångbodda slum. Caesars popularitet i provinsierna var genuin.</p>
+
+      <h3>Ur senatens och optimaternas perspektiv</h3>
+      <p>En dödlig fara för republiken. Caesar utsåg sig till <em>dictator perpetuo</em> — diktator på livstid — ett direkt brott mot republikanens grundprincip att ingen enskild person fick ha permanent makt. Han uppträdde allt mer kungalikt. Det sades att han tog emot ärebevisningar sittande (normalt reste man sig), och att han betraktade Alexandrias lagar med intresse. För de republikanskt sinnade senatorerna — Brutus, Cassius och deras medbrottslingar — var mordet den 15 mars 44 f.Kr. (<em>Ides of March</em>) en plikt, inte ett brott: ett försök att rädda den frihet som republiken stod för.</p>
+
+      <div class="insight">Det djupt ironiska: mordet på Caesar uppnådde raka motsatsen till syftet. Istället för att rädda republiken utlöste det ett nytt inbördeskrig som slutade med Augustus envälde — precis det som Brutus ville förhindra. Caesars adoptivson Octavianus (Augustus) hämnade Caesar och utropade sig till "prinsipatus". Mordet visade att republiken redan var för svag för att räddas — orsaken till krisen var djupare än en enskild man.</div>
+    </div>
+  </div>
+
+  <!-- R4 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">4</span>
+      <span class="q-text">Hur bidrog samhällsförändringar och arméns förändring till maktkampen och republikens sammanbrott?</span>
+    </div>
+    <div class="answer">
+      <p>Republikens fall var ingen olycka — det var resultatet av strukturella förändringar som ingen institution lyckades hantera. Sociala spänningar och en fundamental förändring av arméns lojalitet skapade de förutsättningar som ambitiösa generaler utnyttjade.</p>
+
+      <h3>Sociala förändringar</h3>
+      <ul>
+        <li><strong>Ökad ojämlikhet:</strong> Roms erövringar fyllde halvön med slavar som konkurrerade ut fria bönder. Storgodsägare (<em>latifundia</em>) köpte billig mark av skuldsatta småbönder. En landsbygdsklass försvann in i städernas fattigdom.</li>
+        <li><strong>Reformatorer krossas:</strong> Tiberius Gracchus (133 f.Kr.) och Gaius Gracchus (121 f.Kr.) försökte genomdriva jordreformer för att ge land åt de fattiga. Båda mördades av senaten. Deras öde visade att systemet inte längre kunde reformera sig självt på lagliga vägar.</li>
+        <li><strong>Italiska bundsförvanters missnöje:</strong> Rom byggde sitt välde med italienska allierade, men de fick länge inte romerskt medborgarskap trots att de bars upp av deras blod. Bundesfällenkriget (91–87 f.Kr.) tvingade Rom att utvidga medborgarskapet — men bitterheten satt kvar.</li>
+      </ul>
+
+      <h3>Arméns avgörande förändring</h3>
+      <p>Gaius Marius reformerade 107 f.Kr. armén på ett sätt vars konsekvenser var revolutionära: tidigare krävdes egendom för att tjänstgöra. Nu fick jordlösa fattigmän rekryteras — och staten utrustade dem. Det skapade yrkessoldater vars karriär och pension berodde på <em>deras general</em>, inte på staten.</p>
+      <p>Lojaliteten förflyttades från <em>republiken</em> till den <em>enskilde befälhavaren</em>. Det innebar att generaler nu hade ett personligt vapen i form av lojala legioner — och när de fick politiska ambitioner, hade de maktmedlen att genomdriva dem.</p>
+
+      <h3>Maktkampen</h3>
+      <div class="timeline">
+        <div class="timeline-event">
+          <div class="timeline-date">88 f.Kr.</div>
+          <p>Sulla marscherar in i Rom med sina legioner — ett otänkbart brott mot den heliga principen om att arméer inte fick korsa Pomeriet (stadsgränsen). En gräns bryts, precedensen är satt.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">49 f.Kr.</div>
+          <p>Caesar korsar Rubicon med sin armé: <em>"Alea iacta est"</em> — tärningen är kastad. Inbördeskrig mot Pompejus.</p>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-date">44–31 f.Kr.</div>
+          <p>Mordet på Caesar utlöser nya inbördeskrig. Triumvirerna (Antonius, Octavianus, Lepidus) strider om makten. Octavianus segrar vid Actium 31 f.Kr.</p>
+        </div>
+      </div>
+
+      <div class="insight">Republikens fall kan sammanfattas som en institutionell kollaps: de lagar och normer som höll systemet samman — respekten för senaten, förbudet mot arméer i staden, ettårsembetenas princip — upphörde att respekteras när enskilda mäns ambitioner och lojaliteternas förskjutning till arméerna översteg institutionernas förmåga att upprätthålla dem.</div>
+    </div>
+  </div>
+
+  <!-- R5 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">5</span>
+      <span class="q-text">Vilka förändringar genomförde Augustus? Hur bidrog de till ökad stabilitet?</span>
+    </div>
+    <div class="answer">
+      <p>Augustus (f.d. Octavianus, 63 f.Kr.–14 e.Kr.) löste det problem som splittrat republiken i ett sekel: hur man hade stark central styrning utan att kalla det för envälde. Hans svar var det smarta <em>prinsipatet</em> — en dold monarki klädd i republikans dräkt.</p>
+
+      <h3>Politiska reformer</h3>
+      <ul>
+        <li>Tog titlarna <em>Augustus</em> (den ärevördige) och <em>Princeps</em> (förste medborgaren) — aldrig <em>rex</em> (kung), ett ord som väckte hat.</li>
+        <li>Behöll formellt senat, konsuler och folkförsamlingar — men kontrollerade i praktiken allt genom sina befogenheter (tribun powers, prokonsulär imperium).</li>
+        <li>Kontrollerade direkt de militärt känsliga provinserna och utnämnde deras guvernörer — vilket innebar kontroll över armén.</li>
+        <li>Senaten behöll status och prestige men förlorade reell makt — det var en symbiotisk relation: Augustus behövde Senatens legitimitet, Senaten behövde Augustus skydd.</li>
+      </ul>
+
+      <h3>Ekonomiska och sociala reformer</h3>
+      <ul>
+        <li>Folkräkningar (census) och skattereformer skapade ett rättvisare och mer stabilt skattesystem.</li>
+        <li>Gigantiska byggnadsprojekt: Forum Augustum, Ara Pacis (Fredsaltaret), renovering av 82 tempel. Skapade jobb och visade rikets styrka.</li>
+        <li>Äktenskapslagar (Lex Julia) uppmuntrade äktenskap och barnaföding bland eliten.</li>
+        <li>Skapade en stående professionell armé med fasta löner och pensioner (land eller pengar vid avsked) — men lojaliteten knöts nu till kejsaren, inte enskilda generaler.</li>
+      </ul>
+
+      <h3>Varför skapade det stabilitet?</h3>
+      <p>Augustus löste det strukturella problem som krossat republiken: arméns lojalitet. Genom att göra sig till <em>arméns överbefälhavare</em> och ge soldaterna trygga pensioner eliminerade han konkurrensen mellan rivaliserade generaler. Ingen annan hade råd att utmana honom. Resultatet var <em>Pax Romana</em> — ca 200 år av relativ fred och välstånd inom rikets gränser, en period av oöverträffad blomstring i antik historia.</p>
+
+      <div class="insight">Augustus var ett statsvetenskapligt mästerverk i politisk kommunikation: han förstörde republiken men lät den verka leva kvar. Han var envåldshärskaren som kallade sig "förste medborgare". Hans efterträdare hade svårare att upprätthålla illusionen — det är ingen tillfällighet att Augustus, som förstod spelats regler, styrde i 44 år, medan de kejsare som brutalt visade sin makt levde kortare och våldsamma liv.</div>
+    </div>
+  </div>
+
+  <!-- R6 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">6</span>
+      <span class="q-text">Jämför kvinnors livsvillkor i Aten, Sparta och Rom.</span>
+    </div>
+    <div class="answer">
+      <p>I alla tre samhällena hade kvinnor formellt sett underordnade positioner i förhållande till männen — men graden av autonomi, egendomsrätt och social synlighet skilde sig markant.</p>
+
+      <h3>Aten — starka begränsningar</h3>
+      <p>Den atenska kvinnan förväntades leva inom hemmets väggar (<em>gynaikon</em> — kvinnorummets inre del). Hon fick inte delta i folkförsamlingen, ingå kontrakt eller föra sin egen talan i rätten — det krävdes alltid en manlig förmyndare (<em>kyrios</em>: far, make eller bror). Utomhusrörelserna var begränsade och övervakade. Flickors uppfostran syftade till hushållssysslor och barnafödande. Undantagen var religiösa ritualer (som Thesmoforia, en ren kvinnofestival) och <em>hetärer</em> — välutbildade sällskapskvinnor med mer frihet, men lägre social status.</p>
+
+      <h3>Sparta — ovanlig frihet</h3>
+      <p>Spartanska kvinnor hade anmärkningsvärt stor frihet för sin tid. De tränade fysiskt (löpning, brottning, diskuskastning) eftersom man ansåg att starka mödrar föder starka söner. De fick ärva och äga mark — och eftersom männen tillbringade decennier i kaserner och på fältget skötte kvinnorna hushåll och egendom självständigt. De var kända för sina raka, frimodiga uttalanden. Den berömda spartanska mamman som gav sin son skölden och sa "med den eller på den" illustrerar ett ideal av stark, orädd kvinna — inte en passiv hemmafrau.</p>
+
+      <h3>Rom — mellanposition</h3>
+      <p>Romerska kvinnor hade mer ekonomisk frihet än de atenska: de kunde äga egendom, ärva och driva affärer. Välbärgade matroner spelade viktiga roller i de sociala nätverken och påverkade indirekt politiken (Livias inflytande under Augustus är ett känt exempel). Ändå stod de under <em>patria potestas</em> (faderns/makens auktoritet) och saknade rösträtt. Augustus äktenskapslagar (Lex Julia) reglerade äktenskaplig trohet och visade statens vilja att kontrollera även de privata aspekterna av kvinnors liv.</p>
+
+      <table class="compare-table">
+        <tr><th>Aspekt</th><th>Aten</th><th>Sparta</th><th>Rom</th></tr>
+        <tr><td>Politiska rättigheter</td><td>Inga</td><td>Inga</td><td>Inga</td></tr>
+        <tr><td>Äga egendom</td><td>Nej</td><td>Ja</td><td>Ja (med villkor)</td></tr>
+        <tr><td>Fysisk utbildning</td><td>Nej</td><td>Ja</td><td>Varierande</td></tr>
+        <tr><td>Rörelsefrihet</td><td>Starkt begränsad</td><td>Relativt fri</td><td>Relativt fri</td></tr>
+        <tr><td>Social synlighet</td><td>Minimal</td><td>Hög</td><td>Medelhög</td></tr>
+      </table>
+
+      <div class="insight">Det gemensamma för alla tre: ingen av dem gav kvinnor <em>formell politisk makt</em>. Skillnaden låg i det ekonomiska och sociala handlingsutrymmet. Sparta utmärker sig som det system där avståndet mellan ideal och verklighet var minst — där praktisk frihet och idealets krav sammanföll. Det är också värt att notera att våra huvudkällor om dessa samhällen skrevs av män, för män — vi vet förhållandevis lite om hur kvinnorna själva upplevde sina liv.</div>
+    </div>
+  </div>
+
+  <!-- R7 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">7</span>
+      <span class="q-text">Varför föll det västromerska riket?</span>
+    </div>
+    <div class="answer">
+      <p>Romarrikets fall är ett av historiens mest diskuterade ämnen — historikern Edward Gibbon ägnade sex volymer åt frågan. Det enkla svaret (germaner drev bort romarna) är missvisande. Fallet var resultatet av en <strong>lång process</strong> där inre försvagning och yttre tryck ömsesidigt förstärkte varandra.</p>
+
+      <h3>Inre faktorer</h3>
+      <ul>
+        <li><strong>Ekonomisk kris:</strong> Erövringar upphörde kring 100-talets e.Kr., vilket innebar ett slut på inflödet av slavar och krigsbyten. Militärkostnaderna steg ändå — staten svarade med inflation (silverhalt i mynt sänktes drastiskt) och höga skatter. Handel och jordbruk stagnerade.</li>
+        <li><strong>Politisk instabilitet:</strong> Under 200-talets kris (235–284 e.Kr.) avsattes och mördades 50 kejsare på 50 år. Ingen central styrning fungerade. Armégeneralerna utsåg och störtade kejsare efter eget gottfinnande.</li>
+        <li><strong>Militärisering och barbarisering:</strong> Västriket rekryterade alltmer germanska foederati (allierade trupper) som ersättning för den krympande romerska armén. Dessa var inte alltid lojala mot Rom — utan mot sina egna stammars ledare.</li>
+      </ul>
+
+      <h3>Yttre faktorer</h3>
+      <ul>
+        <li><strong>Folkvandringstiden:</strong> Hunners expansion från öst pressade germaniska folkstammar (visigoter, vandaler, ostrogoter m.fl.) västerut in i romarriket. Det var en dominoeffekt: hunner trycker på goter, goter trycker på romare.</li>
+        <li><strong>Konkreta händelser:</strong> Visigoter plundrar Rom 410 e.Kr. (chockerande för samtiden — Rom hade inte plundrats på 800 år). Vandaler härjar Nordafrika och skär av kornförsörjningen. 476 e.Kr. avsätter den germanske hövdingen Odovakar den siste västromerske kejsaren, Romulus Augustulus.</li>
+      </ul>
+
+      <h3>Strukturell faktor: rikets delning</h3>
+      <p>Diocletianus delade riket 285 e.Kr. i öst och väst för bättre administration. Det östromerska riket (Bysans) var rikare, hade Konstantinopel som befäst och strategiskt belägen huvudstad, och överlevde faktiskt till 1453 — nästan tusen år längre än väst. Västriket fick de tyngsta militära trycken men de minsta resurserna.</p>
+
+      <div class="insight">Historikern Peter Heather betonar yttre faktorer, medan Bryan Ward-Perkins understryker att fallet var katastrofalt för västra Europas materiella välstånd. Edward Gibbon pekade på kristendomens "demoralisering" av romerska dygder. Ingen ensam orsak räcker — det är just det samverkande av ekonomisk utmattning, politisk söndring och yttre invasioner som är det historiskt intressanta. Riket dog inte — det upplöstes långsamt.</div>
+    </div>
+  </div>
+
+  <!-- R8 -->
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">8</span>
+      <span class="q-text">Vilka arv från antikens Grekland och Rom kan vi se i samhället idag?</span>
+    </div>
+    <div class="answer">
+      <p>Det antika arvet är inte museum — det är levande. Nedan följer konkreta exempel på hur Aten och Rom fortfarande formar vår värld.</p>
+
+      <h3>Demokrati och politisk filosofi</h3>
+      <p>Ordet <em>demokrati</em> är direkt från det antika Aten: <em>demos</em> (folk) + <em>kratos</em> (makt). Idéerna om folkstyre, yttrandefrihet och att makten ska begränsas av lagar härstammar från den atenska traditionen. Upplysningens tänkare (Locke, Rousseau, Montesquieu) studerade aktivt den atenska demokratin när de lade grunden för moderna konstitutioner. Sveriges riksdag, det amerikanska senatsystemet och FN:s tanke om folkets suveränitet bär alla spår av antikens politiska idéer.</p>
+
+      <h3>Rättssystem</h3>
+      <p>Det romerska juridiska systemet — kodifierat i <em>Corpus Juris Civilis</em> under Justinianus på 500-talet — är grunden för rättssystemen i stora delar av Europa, Latinamerika och Afrika. Begrepp som "rättsstat", "oskyldig till dess motsatsen bevisas" och juridisk personlighet är direkt romerska arv. Juristutbildningen i Sverige läser fortfarande romersk rätt.</p>
+
+      <h3>Filosofi och vetenskap</h3>
+      <p>Aristoteles logik låg till grund för Europas intellektuella liv i ett årtusende. Hippokrates princip — att söka naturliga orsaker till sjukdomar, dokumentera symptom och prova behandlingar — är principen bakom modern medicinsk forskning. Euklides geometri lärs fortfarande ut på gymnasiet. Arkimedes princip om densitet och flytkraft används dagligen i ingenjörskonsten.</p>
+
+      <h3>Språk</h3>
+      <p>Latin är grunden för de romanska språken (spanska, franska, italienska, portugisiska, rumänska). Hälften av alla engelska ord har latin- eller grekiskursprung. Vetenskaplig och juridisk terminologi i hela världen är latinbaserad — från <em>species</em> i biologin till <em>habeas corpus</em> i juridiken.</p>
+
+      <h3>Arkitektur</h3>
+      <p>Kolonnader, kuppler, triumfbågar och stadsplaner med raka gator är direkt hämtade från Rom. Kapitolium i Washington D.C., riksdagshuset i Stockholm och otaliga europeiska domstolar och bibliotek är arkitektoniska citat av antikens byggnader.</p>
+
+      <h3>Olympiska spelen</h3>
+      <p>De moderna olympiska spelen, återupplivade 1896 av Pierre de Coubertin, är direkt inspirerade av de antika spelen (776 f.Kr.–393 e.Kr.). Tanken om att idrott transcenderar nationsgränser och skapar fred är en återuppliven panhellenisk idé.</p>
+
+      <div class="insight">Det kanske djupaste arvet är ett tankesätt: att söka rationella förklaringar, att ifrågasätta auktoriteter, att tro att förnuft och debatt är bättre än godtycke — det är det antika Aten i varje vetenskaplig artikel, varje domstolsdebatt, varje val. Vi behöver inte studera antiken för att lära om det förflutna — vi studerar det för att förstå varför vi tänker och lever som vi gör.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ANALYSFRÅGA ========== -->
+<section class="tab-section" id="tab-analys">
+  <div class="section-intro">
+    Analysfrågan kräver ett jämförande resonemang ur <strong>olika gruppers perspektiv</strong> — det är detta som skiljer ett A-svar från ett C-svar. Visa att du förstår att samma samhälle kan se fundamentalt olika ut beroende på vem du är.
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">
+      <span class="q-num">★</span>
+      <span class="q-text">Välj två grupper och jämför deras möjligheter, rättigheter och inflytande. Förklara varför deras perspektiv på samhället skilde sig åt.</span>
+    </div>
+    <div class="answer">
+      <p>Jag väljer att jämföra den <strong>atenske manlige medborgaren</strong> och den <strong>atenske slaven</strong> — två grupper som levde sida vid sida i samma stad men i fullständigt skilda världar. Valet är medvetet: det belyser demokratins paradox på ett sätt som är historiskt och analytiskt givande.</p>
+
+      <h3>Den atenske manlige medborgaren</h3>
+      <ul>
+        <li><strong>Politiska rättigheter:</strong> Full rösträtt i folkförsamlingen, rätt att tala, kandidera till ämbeten och sitta i juridiska juryer.</li>
+        <li><strong>Juridisk status:</strong> Självständig rättssubjekt — kunde äga mark, ingå kontrakt, stämma och stämmas.</li>
+        <li><strong>Social identitet:</strong> Uppfostrad som en del av stadsstaten. Militärtjänst och politiskt deltagande var inte bara rättigheter utan medborgerliga skyldigheter — plikter som gav status och gemenskapstillhörighet.</li>
+        <li><strong>Ekonomi:</strong> Kunde äga mark, bedriva handel, och — framför allt — kunde äga slavar, vars arbete frigjorde honom för politisk och intellektuell verksamhet.</li>
+      </ul>
+
+      <h3>Den atenske slaven</h3>
+      <ul>
+        <li><strong>Juridisk status:</strong> Rättslös. Slaven var inte en person utan ett ting (<em>ktema</em>) i lagens ögon — ägarens egendom att köpa, sälja, hyra ut och bestraffa.</li>
+        <li><strong>Inga politiska rättigheter:</strong> Absolut utestängd från folkförsamlingen, domstolarna och allt politiskt liv.</li>
+        <li><strong>Inget familjeskydd:</strong> Familjen kunde splittras vid försäljning. Slavens barn tillhörde ägaren.</li>
+        <li><strong>Variation inom gruppen:</strong> Slavar var inte en homogen massa. Statliga slavar i Aten (som offentliga skrivare eller poliskåren — de s.k. skytherna) hade viss rörelsefrihet. Välutbildade slavar i rika hem hade mer bekväma liv. Gruvslavarna i Laurion-silvermineralen levde i helvetiska förhållanden. Men alla delade den absoluta rättslösheten.</li>
+      </ul>
+
+      <h3>Perspektivskillnad — två verkligheter i samma stad</h3>
+      <p>För den frie medborgaren var Aten Perikles vision: <em>"Hellas skola"</em>, en stad av frihet, debatt och demokrati. Hans identitet var sammanflätad med stadsstaten — att delta i politiken var att vara fullt mänsklig. Demokratin var hans stolthet och hans ansvar.</p>
+
+      <p>För slaven var samma demokrati en abstrakt — och närmast ironisk — konstruktion. De byggnader där medborgarna debatterade frihetens natur byggdes av slavar. De symposier där Sokrates och Platon diskuterade rättvisans väsen serverades av ofria. De rika medborgare som talade om alla mäns lika rätt att höja sin röst ägde människor som inte fick öppna munnen i juridiska sammanhang.</p>
+
+      <h3>Det strukturella sambandet</h3>
+      <p>Det avgörande insikten är att dessa två perspektiv inte existerade oberoende av varandra — de var intimt sammanlänkade. <strong>Demokratin förutsatte slaveriet.</strong> Utan slavarnas arbete i hushållen, på fälten och i gruvorna hade de fria medborgarna inte haft den fritid som krävdes för att delta i folkförsamlingen, lyssna på filosofer och sitta i juryer. Slaveriet var alltså inte en bieffekt av den atenska demokratin — det var dess ekonomiska fundament.</p>
+
+      <div class="insight">
+        Den här paradoxen — frihetens ideal i ett samhälle grundat på ofrihet — är ett av historiens viktigaste lärdomar. Det påminner oss om att samhällen kan ha höga ideal och samtidigt djupa strukturella orättvisor. Atens demokrati var revolutionär för sin tid och lade grunden för vår — men den var exkluderande på ett sätt vi inte kan förbise. Att förstå båda dessa sanningar samtidigt är vad det innebär att tänka historiskt.
+      </div>
+
+      <h3>Parallell: Patricier och plebejer i Rom</h3>
+      <p>En liknande men strukturellt annorlunda jämförelse är den mellan <strong>romerske patricier</strong> och <strong>romskt plebejer</strong>. Till skillnad från i Aten var plebejerna inte rättslösa — de var fria medborgare. Men de saknade länge politiskt inflytande och utsattes för patriciska godtycke. Det avgörande är att deras kamp fördes på <em>legala</em> vägar (strejker, tribuner, lagstiftning) och slutade med faktiska reformer — något slavarna i Aten aldrig uppnådde. Det illustrerar att graden av orättvisa och möjligheterna att förändra den var olika i de två samhällena.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Antiken · Instuderingssvar NATE24B · Gymnasiet åk 3 · Samtliga svar syftare till A-nivå: utförliga, nyanserade och med flerperspektivsanalys.
+</footer>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

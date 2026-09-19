@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studiehandledning — De Abrahamitiska Religionerna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --base: #f4f2ee;
+    --white: #ffffff;
+    --ink: #1a1a2e;
+    --ink-muted: #4a4a5e;
+    --nav-bg: #1e2d4a;
+    --nav-text: #e8e4d8;
+    --gold: #b08d2a;
+    --gold-light: #f0e6c0;
+    --jud: #2c4a8a;
+    --jud-light: #e8edf8;
+    --jud-mid: #9ab0d8;
+    --krist: #7a2035;
+    --krist-light: #f5e8eb;
+    --krist-mid: #c98090;
+    --islam: #1a5c38;
+    --islam-light: #e5f2ea;
+    --islam-mid: #7ab898;
+    --abr: #5c3570;
+    --abr-light: #eee8f5;
+    --abr-mid: #a888c0;
+    --border: #ddd9d0;
+    --shadow: rgba(26,26,46,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', 'Georgia', sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--base);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--nav-bg);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar-header {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  #sidebar-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+
+  #sidebar-header p {
+    font-size: 0.78rem;
+    color: rgba(232,228,216,0.6);
+    font-weight: 300;
+  }
+
+  nav { flex: 1; padding: 12px 0 28px; }
+
+  nav ul { list-style: none; }
+
+  .nav-section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(232,228,216,0.4);
+    padding: 16px 20px 6px;
+  }
+
+  nav a {
+    display: block;
+    padding: 7px 20px;
+    font-size: 0.85rem;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-weight: 300;
+    transition: background 0.15s, color 0.15s;
+    border-left: 3px solid transparent;
+  }
+
+  nav a:hover { background: rgba(255,255,255,0.07); color: #fff; }
+
+  nav a.abr-nav  { border-left-color: var(--abr-mid); }
+  nav a.jud-nav  { border-left-color: var(--jud-mid); }
+  nav a.krist-nav{ border-left-color: var(--krist-mid); }
+  nav a.islam-nav{ border-left-color: var(--islam-mid); }
+
+  nav a.abr-nav  { color: #c8b8dc; }
+  nav a.jud-nav  { color: #a8bfe8; }
+  nav a.krist-nav{ color: #d8a0b0; }
+  nav a.islam-nav{ color: #98d0b0; }
+
+  .print-btn {
+    margin: 0 14px 20px;
+    padding: 10px 16px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    font-size: 0.85rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  .print-btn:hover { background: #9a7a20; }
+
+  /* MAIN */
+  main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: var(--nav-bg);
+    padding: 52px 64px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(176,141,42,0.08);
+    transform: translate(30%, 40%);
+  }
+
+  .header-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: #fff;
+    line-height: 1.2;
+    max-width: 600px;
+    font-weight: 700;
+  }
+
+  .page-header p {
+    margin-top: 16px;
+    font-size: 1rem;
+    color: rgba(232,228,216,0.75);
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .religion-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .chip {
+    padding: 5px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+  }
+
+  .chip-abr   { background: var(--abr);   color: #fff; }
+  .chip-jud   { background: var(--jud);   color: #fff; }
+  .chip-krist { background: var(--krist); color: #fff; }
+  .chip-islam { background: var(--islam); color: #fff; }
+
+  /* CONTENT AREA */
+  .content { padding: 0 64px 80px; }
+
+  /* SECTION */
+  .section {
+    margin-top: 56px;
+    scroll-margin-top: 24px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .icon-abr   { background: var(--abr-light);   color: var(--abr); }
+  .icon-jud   { background: var(--jud-light);   color: var(--jud); }
+  .icon-krist { background: var(--krist-light); color: var(--krist); }
+  .icon-islam { background: var(--islam-light); color: var(--islam); }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-top: 3px;
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--white);
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px var(--shadow);
+    border-left: 4px solid var(--border);
+    overflow: hidden;
+  }
+
+  .q-card.abr   { border-left-color: var(--abr); }
+  .q-card.jud   { border-left-color: var(--jud); }
+  .q-card.krist { border-left-color: var(--krist); }
+  .q-card.islam { border-left-color: var(--islam); }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 24px 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .q-num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .abr   .q-num { background: var(--abr-light);   color: var(--abr); }
+  .jud   .q-num { background: var(--jud-light);   color: var(--jud); }
+  .krist .q-num { background: var(--krist-light); color: var(--krist); }
+  .islam .q-num { background: var(--islam-light); color: var(--islam); }
+
+  .q-question {
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    flex: 1;
+    color: var(--ink);
+  }
+
+  .q-toggle {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    margin-top: 2px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+
+  .q-body {
+    display: none;
+    padding: 0 24px 24px 64px;
+  }
+
+  .q-card.open .q-body { display: block; }
+
+  .q-body p {
+    margin-bottom: 14px;
+    font-size: 0.96rem;
+    max-width: 70ch;
+  }
+
+  .q-body p:last-child { margin-bottom: 0; }
+
+  /* SUBHEADINGS INSIDE ANSWERS */
+  .q-body h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin: 20px 0 8px;
+    color: var(--ink-muted);
+  }
+
+  .q-body h5 {
+    font-weight: 600;
+    font-size: 0.96rem;
+    margin: 14px 0 6px;
+    color: var(--ink);
+  }
+
+  /* KEY TERM HIGHLIGHT */
+  .term {
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .abr   .term { color: var(--abr); }
+  .jud   .term { color: var(--jud); }
+  .krist .term { color: var(--krist); }
+  .islam .term { color: var(--islam); }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    max-width: 68ch;
+  }
+
+  .compare-table th {
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--base);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .compare-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+    max-width: 68ch;
+    font-style: italic;
+  }
+
+  /* ANALYS SECTION */
+  .analys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+    max-width: 70ch;
+  }
+
+  .analys-cell {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  .analys-cell h5 { margin-top: 0; margin-bottom: 8px; font-size: 0.88rem; }
+  .analys-cell p { font-size: 0.86rem; margin: 0; }
+
+  /* DIVIDER */
+  .divider {
+    margin: 60px 0 0;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* EXAM TIPS */
+  .exam-tips {
+    margin-top: 48px;
+    background: var(--white);
+    box-shadow: 0 1px 4px var(--shadow);
+    padding: 28px 32px;
+  }
+
+  .exam-tips h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tip-item {
+    padding: 14px 16px;
+    background: var(--base);
+    border-left: 3px solid var(--gold);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .tip-item strong { display: block; margin-bottom: 4px; }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    #sidebar { display: none !important; }
+    main { margin-left: 0 !important; }
+    .page-header { padding: 32px 40px !important; }
+    .content { padding: 0 40px 40px !important; }
+    .q-body { display: block !important; }
+    .q-toggle { display: none !important; }
+    .q-card { box-shadow: none !important; break-inside: avoid; }
+    .section { break-inside: avoid; }
+    .exam-tips { break-inside: avoid; box-shadow: none !important; }
+    .print-btn { display: none !important; }
+    a { color: inherit !important; text-decoration: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR NAV -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h2>Studiehandledning</h2>
+    <p>Abrahamitiska religionerna — Prov v.&nbsp;39</p>
+  </div>
+  <nav>
+    <div class="nav-section-label">Gemensamt</div>
+    <ul>
+      <li><a href="#abrahamitiska" class="abr-nav">Abrahamitiska religionerna</a></li>
+    </ul>
+    <div class="nav-section-label">Judendom</div>
+    <ul>
+      <li><a href="#jud-1" class="jud-nav">F1 – Historiens betydelse</a></li>
+      <li><a href="#jud-2" class="jud-nav">F2 – Förbundet med Gud</a></li>
+      <li><a href="#jud-3" class="jud-nav">F3 – Talmud-traditionen</a></li>
+      <li><a href="#jud-4" class="jud-nav">F4 – Judiska inriktningar</a></li>
+      <li><a href="#jud-5" class="jud-nav">F5 – Gudstjänsten</a></li>
+      <li><a href="#jud-6" class="jud-nav">F6 – Övergångsriter</a></li>
+      <li><a href="#jud-7" class="jud-nav">F7 – Tolkning i vardagen</a></li>
+      <li><a href="#jud-8" class="jud-nav">F8 – Antisemitism</a></li>
+    </ul>
+    <div class="nav-section-label">Kristendom</div>
+    <ul>
+      <li><a href="#krist-1" class="krist-nav">F1 – Jesus betydelse</a></li>
+      <li><a href="#krist-2" class="krist-nav">F2 – Messias och Kristus</a></li>
+      <li><a href="#krist-3" class="krist-nav">F3 – Monoteism & treenighet</a></li>
+      <li><a href="#krist-4" class="krist-nav">F4 – Kristendomens historia</a></li>
+      <li><a href="#krist-5" class="krist-nav">F5 – Jul och påsk</a></li>
+      <li><a href="#krist-6" class="krist-nav">F6 – Sakrament</a></li>
+      <li><a href="#krist-7" class="krist-nav">F7 – Kön och sexualitet</a></li>
+    </ul>
+    <div class="nav-section-label">Islam</div>
+    <ul>
+      <li><a href="#islam-1" class="islam-nav">F1 – Veta om Gud</a></li>
+      <li><a href="#islam-2" class="islam-nav">F2 – Profet och sändebud</a></li>
+      <li><a href="#islam-3" class="islam-nav">F3 – Hadith och sunna</a></li>
+      <li><a href="#islam-4" class="islam-nav">F4 – Gabrielhadithen</a></li>
+      <li><a href="#islam-5" class="islam-nav">F5 – Rättslärd & handlingar</a></li>
+      <li><a href="#islam-6" class="islam-nav">F6 – Tolkningsskillnader</a></li>
+      <li><a href="#islam-7" class="islam-nav">F7 – Tawhid i praktiken</a></li>
+    </ul>
+    <div class="nav-section-label">Provförberedelse</div>
+    <ul>
+      <li><a href="#provtips" class="abr-nav">Analystips för provet</a></li>
+    </ul>
+  </nav>
+  <button class="print-btn" onclick="window.print()">🖨 Skriv ut / Spara PDF</button>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="header-eyebrow">Gymnasiet — Religionskunskap</div>
+    <h1>De Abrahamitiska Religionerna</h1>
+    <p>Komplett studiehandledning med A-nivå-svar på samtliga instuderingsfrågor inför provet.</p>
+    <div class="religion-chips">
+      <span class="chip chip-abr">Gemensamt</span>
+      <span class="chip chip-jud">Judendom</span>
+      <span class="chip chip-krist">Kristendom</span>
+      <span class="chip chip-islam">Islam</span>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- ======================== ABRAHAMITISKA ======================== -->
+    <section class="section" id="abrahamitiska">
+      <div class="section-header">
+        <div class="section-icon icon-abr">☪✡✝</div>
+        <div>
+          <h2>De Abrahamitiska Religionerna</h2>
+          <div class="section-sub">Gemensamma drag, gudsbilder och synen på kön</div>
+        </div>
+      </div>
+
+      <!-- ABR F1 -->
+      <div class="q-card abr open" id="abr-1">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">1</div>
+          <div class="q-question">Förklara bakgrunden till samlingsbegreppet "abrahamitiska religioner"</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Beteckningen <span class="term">abrahamitiska religioner</span> används för att samla judendom, kristendom och islam under ett gemensamt paraplybegrepp, eftersom alla tre härstammar ur och knyter an till patriarken <em>Abraham</em> (hebreiska: <em>Avraham</em>; arabiska: <em>Ibrahim</em>). Abraham betraktas i alla tre traditionerna som trosfadern — den förste som slöt ett förbund med Gud och visade en ovillkorlig tilltro till Gud trots att han prövades hårt.</p>
+
+          <h4>Abrahams roll i respektive religion</h4>
+          <p>Inom <strong>judendomen</strong> är Abraham den förste av patriarkerna och den Gud slöt ett evigt förbund med: Gud lovade att göra hans ättlingar till ett stort folk och skänka dem Kanaans land. Förbundets tecken är omskärelsen (<em>brit mila</em>), som inrättades med Abraham (1 Mos 17).</p>
+          <p>Inom <strong>kristendomen</strong> ses Abraham som trons förebild. Paulus skriver i Romarbrevet att Abraham "trodde Gud, och det räknades honom till rättfärdighet" — alltså att tron, inte gärningarna, är det frälsande. Jesus presenteras dessutom som Abrahams ättling (Matt 1:1), vilket knyter Nya testamentets budskap till Gamla testamentets löften.</p>
+          <p>Inom <strong>islam</strong> betraktas Ibrahim som en central profet — "Guds vän" (<em>Khalilullah</em>) — och den som tillsammans med sin son Ismail (Ishmael) byggde Ka'ba i Mecka och återupprättade monoteismens heliga plats. Vallfärden (<em>hajj</em>) kopplas direkt till Ibrahims historia.</p>
+          <p>Utöver Abraham delar religionerna tre avgörande grunddrag: de är <em>monoteistiska</em>, de uppstod i och kring Mellanöstern, och de ser sig som bärare av Guds historiska uppenbarelse till mänskligheten.</p>
+          <div class="highlight-box">"Abraham är knutpunkten som binder samman tre världsreligioner — hans historia är en gemensam startpunkt, men tre olika resvägar."</div>
+        </div>
+      </div>
+
+      <!-- ABR F2 -->
+      <div class="q-card abr" id="abr-2">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">2</div>
+          <div class="q-question">"De abrahamitiska religionerna har en gemensam gudsbild." Resonera om vad som kan stödja det påståendet och vad som kan motsäga det.</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Påståendet är delvis sant — på ett grundläggande plan delar religionerna en monoteistisk gudsbild — men håller inte fullt ut när man granskar detaljerna i respektive traditions gudsuppfattning.</p>
+
+          <h4>Argument som stödjer påståendet</h4>
+          <p>Alla tre religionerna är <span class="term">monoteistiska</span> och tillber Abrahams Gud — den skapande, allsmäktige och allvetande Guden. Ingen av dem tolererar polyteism. De delar dessutom tron på att Gud är transcendent (bortom mänsklig fullständig förståelse), att Gud handlar i historien, och att Gud är rättvis och barmhärtig. Gemensamma teman som profeter, uppenbarelse, dom och rättfärdighet förstärker bilden av en delad gudsuppfattning.</p>
+
+          <h4>Argument som motsäger påståendet</h4>
+          <p><strong>Treenigheten</strong> är den mest grundläggande skiljelinjen. Kristendomen formulerar i treenighetsläran att Gud är en i väsen men uppenbarar sig i tre "personer": Fadern, Sonen och den Helige Ande. Judendom och islam avvisar detta bestämt. Judendomen betonar Guds absoluta enhet i <em>Shema Yisrael</em> ("Hör Israel, Herren är vår Gud, Herren är en" — 5 Mos 6:4). Islam betonar <em>tawhid</em> — Guds odelbarhet — och betraktar varje form av att "lägga något vid sidan om Gud" (<em>shirk</em>) som den allvarligaste tänkbara synden.</p>
+          <p><strong>Inkarnationen</strong> är en annan skiljelinje. Kristendomen hävdar att Gud tog mänsklig form i Jesus Kristus — "Ordet blev kött" (Joh 1:14). Varken judendomen eller islam accepterar att Gud kan ta mänsklig gestalt. Inom islam är Isa (Jesus) en profet, inte Guds son.</p>
+          <p><strong>Guds relation till ett specifikt folk:</strong> Judendomen betonar förbundsguden som Israels Gud — ett förhållande med ett specifikt folk — medan islam och kristendom har en mer universell gudsbild riktad till hela mänskligheten.</p>
+
+          <div class="analys-grid">
+            <div class="analys-cell">
+              <h5>✓ Gemensamt</h5>
+              <p>Monoteism, skapelsetro, profeternas roll, etisk Gud, historisk uppenbarelse</p>
+            </div>
+            <div class="analys-cell">
+              <h5>✗ Skiljande</h5>
+              <p>Treenigheten (krist.), inkarnationen (krist.), tawhid kontra treigheten, förbundets räckvidd</p>
+            </div>
+          </div>
+          <p>Slutsats: Påståendet gäller på ett ytligt plan men är missvisande i djupare teologisk mening — skillnaderna i gudsuppfattning är inte perifera utan avgörande för varje traditions identitet.</p>
+        </div>
+      </div>
+
+      <!-- ABR F3 -->
+      <div class="q-card abr" id="abr-3">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">3</div>
+          <div class="q-question">Beskriv olika sätt att se på kön och genus inom de abrahamitiska religionerna</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Alla tre religionerna har historiskt präglats av <span class="term">patriarkala</span> strukturer — system där mannen haft religiös och samhällelig auktoritet, medan kvinnors roller begränsats. Samtidigt finns det i alla tre traditioner reformrörelser som utmanar dessa strukturer med stöd i de heliga texterna.</p>
+
+          <h4>Judendom</h4>
+          <p>I <strong>ortodox judendom</strong> är könsrollerna strikt separerade. Traditionellt är mannen den som är religiöst skyldig att fullgöra samtliga bud (<em>mitzvot</em>), och i ortodoxa synagogor skiljer en skärm (<em>mechitza</em>) mellan män och kvinnors sittplatser. Rabbinrollen har traditionellt förbehållits män, och kvinnan ses i klassisk teologi primärt som familjens och hemmets väktare.</p>
+          <p><strong>Reformjudendomen</strong> (sedan 1800-talet) har brutit radikalt med detta: man ordinerar kvinnliga rabbiner sedan 1972, bejakar full jämlikhet i gudstjänsten och accepterar samkönade relationer. Konservativ judendom intar en mellanposition — man ordinerar kvinnliga rabbiner men håller fast vid mer traditionell liturgi.</p>
+
+          <h4>Kristendom</h4>
+          <p>Den <strong>katolska kyrkan</strong> reserverar prästämbetet för män, med hänvisning till Jesu val av manliga apostlar och Paulus' brev (1 Tim 2:12). Ortodoxa kyrkor har liknande hållning. Däremot har <strong>Svenska kyrkan</strong> (sedan 1960) och många protestantiska kyrkor öppnat prästämbetet för kvinnor. Vissa frikyrkor välsignar samkönade par. Variationen är alltså enorm beroende på konfession och geografisk kontext.</p>
+
+          <h4>Islam</h4>
+          <p>I klassisk sunnitisk och shiamuslimsk teologi har mannen traditionellt lett bönen som <em>imam</em>, och Koranens surah 4:34 tolkas traditionellt som att mannen bär ansvaret för familjen. Konservativa tolkningar innebär krav på <em>hijab</em>, begränsad rörlighet för kvinnor och separata utrymmen i moskén. Muslimska feminister — bl.a. Amina Wadud och Fatema Mernissi — argumenterar för könsinkluderande korantolkning och hävdar att traditionella tolkningar speglar mänsklig kultur, inte Guds vilja.</p>
+
+          <div class="highlight-box">Nyckelinsikt för A-nivå: Skillnaden <em>inom</em> varje religion är ofta lika stor som skillnaden <em>mellan</em> religionerna. Konservativa katoliker, ortodoxa judar och konservativa muslimer har mer gemensamt med varandra i synen på könsroller än med liberala tolkare av den egna traditionen.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ======================== JUDENDOM ======================== -->
+    <section class="section" id="judendom">
+      <div class="section-header">
+        <div class="section-icon icon-jud">✡</div>
+        <div>
+          <h2>Judendom</h2>
+          <div class="section-sub">Historia, förbund, texter, riktningar och livspraktik</div>
+        </div>
+      </div>
+
+      <!-- JUD F1 -->
+      <div class="q-card jud" id="jud-1">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">1</div>
+          <div class="q-question">Förklara varför historien är så viktig inom judendom och ge några exempel på händelser med särskilt betydelse</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Historien är fundamental inom judendomen av ett avgörande skäl: judisk tro handlar inte primärt om abstrakta idéer, utan om <em>Guds konkreta handlingar i historien</em> — framförallt i relation till det judiska folket som förbundspartner. Att Gud ingripit i mänsklig historia är beviset på förbundets realitet och Guds trohet.</p>
+          <p>Den judiska gudstjänstens, högtidernas och liturgins strukturer är alla uppbyggda kring historiska händelser som <em>reaktualiseras</em> av varje ny generation — man berättar historien som sin <em>egen</em> historia, inte bara som ett minne av förfäders upplevelser.</p>
+
+          <h4>Centrala historiska händelser</h4>
+          <h5>Uttåget ur Egypten (Exodus)</h5>
+          <p>Befrielsen från slaveriet i Egypten under Moses ledarskap är den allra mest grundläggande berättelsen. Den firas varje år under <em>Pesach</em> (påskhögtiden), då haggadah-berättelsen återberättas vid middagsbordet med symbolisk mat. Uttåget är prototypen för Guds befriande ingripande och bekräftar förbundets löfte.</p>
+
+          <h5>Uppenbarelsen på Sinai</h5>
+          <p>Guds uppenbarelse för Moses och överlåtandet av <em>Torah</em> — de tio budorden och den fullständiga lagen — konstituerar det judiska folkets identitet som förbundsfolk och sätter ramverket för hela det judiska livet.</p>
+
+          <h5>Tempelns förstörande</h5>
+          <p>Det första Templet i Jerusalem förstördes av babylonierna 586 f.Kr. och det andra av romarna år 70 e.Kr. Dessa katastrofer driver judarna i <em>diaspora</em> (spridning). De tolkas teologiskt inte som Guds nederlaget utan som konsekvenser av olydnad mot förbundet — och som löfte om framtida återvändande. Den nionde av månaden Av (<em>Tisha B'Av</em>) firas som fastdag till minnet av bägge förstörelserna.</p>
+
+          <h5>Förintelsen (Shoah)</h5>
+          <p>Nazisternas systematiska utrotning av sex miljoner judar 1941–1945 är en modernhistorisk händelse som djupt präglar judisk teologi, identitet och etik. Minnesdagen <em>Yom HaShoah</em> är idag en del av den judiska högtidskalendern. Shoah väcker svåra teologiska frågor om Guds roll och förbundets innebörd efter traumat.</p>
+
+          <div class="highlight-box">Nyckelformulering: Judendomen är en historisk religion — Gud uppenbarar sig genom historiska händelser, och den judiska identiteten bärs upp av ett gemensamt minne av dessa händelser.</div>
+        </div>
+      </div>
+
+      <!-- JUD F2 -->
+      <div class="q-card jud" id="jud-2">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">2</div>
+          <div class="q-question">Vad innebär förbundet med Gud för det judiska folket enligt judisk tro?</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Förbundet</span> (hebreiska: <em>brit</em>) är en sakral ömsesidig överenskommelse mellan Gud och det judiska folket och genomsyrar hela Torahtexten. Det är grunden för den judiska religiösa identiteten.</p>
+
+          <h4>Förbundets innehåll</h4>
+          <p>Gud lovar att skydda, välsigna och evigt vara med det judiska folket och hålla dem som sitt eget folk. I gengäld ska det judiska folket följa Guds bud (<em>mitzvot</em>) — Torah innehåller 613 sådana bud. Förbundet innebär ett uppdrag: att leva som ett "heligt folk" och ett "prästerligt rike" (Exodus 19:6) — det vill säga ett folk som i sin livsstil och etik vittnar om Gud inför omvärlden.</p>
+
+          <h4>Förbundets tecken</h4>
+          <p>Det yttre tecknet på förbundet med Abraham är <em>brit mila</em> (omskärelsen), instiftad i 1 Mos 17. Förbundets tecken med hela folket är <em>sabbaten</em> (Exodus 31:13: "Mina sabbater ska ni hålla — det är ett tecken mellan mig och er") och bärandet av Torah.</p>
+
+          <h4>Förbundets konsekvenser</h4>
+          <p>Klassisk rabbinsk teologi menar att folkets lydnad eller olydnad mot Torah-buden leder till välsignelse eller straff — exilperioderna tolkades som konsekvenser av folkets avfall. Förbundet är däremot evigt: Gud tar aldrig tillbaka det, även om individer eller hela folket sviker.</p>
+
+          <h4>Skillnader mellan riktningarna</h4>
+          <p><strong>Ortodoxa judar</strong> ser alla 613 mitzvot som bokstavligt bindande idag. <strong>Konservativa judar</strong> menar att rabbinsk auktoritet kan anpassa tolkningen till modernt liv. <strong>Reformjudar</strong> ser förbundets etiska kärna — rättvisa, barmhärtighet och helighet — som det väsentliga, medan de rituella buden är vägledande men inte obligatoriska.</p>
+        </div>
+      </div>
+
+      <!-- JUD F3 -->
+      <div class="q-card jud" id="jud-3">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">3</div>
+          <div class="q-question">Av vilka skäl utvecklas Talmud-traditionen i judendomen?</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Talmud</span> uppstod ur ett konkret och historiskt betingat behov: hur ska man leva ett autentiskt judiskt liv när de yttre förhållandena förändrats radikalt?</p>
+
+          <h4>Bakgrunden — den muntliga Torah-traditionen</h4>
+          <p>Enligt judisk tradition existerade vid sidan av den <em>skriftliga Torah</em> (Femböckerna, nedtecknade) en <em>muntlig Torah</em> — en levande tolkningspraxis som Moses fått av Gud på Sinai och som förts vidare muntligt från generation till generation. Denna muntliga tradition var grunden för praktisk halacha (judisk lag).</p>
+
+          <h4>Drivkrafter bakom Talmuds nedskrivande</h4>
+          <p><strong>Templets förstörande (70 e.Kr.):</strong> När det andra Templet i Jerusalem förstördes av romarna upphörde offerkultens centrum. Judendomen behövde reformeras kring synagogan och Torah-studiet som alternativa platser för Guds närvaro. Rabbinern Rabbi Johanan ben Zakkai var avgörande för denna omvandling.</p>
+          <p><strong>Diasporan och nya livskontexter:</strong> Judar i babylonisk, persisk och romersk exil mötte nya praktiska frågor som Torah-texten inte direkt besvarade — om handel, äktenskap, lantbruk i en annan kontext. Rabbinerna behövde diskutera och fastslå hur Torah-lagen gäller i dessa situationer.</p>
+          <p><strong>Skydda den muntliga traditionen:</strong> Oron att den levande muntliga traditionen skulle gå förlorad under förföljelser ledde till att Rabbi Judah HaNasi (~200 e.Kr.) sammanfattade den i <em>Mishna</em> — den första systematiska kodifieringen av muntlig lag. Mishna kommenterades sedan vidare i <em>Gemara</em>, och Mishna + Gemara utgör <em>Talmud</em>.</p>
+
+          <h4>Talmuds struktur och funktion</h4>
+          <p>Den Babyloniska Talmud (<em>Bavli</em>, ~500 e.Kr.) är den mest auktoritativa. Den innehåller <em>halacha</em> (juridiska avgöranden) och <em>aggadah</em> (berättelser, liknelser och teologiska reflexioner). Talmud är inte bara en lagbok utan ett levande samtal som visar hur tusentals rabbiner tänkt och resonerat — osäkerheten, debatten och minoritetssynpunkterna bevaras sida vid sida med majoritetsbeslutet.</p>
+          <div class="highlight-box">Talmud är resultatet av ett tvåfaldigt behov: bevara en hotad muntlig tradition, och tillämpa en urgammal lag på ständigt nya livssituationer. Det gör den till en levande text, inte ett statiskt dokument.</div>
+        </div>
+      </div>
+
+      <!-- JUD F4 -->
+      <div class="q-card jud" id="jud-4">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">4</div>
+          <div class="q-question">De olika judiska riktningarna kan ses som olika svar på frågan om hur det judiska uppdraget bäst förvaltas. Förklara!</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Det judiska uppdraget — att leva som ett heligt folk i förbund med Gud och vittna om monoteism och etik inför världen — är gemensamt för alla judiska riktningar. Men tolkningen av vad detta innebär i en modern, sekulariserad och pluralistisk värld är kärnfrågan som skiljer riktningarna åt.</p>
+
+          <h4>Ortodox judendom — uppdraget kräver fullständig lagefterlevnad</h4>
+          <p>Ortodox judendom (uppkommen som reaktion mot upplysningen på 1700–1800-talet) svarar att uppdraget bäst förvaltas genom strikt och oföränderlig efterlevnad av <em>halacha</em>. Både den skriftliga och muntliga Torah är gudomligt uppenbarade och oföränderliga. Ortodoxa judar helgar sabbaten fullt ut (inga elektriska apparater), följer hela koscherlagen, och separerar könen i synagogan. Deras argument: trogen lydnad mot Guds lag är det enda äkta judiska livet.</p>
+
+          <h4>Konservativ judendom — uppdraget kräver balans</h4>
+          <p>Konservativ judendom (Masorti) menar att halacha är bindande men att rabbinsk auktoritet <em>kan</em> göra måttfulla anpassningar till moderna förhållanden. Man följer Talmud och kodexar som Shulchan Aruch som vägledning, men tillåter t.ex. att köra bil till synagogan på sabbaten om alternativet är att inte delta alls. Konservativ judendom ordinerar numera kvinnliga rabbiner men bibehåller mer traditionell liturgi.</p>
+
+          <h4>Reformjudendom — uppdraget kräver etisk förnyelse</h4>
+          <p>Reformjudendomen (uppkommen i Tyskland på 1800-talet) hävdar att uppdraget handlar om profetisk etik och rättvisa — inte om rituell laglydnad. Torah är gudomligt inspirerad men skriven av människor, och ska tolkas i ljuset av modern etik och vetenskaplig förståelse. Reformjudar ordinerat kvinnliga rabbiner sedan 1972, välkomnar samkönade relationer, och ser koscherregler och sabbatsbud som vägledande men valfria.</p>
+
+          <h4>Rekonstruktionistisk judendom</h4>
+          <p>Rekonstruktionismen (grundad av Mordecai Kaplan, 1900-tal) ser judendomen som en <em>civilisation</em> snarare än en gudomligt styrd religion. Gud är inte en person utan en kraft för rättvisa och godhet. Uppdraget är att bevara och levandegöra den judiska kulturen och gemenskapen.</p>
+
+          <table class="compare-table">
+            <tr><th>Riktning</th><th>Syn på Torah</th><th>Halacha</th><th>Könsroller</th></tr>
+            <tr><td>Ortodox</td><td>Gudomligt uppenbarad, oföränderlig</td><td>Fullt bindande</td><td>Traditionell separation</td></tr>
+            <tr><td>Konservativ</td><td>Gudomlig, men rabbiner kan anpassa</td><td>I hög grad bindande</td><td>Jämlik gudstjänst, kv. rabbiner</td></tr>
+            <tr><td>Reform</td><td>Inspirerad, humanistisk tolkning</td><td>Vägledande, ej bindande</td><td>Full jämlikhet, välkomnar HBT+</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- JUD F5 -->
+      <div class="q-card jud" id="jud-5">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">5</div>
+          <div class="q-question">Använd begreppen rabbin, synagoga, Tora och beskriv en gudstjänst i en synagoga</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>En judisk gudstjänst hålls i <span class="term">synagogan</span> — den judiska församlingens samlingshus för bön, Torah-studium och gemenskap. Synagogan ersatte Templet som centrum för judiskt religiöst liv efter dess förstörande år 70 e.Kr. Ordet "synagoga" är grekiska för "samling" eller "mötesplats".</p>
+
+          <h4>Synagogans rum</h4>
+          <p>Det viktigaste elementet i synagogan är <em>Aron HaKodesh</em> — den heliga arken — ett skåp eller alcov i väggen mot Jerusalem där <span class="term">Torah</span>-rullarna (handskrivna pergamentrullar med Moseböckerna på hebreiska) förvaras. Framför arken hänger ett evigt ljus (<em>ner tamid</em>) som symboliserar Guds ständiga närvaro.</p>
+
+          <h4>Gudstjänstens ordning (Shacharit — morgongudstjänst, sabbat)</h4>
+          <p>Gudstjänsten inleds med inledande psalmer och välsignelser (<em>pesukei dezimra</em>). Kärnan är <em>Shema Yisrael</em> — trosbekännelsen ur 5 Mos 6:4 — som läses av hela församlingen. Därefter följer <em>Amida</em>: en stående bön med arton välsignelser som är gudstjänstens hjärta.</p>
+          <p>Höjdpunkten under sabbatsgudstjänsten är <em>Torah-läsningen</em>: Torah-rullen tas högtidligt ut ur arken och bärs i procession bland de troende. En kallad person (<em>oleh</em>) läser veckans Torah-avsnitt (<em>parashah</em>) på hebreiska, och därpå följer en kompletterande läsning från Profeterna (<em>haftara</em>). Den sju-åriga cykeln av Torah-läsningar gör att hela Torah läses igenom varje år.</p>
+
+          <h4>Rabbinens roll</h4>
+          <p><span class="term">Rabbinen</span> (hebreiska: "min lärare/mästare") är inte en präst i offerteologisk mening — offerkultens tid är förbi. Rabbinen är en Torah-tolkare, juridisk expert (<em>posek</em>) och pastoral ledare för församlingen. Under gudstjänsten håller rabbinen en predikan (<em>drasha</em>) kopplad till veckans Torah-avsnitt och kopplar texten till dagens liv.</p>
+
+          <h4>Skillnader mellan riktningar</h4>
+          <p>I <strong>ortodox</strong> synagoga sitter män och kvinnor åtskilda av en skärm (<em>mechitza</em>); gudstjänsten leds av en manlig kantor och rabbin; bönen sker uteslutande på hebreiska. I <strong>konservativa</strong> och <strong>reformsynagogor</strong> sitter familjer ihop, kan inkludera hebreiska och modersmål, och kan ledas av kvinna.</p>
+        </div>
+      </div>
+
+      <!-- JUD F6 -->
+      <div class="q-card jud" id="jud-6">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">6</div>
+          <div class="q-question">Ge exempel på ett par övergångsriter och hur de genomförs i judisk tradition</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Övergångsriter (<em>lifecycle rituals</em>) markerar viktiga övergångar i livet och knyter den enskilde till förbundsgemenskapen och Torah-traditionen.</p>
+
+          <h4>Brit mila — omskärelse</h4>
+          <p>Judiska pojkar omskärs på sin <em>åttonde levnadsdag</em> som ett konkret, kroppsligt tecken på förbundet som Gud slöt med Abraham (1 Mos 17:10–12). Ceremonin utförs av en specialist kallad <em>mohel</em> i närvaro av familj och vänner. Under ceremonin ges barnet sitt <em>hebreiska namn</em>. Det åttonde dagets symbolik är teologiskt laddad — sjudagarsveckan är skapad tid, men det åttonde dagen pekar bortom skapelsens ordning mot förbundets evighet. Flickor välkomnas med en namngivningsceremoni kallad <em>simchat bat</em>.</p>
+
+          <h4>Bar/Bat Mitzvah — religiös myndighetsålder</h4>
+          <p><em>Bar mitzvah</em> ("bud-son", pojke vid ~13 år) och <em>bat mitzvah</em> ("bud-dotter", flicka vid ~12–13 år) markerar att ungdomen nu bär personligt ansvar för att följa Guds bud. Ceremonin sker under en sabbatsgudstjänst i synagogan: ungdomen läser ur Torah-rullen och/eller haftara på hebreiska inför hela församlingen — ett ytterst synligt tecken på att hon/han nu tillhör den religiösa gemenskapen som vuxen.</p>
+          <p>I <strong>ortodox</strong> judendom genomförs flickors bat mitzvah i en mer begränsad form (inte Torah-läsning inför blandad församling). I <strong>reformjudendomen</strong> är bat mitzvah fullt jämställd med bar mitzvah. Ceremonin följs alltid av ett familjefirande.</p>
+
+          <h4>Övriga riter</h4>
+          <p>Det judiska bröllopet (<em>kiddushin</em>) genomförs under en baldakin (<em>chuppah</em>) som symboliserar det nya hemmet. Brudparet dricker vin ur samma bägare, och brudgummen krossar ett glas under foten — en påminnelse om Templets förstörande och om att glädje aldrig kan vara fullständig förrän templet återuppbyggs. Judisk begravning sker snabbt (inom 24–48 timmar), och den sörjande familjen håller sju dagars sorg (<em>shiva</em>).</p>
+        </div>
+      </div>
+
+      <!-- JUD F7 -->
+      <div class="q-card jud" id="jud-7">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">7</div>
+          <div class="q-question">Förklara genom exemplifiering hur olika sätt att tolka Toran kan leda till olika sätt att leva ett judiskt liv i vardagen</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Det finns tre huvudsakliga tolkningsansatser till heliga texter:</p>
+          <p><span class="term">Bokstavstrogen/fundamentalistisk tolkning</span> — texten gäller exakt som den är skriven, tidlöst och utan hänsyn till historisk kontext.<br>
+          <span class="term">Traditionalistisk tolkning</span> — man följer den etablerade rabbinska tolkningstraditionen (Talmud, Shulchan Aruch) och de rättsskolor som förts vidare i generationer.<br>
+          <span class="term">Modernistisk/liberal tolkning</span> — man läser texten i ljuset av modern etik och vetenskaplig förståelse; grundbudskapet om rättvisa och helighet väger tyngre än rituella detaljer.</p>
+
+          <h4>Exempel 1 — Sabbaten</h4>
+          <p>Torah-texten förbjuder arbete på sabbaten och förbjuder att tända eld (Exodus 20:8–10, 35:3). En <strong>ortodox jude</strong> tolkar detta bokstavstroget och följer samtliga 39 förbjudna handlingstyper: inga elektriska apparater (el = "eld"), inget bilkörande, ingen matlagning, allt förbereds på fredag. En <strong>reformjude</strong> tolkar sabbatens syfte som vila, reflektion och familjetid och ser de tekniska förbudens bokstavliga tillämpning som ett kulturhistoriskt uttryck, inte som en evig lag.</p>
+
+          <h4>Exempel 2 — Koschermat</h4>
+          <p>Torah-reglerna om matlagning (3 Mos 11, 5 Mos 14) förbjuder gris och skaldjur, kräver ritual slakt (<em>shechita</em>) och förbjuder blandning av kött och mejeriprodukter ("koka inte ett kid i sin moders mjölk", Exodus 23:19). En <strong>ortodox jude</strong> har åtskilda köksredskap, väntar 6 timmar mellan kött och mjölk och köper bara koscherCertifierat kött (<em>mashgiach</em>-stämplat). En <strong>reformjude</strong> kan se koscherreglerna som valfria identitetsmarkörer — intressanta men inte religiöst förpliktande.</p>
+
+          <h4>Exempel 3 — Klädsel och synliga symboler</h4>
+          <p>Ortodox-judiska män bär <em>kippa</em> (hjässkalott) alltid som tecken på Guds närvaro. Gifta ortodoxa kvinnor täcker håret med <em>sheitel</em> (peruk) eller sjal, baserat på tolkningar av modestynormer i Talmud. En reformjude kan bära kippa vid gudstjänst men inte i det dagliga livet, utan att se detta som en kompromiss med tron.</p>
+
+          <div class="highlight-box">Tolkningsskillnaderna skapar radikalt olika livsstilar — samma text, men tre vitt skilda sätt att leva ett judiskt liv. Det är just detta som gör att de judiska riktningarna kan ses som "olika svar på hur uppdraget förvaltas".</div>
+        </div>
+      </div>
+
+      <!-- JUD F8 -->
+      <div class="q-card jud" id="jud-8">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">8</div>
+          <div class="q-question">Vad innebär antisemitism? Ge exempel på hur det kan ta sig uttryck</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Antisemitism</span> är hat, fördomar och diskriminering riktad specifikt mot judar som individer eller som grupp, grundad på deras judiska identitet — religiös, etnisk eller kulturell. Det är ett mångfacetterat fenomen med rötter i antiken men med sina mest extrema uttryck under 1900-talet.</p>
+
+          <h4>Historiska former</h4>
+          <p><strong>Religiös antisemitism:</strong> Under medeltiden spreds anklagelsen att judar var "gudsmördare" — ansvariga för Jesu avrättning. Judar anklagades dessutom för ritualmord (den s.k. "blodanklagelsen" — en helt falsk konspirationsteori) och drevs ut från länder runt om i Europa.</p>
+          <p><strong>Rasmässig antisemitism:</strong> Under 1800-talets och 1900-talets pseudovetenskapliga rasbiologi konstruerades "den judiska rasen" som biologiskt underlägsen. Nazisternas raslagar (Nürnberglagarna 1935) och slutligen Förintelsen (<em>Shoah</em>, 1941–1945), där sex miljoner judar systematiskt mördades i utrotningsläger, är historiens värsta uttryck för antisemitism.</p>
+
+          <h4>Moderna former</h4>
+          <p><strong>Ekonomisk antisemitism:</strong> Sterotyper om att judar kontrollerar banker, media och ekonomi — konspirationsteorier som florerar på sociala medier idag.</p>
+          <p><strong>Förintelseförnekelse:</strong> Att förneka eller förminska Shoah — i vissa länder ett brott.</p>
+          <p><strong>Antisemitiska hatbrott:</strong> Vandalisering av synagogor och judiska gravplatser med hakkors, verbala angrepp och fysiska våldsbrott mot judar.</p>
+          <p><strong>Politisk antisemitism:</strong> Konspirationsteorier om judisk världsmaktkontroll, senast framträdande i extremhögerns och extremvänsterns retorik.</p>
+
+          <p>Viktigt att notera: Antisemitism är ett föränderligt fenomen — det anpassar sig till nya ideologiska klimat och context, men kärnan förblir densamma: judar som objekt för hat och förföljelse.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ======================== KRISTENDOM ======================== -->
+    <section class="section" id="kristendom">
+      <div class="section-header">
+        <div class="section-icon icon-krist">✝</div>
+        <div>
+          <h2>Kristendom</h2>
+          <div class="section-sub">Jesus, treenighet, kyrkans historia och etiska frågor</div>
+        </div>
+      </div>
+
+      <!-- KRIST F1 -->
+      <div class="q-card krist" id="krist-1">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">1</div>
+          <div class="q-question">Varför är Jesus så betydelsefull i kristen tro?</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Jesus från Nasaret är kristendomens absoluta centrum och skiljer kristendomen från alla andra religioner. I kristen tro är Jesus inte enbart en profet eller en stor lärare — han är <em>Guds inkarnerade Son</em>, både fullt mänsklig och fullt gudomlig (<em>hypostatisk union</em>).</p>
+
+          <h4>Inkarnationen</h4>
+          <p>Guds beslut att ta mänsklig form i Jesus är unikt i religionshistorien. Johannesevangeliet inleds: "I begynnelsen var Ordet, och Ordet var hos Gud, och Ordet var Gud... och Ordet blev kött och bodde ibland oss" (Joh 1:1,14). Att Gud identifierar sig med mänskligheten — delar dess lidande och död — är kärnan i inkarnationsläran.</p>
+
+          <h4>Frälsningen (soteriologi)</h4>
+          <p>Jesu korsdöd tolkas som ett försoningsoffer för mänsklighetens synder — ett ställföreträdande offer som återupprättar relationen mellan Gud och människa. Paulus skriver: "Kristus dog för våra synder, i enlighet med skrifterna" (1 Kor 15:3). Utan korset har kristendomen ingen kärna.</p>
+
+          <h4>Uppståndelsen</h4>
+          <p>Jesu uppståndelse på tredje dagen (påskdagen) är kristendomens allra viktigaste händelse — den bekräftar Jesu gudomlighet, att döden är besegrad, och att troende kristna har hopp om uppståndelse. Paulus är direkt: "Om Kristus inte är uppstånden, är er tro förgäves" (1 Kor 15:14). Utan uppståndelsen finns ingen kristen tro.</p>
+
+          <h4>Jesus som fullbordaren av Gamla testamentet</h4>
+          <p>Kristna ser Jesus som uppfyllelsen av de messiasprofetior som Gamla testamentet innehåller — t.ex. Jesaja 53 om "den lidande tjänaren" och Mika 5:1 om en ledare från Betlehem. Jesu liv förklarar därför varför Gamla testamentet (Tanakh) är en del av den kristna Bibeln: det pekar fram mot Kristus.</p>
+        </div>
+      </div>
+
+      <!-- KRIST F2 -->
+      <div class="q-card krist" id="krist-2">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">2</div>
+          <div class="q-question">Använd begreppen Messias och Kristus och förklara hur en kristen anser att judendom och kristendom hör samman</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Messias</span> (hebreiska: <em>masjiach</em>) och <span class="term">Kristus</span> (grekiska: <em>khristos</em>) betyder båda "den smorde" — en titel för den kung som vigdes till ämbete genom att smörjas med olja. I judisk profettradition pekade texter om en kommande Messias-kung av Davids ätt som skulle befria Israel och inrätta Guds rike på jorden.</p>
+
+          <h4>Kristnas syn på Jesus som Messias</h4>
+          <p>Kristna hävdar att Jesus av Nasaret är den utlovade Messias och kallar honom därför <em>Jesus Kristus</em> (Jesus, den smorde). Hela Jesu liv — hans födelse i Betlehem av Davids ätt (Mika 5:1), hans undervisning, undergärningar, korsdöd och uppståndelse — tolkas som uppfyllelsen av GT:s messiasprofetior.</p>
+
+          <h4>Kristnas syn på sambandet</h4>
+          <p>Kristna ser kristendomen som ett <em>fullbordande</em> av judendomen, inte en avvisning: Gamla testamentets löften till Abraham, Moses och profeterna ses som uppfyllda i Jesus. Jesus var själv jude, firade judiska högtider, läste Torah i synagogan och diskuterade lagen med rabbiner. Paulus skriver i Romarbrevet att de hednakristnas "vilda skott" ympar in på det judiska "rotträdet" — judendomen är fundamentet.</p>
+
+          <h4>Det asymmetriska sambandet</h4>
+          <p>Sambandet är dock asymmetriskt: kristendomen ser sig som beroende av och beroende av judendomen, medan judendomen inte ser sig som ofullständig utan kristendomen. Judar avvisar att Jesus är Messias — Messias ska, enligt judisk tradition, bygga tredje templet, samla alla diaspora-judar till Israel, och inrätta en messiansk era av fred och kunskap. Inget av detta skedde under Jesu livstid. Kristnas svar: Messias-uppdraget fullbordas i Jesu <em>återkomst</em>.</p>
+        </div>
+      </div>
+
+      <!-- KRIST F3 -->
+      <div class="q-card krist" id="krist-3">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">3</div>
+          <div class="q-question">Använd begreppen monoteism och treenighet för att förklara hur kristna kan beskriva Gud</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Kristendomen är <span class="term">monoteistisk</span> — den tror på en och enda Gud — och förnekar kategoriskt polyteism (flerguderi). Ändå formulerar den sin gudsuppfattning på ett sätt som ingen annan monoteistisk tradition gör: <span class="term">treenighetsläran</span>.</p>
+
+          <h4>Treenighetsläran</h4>
+          <p>Treenigheten (<em>trinitas</em>) innebär att Gud är <em>en</em> i väsen (<em>ousia</em>) men uppenbarar sig i tre distinkta "personer" (<em>hypostaser</em>): <strong>Fadern</strong> (Skaparen), <strong>Sonen</strong> (Jesus Kristus, inkarnerad) och <strong>den Helige Ande</strong> (Guds närvaro och kraft i världen och i de troende). Läran formulerades officiellt vid kyrkokoncilet i Nicaea år 325 e.Kr., och klassificerades ytterligare i Konstantinopel 381 e.Kr.</p>
+          <p>Den klassiska formuleringen: alla tre är "av samma substans" (<em>homousios</em>) — inte tre gudar (<em>triteism</em>) utan ett gudomligt väsen i tre relationsformer. Det är ett troensdogm som erkänner mysteriet snarare än att lösa det rationellt.</p>
+
+          <h4>De tre personerna i praktiken</h4>
+          <p><em>Gud som Fader:</em> Skaparen och universums uppehållare; den som slöt förbund med Israel.<br>
+          <em>Gud som Son:</em> Guds Ord i mänsklig form; Frälsaren som dog och uppstod.<br>
+          <em>Gud som Helig Ande:</em> Guds aktiva närvaro i världen och i de troendes hjärtan sedan pingstdagen.</p>
+
+          <h4>Invändningarna</h4>
+          <p>Judar (Shema Yisrael: "Herren är en") och muslimer (<em>tawhid</em>) invänder att treenigheten i praktiken innebär tre gudar. Kristna svarar att treenigheten är ett gudomligt mysterium som spränger mänsklig logik — Gud är inte tre gudar utan ett väsen med tre relationssätt.</p>
+        </div>
+      </div>
+
+      <!-- KRIST F4 -->
+      <div class="q-card krist" id="krist-4">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">4</div>
+          <div class="q-question">Ge exempel på hur kristendomen har utvecklats på olika sätt genom historien — begreppen påve, ortodoxa kyrkan, reformation, väckelserörelse</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Kristendomens historia är en historia av tillväxt, splittring och förnyelse — en rörelse som över 2000 år splittrats i tusentals riktningar och konfessioner.</p>
+
+          <h4>Påvedömet och den katolska kyrkan</h4>
+          <p>Den romerske biskopen (<span class="term">påven</span>) hävdade tidigt ett andligt ledarskap som Petrus' efterträdare — med stöd av Matteus 16:18: "Du är Petrus, klippan, och på den klippan skall jag bygga min kyrka." Under medeltiden nådde påvedömet sin politiska och religiösa topp som en central institution i europeiskt liv. Dogmatiska avgöranden, sakrament och moralteologiska ståndpunkter definierades av kyrkans <em>magisterium</em> (läroämbete) med påven som yttersta auktoritet.</p>
+
+          <h4>Stora schismen 1054 — den ortodoxa kyrkan</h4>
+          <p>Spänningarna mellan Rom och Konstantinopel kulminerade i den Stora schismen 1054, som delade kristenheten i <span class="term">Västerländsk katolsk kyrka</span> och <span class="term">Östlig ortodox kyrka</span>. Tvisterna gällde: påvens auktoritetsanspråk (som östkyrkan avvisade), och tillägget <em>filioque</em> i trosbekännelsen ("och från Sonen" — om den Helige Andes ursprung). Ortodox kristendom är idag stark i Ryssland, Grekland, Serbien, Rumänien och Etiopien.</p>
+
+          <h4>Reformationen på 1500-talet</h4>
+          <p>Martin Luther slog 1517 upp sina 95 teser mot avlatskrämeriet — försäljning av syndaförlåtelse. <span class="term">Reformationen</span> ledde till lutheranism, kalvinism, anglikanismen och baptismen. Grundprinciperna var: <em>sola scriptura</em> (Bibeln allena som auktoritet), <em>sola fide</em> (tron allena för frälsning) och <em>sola gratia</em> (nåden allena). Präster fick gifta sig, gudstjänsten hölls på folkspråk, och bibeln översattes (Luther till tyska, Gustav Vasa-bibeln till svenska 1541).</p>
+
+          <h4>Väckelserörelserna</h4>
+          <p>Pietistiska rörelser på 1700-talet (Philipp Spener, August Francke) och metodismen (John Wesley) betonade personlig omvändelse, bibelläsning och levande tro kontra kyrkoformalism. På 1800-talet svepte <span class="term">väckelserörelser</span> genom Skandinavien (Läsarna, Rosenius, baptismen) och USA (camp meetings). Frikyrkor bildades som kongregationalistiska alternativ till statskyrkorna — individens personliga trosbeslut och upplevelse stod i centrum.</p>
+        </div>
+      </div>
+
+      <!-- KRIST F5 -->
+      <div class="q-card krist" id="krist-5">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">5</div>
+          <div class="q-question">Förklara hur de kristna högtiderna jul och påsk hänger samman med Jesus enligt kristen tradition</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>De två största kristna högtiderna hänger samman som kristendomens frälsningsberättelsens två höjdpunkter: ankomsten och segern.</p>
+
+          <h4>Jul — inkarnationens fest</h4>
+          <p><strong>Jul</strong> firar Jesu <em>inkarnation</em> — att Gud tog mänsklig form och kom till världen i Betlehem. Berättelsen i Lukasevangeliet 2 beskriver Jesu födelse i ett stall, änglars hyllning och herdars besök. I Matteus 2 berättas om vise männen som följer stjärnan.</p>
+          <p>Den fyraveckors period som föregår juldag kallas <em>advent</em> (latin: "ankomsten") — en tid av bön, förberedelse och förväntan. Julnatten (julottan) firas med gudstjänst. Teologiskt handlar jul om att Gud väljer att dela mänskligheten — "Ljuset kom till världen" (Joh 1:9) — ett radikalt budskap om Guds kärlek och identifikation med mänsklig sårbarhet.</p>
+
+          <h4>Påsk — uppståndelsens fest</h4>
+          <p><strong>Påsken</strong> är kristendomens <em>viktigaste</em> högtid och firar Jesu lidande, korsdöd och uppståndelse. <em>Stilla veckan</em> inleds med Palmsondag (Jesu intåg i Jerusalem), följs av Skärtorsdag (den sista måltiden, nattvarden instiftad), Långfredag (Jesu korsdöd på Golgata) och avslutas med Påskdag — uppståndelsens dag.</p>
+          <p>Påsken är inkarnationsberättelsens (<em>julens</em>) mål och syfte: Gud kom till världen för att ge sitt liv och besegra döden. Paulus sätter det skarpt: "Om Kristus inte är uppstånden, är er tro förgäves" (1 Kor 15:14).</p>
+
+          <div class="highlight-box">Sambandet: Jul är möjlig tack vare påsken — inkarnationen är inte meningsfull utan frälsningens möjlighet. Påsken är möjlig tack vare julen — Guds son måste ha kommit till världen för att kunna dö och uppstå för den.</div>
+        </div>
+      </div>
+
+      <!-- KRIST F6 -->
+      <div class="q-card krist" id="krist-6">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">6</div>
+          <div class="q-question">Förklara begreppet sakrament och hur det ser ut i olika kristna inriktningar</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Sakrament</span> (latin: <em>sacramentum</em>) är heliga handlingar instiftade av Kristus som anses förmedla Guds nåd på ett konkret, synligt sätt. Augustinus definierade dem klassiskt som "ett synligt tecken på en osynlig nåd" — yttre handlingar som förmedlar inre andlig verklighet.</p>
+
+          <h4>Katolska kyrkan — sju sakrament</h4>
+          <p>Katolska kyrkan erkänner <em>sju</em> sakrament instiftade av Kristus, fastslaget vid konciliet i Florens (1439) och Trient (1545–1563):</p>
+          <p>1. <em>Dopet</em> — inträde i kyrkan och syndernas förlåtelse via vatten<br>
+          2. <em>Eukaristin</em> — nattvarden, Kristi verkliga närvaro i bröd och vin (transsubstantiation)<br>
+          3. <em>Konfirmationen</em> — den Helige Andes gåva; fullbordandet av dopet<br>
+          4. <em>Bikt och avlösning</em> — syndförlåtelse via präst<br>
+          5. <em>Äktenskapet</em> — heligt förbund<br>
+          6. <em>De sjukas smörjelse</em> — bön och olja vid sjukdom eller dödsstund<br>
+          7. <em>Prästvigning</em> — inträde i kyrkans ämbete</p>
+
+          <h4>Ortodoxa kyrkan — mysterier</h4>
+          <p>Ortodoxa kyrkan kallar dem <em>mysterier</em> (<em>mysteria</em>) snarare än sakrament, med samma antal men med viss liturgisk skillnad — t.ex. ges konfirmation (<em>krysmation</em>) omedelbart efter dopet, även till spädbarn.</p>
+
+          <h4>Protestantiska kyrkor — två sakrament</h4>
+          <p>Luther och reformatorerna menade att bara handlingar som Jesus <em>explicit</em> instiftade med ett yttre tecken och ett löfte om nåd räknas som sakrament: <strong>dopet</strong> (vatten + Guds ord, Matt 28:19) och <strong>nattvarden</strong> (bröd och vin, 1 Kor 11:23–26). De övriga fem är riter eller ordningsfrågor — värdefulla men inte sakrament i egentlig mening.</p>
+          <p>Synen på <em>nattvardens natur</em> skiljer protestanter åt: lutheraner tror på Kristi reala närvaro "i, med och under" bröd och vin (<em>konsubstantiation</em>); kalvinister på en andlig närvaro; baptister och pingstkarismatiker ser nattvarden primärt som en <em>minneshandling</em>.</p>
+        </div>
+      </div>
+
+      <!-- KRIST F7 -->
+      <div class="q-card krist" id="krist-7">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">7</div>
+          <div class="q-question">Resonera om vad som gör att olika kristna grupper resonerar på olika sätt i frågor som har med kön och sexualitet att göra</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Synen på kön och sexualitet är en av de mest dividerande frågorna i modern kristendom — och den speglar djupare oenigheter om bibelauktoritet, tradition och etik.</p>
+
+          <h4>1. Bibelsynen — bokstavstrogen kontra historisk-kritisk tolkning</h4>
+          <p><strong>Konservativa/fundamentalistiska</strong> kristna tolkar Bibelns texter bokstavstroget: Paulus' ord om att "kvinnor ska tiga i församlingen" (1 Kor 14:34), att äktenskapet är mellan man och kvinna (1 Mos 2:24), och att homoerotiska handlingar strider mot Guds ordning (3 Mos 18:22, Rom 1:26-27) ses som tidlösa moraliska sanningar.<br>
+          <strong>Modernistiska/liberala</strong> kristna tillämpar historisk-kritisk bibelläsning: dessa texter är skrivna i specifika kulturella kontexter och speglar dåtidens normer. Det eviga budskapet — kärlek, rättvisa, inkludering — väger tyngre än de kulturellt bundna formerna.</p>
+
+          <h4>2. Traditionens auktoritet</h4>
+          <p>Den <strong>katolska kyrkans</strong> läroämbete (<em>magisterium</em>) är bunden av en obruten tolkningsskola och kan inte enkelt ändra officiella ståndpunkter utan att erodera sin legitimitet som bärare av den apostoliska traditionen. <strong>Protestantiska frikyrkor</strong> är kongregationalistiska och kan rösta om att ändra sin hållning — vilket gjort att t.ex. Svenska kyrkan numera viger samkönade par (sedan 2009) och Equmeniayrkan likaså.</p>
+
+          <h4>3. Geografiskt och kulturellt sammanhang</h4>
+          <p>Kristna i Afrika och delar av Latinamerika är generellt mer konservativa i kön- och sexualitetsfrågor än skandinaviska och nordamerikanska progressiva kyrkor. Samma Bibel tolkas alltså radikalt olika beroende på kulturell kontext — vilket visar att tolkningarna aldrig är kulturellt neutrala.</p>
+
+          <h4>4. Teologisk etiktradition</h4>
+          <p><strong>Naturrätten</strong> (central i katolsk moralteologi, härstammande från Thomas av Aquino) hävdar att skapelsens ordning är normgivande — heterosexualitet är "i enlighet med naturen" och fortplantningens syfte. <strong>Relationsetik</strong> (vanligare i liberal protestantisk teologi) menar att kärleksrelationens kvalitet och ömsesidighet är det etiska kriteriet, inte könskombinationen.</p>
+
+          <div class="highlight-box">Nyckelinsikt: Oenigheten handlar inte om huruvida man ska ta Bibeln på allvar, utan om <em>hur</em> man tolkar den — och vad man anser att tolkningens auktoritet grundar sig på: texten allena, traditionen, förnuftet eller erfarenheten (teologins "fyrhörning").</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ======================== ISLAM ======================== -->
+    <section class="section" id="islam">
+      <div class="section-header">
+        <div class="section-icon icon-islam">☪</div>
+        <div>
+          <h2>Islam</h2>
+          <div class="section-sub">Gud, profeter, texter, rätt och teologisk praktik</div>
+        </div>
+      </div>
+
+      <!-- ISLAM F1 -->
+      <div class="q-card islam" id="islam-1">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">1</div>
+          <div class="q-question">Hur kan människan veta något om Gud enligt islam?</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Inom islam är Gud (<em>Allah</em>) transcendent — ofattbart stor och bortom mänsklig fullständig förståelse. Ändå har Gud gjort sig tillgänglig för människan på tre komplementära sätt.</p>
+
+          <h4>1. Koranen — Guds direkta tal</h4>
+          <p><span class="term">Koranen</span> (<em>kalam Allah</em>, "Guds tal") är islams primärkälla för kunskap om Gud. Till skillnad från Bibeln, som kristna ser som gudomligt inspirerad men skriven av människor, betraktas Koranen som <em>Guds exakta ord</em> uppenbarat på arabiska till profeten Muhammed via ärkeängeln Gabriel (Jibril) under perioden 610–632 e.Kr. Koranen är orubricerad och evig — "den bevarade tavlan" (<em>al-lawh al-mahfuz</em>). Att recitera Koranen på arabiska är en akt av tillbedjan i sig.</p>
+
+          <h4>2. Profetens vittnesbörd — Sunna</h4>
+          <p>Muhammed är Guds siste och fullkomlige profet (<em>khatam al-anbiya</em>). Hans liv, ord och handlingar — bevarade i <em>hadith</em>-samlingarna och sammantagna kallade <em>sunna</em> — är en levande tolkning av Koranen. Genom sunnan lär muslimer känna Guds vilja i konkret livspraktik: hur man ber, lever och behandlar andra.</p>
+
+          <h4>3. Skapelsen — naturens tecken</h4>
+          <p>Koranen pekar upprepade gånger på naturen som <em>ayat</em> (tecken) som vittnar om Guds existens, storhet och barmhärtighet. Skapelsens ordning, skönhet och komplexitet är en "bok" som berättar om Skaparen. Surah Al-Ikhlas (112:1–4) sammanfattar: "Säg: Han är Allah, den Ene. Allah, den Evigt Sökte. Han har inte fött och inte blivit född. Och ingen är Hans like."</p>
+        </div>
+      </div>
+
+      <!-- ISLAM F2 -->
+      <div class="q-card islam" id="islam-2">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">2</div>
+          <div class="q-question">Använd begreppen profet, sändebud och förklara hur en muslim kan anse att judendom, kristendom och islam hör samman</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Islamisk teologi skiljer mellan <span class="term">nabi</span> (profet — tar emot gudomlig uppenbarelse och förkunnar den inom sitt folk) och <span class="term">rasul</span> (sändebud — en profet med ett specifikt gudomligt uppdrag och en skriven uppenbarelse för en vidare krets). Alla rasul är nabi, men inte vice versa.</p>
+
+          <h4>Den islamiska profetskedjan</h4>
+          <p>Enligt islamisk tro sände Gud profeter och sändebud till alla folk och tider med ett och samma grundläggande budskap: monoteism (<em>tawhid</em>) och rättfärdighet. Adam var den förste profeten. Abraham (Ibrahim) restaurerade monoteismens tempel och är "Guds vän". Moses (Musa) fick Torah (Tawrat). Jesus (Isa) var ett sändebud med mirakelkraft som fick Evangeliet (Injil). Muhammed är den siste profeten — "siglets profet" (<em>khatam al-nabiyyin</em>) — som fick den slutgiltiga, fullständiga uppenbarelsen.</p>
+
+          <h4>Sambandet muslimer ser</h4>
+          <p>Islam, kristendom och judendom är i grunden samma religion — Abrahams monoteism — uppenbarad progressivt och slutgiltigt fulländad i Koranen. De tre religionerna har gemensam källa men muslimer menar att de tidigare uppenbarelserna med tiden <em>förvanskats</em> (<em>tahrif</em>) — judar och kristna har missförstått eller förändrat sina heliga texters ursprungliga innebörd.</p>
+          <p>Islam ses inte som en ny religion utan som en <em>återställning</em> (<em>din al-fitra</em>) av den ursprungliga monoteistiska religionen som alla människor är skapade till. Muslimer respekterar Moses och Jesus som stora profeter och "bokets folk" (<em>ahl al-kitab</em>) — en kategori med speciell status inom islamisk rätt.</p>
+
+          <h4>Gränsen — kristologin</h4>
+          <p>Den avgörande tvistefrågan är Jesus: muslimer avvisar kategoriskt att Isa var Guds son eller del av en treenighet. Att tillskriva Gud en son är <em>shirk</em> — den allvarligaste synden. Jesus dog inte heller på korset enligt islamisk tradition; Gud "lyfte honom till sig" (<em>rafa'ahu Allah</em>, Kor 4:158).</p>
+        </div>
+      </div>
+
+      <!-- ISLAM F3 -->
+      <div class="q-card islam" id="islam-3">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">3</div>
+          <div class="q-question">Använd begreppen hadith och sunna för att förklara varför profeten Muhammed har betydelse för muslimers dagliga liv</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Sunna</span> (arabiska: "väg" eller "sedvana") är det totala mönstret av hur Muhammed levde, bad, pratade och behandlade andra. Det är hans levnadsexempel (<em>uswa hasana</em> — "det bästa föredömet", Kor 33:21) som alla muslimer strävar efter att efterlikna.</p>
+          <p><span class="term">Hadith</span> (arabiska: "berättelse/rapport") är de nedtecknade berättelserna om Muhammeds ord, handlingar och tysta godkännanden (<em>taqrir</em>), samlade av följeslagare (<em>sahaba</em>) och deras efterföljare. De mest auktoritativa samlingarna är <em>Sahih al-Bukhari</em> och <em>Sahih Muslim</em> — "de två sahih" (<em>al-sahihayn</em>).</p>
+
+          <h4>Varför Muhammed är viktig för dagligt liv</h4>
+          <p><strong>Bönen (Salat):</strong> De fem dagliga bönernas exakta form — rörelserna (<em>ruku'</em>, <em>sujud</em>), orden och timing — är inte detaljerat beskriven i Koranen utan instrueras via haditherna. "Be som ni sett mig be" sade Muhammed.</p>
+          <p><strong>Matregler:</strong> Hur halal-slakt (<em>dhabiha</em>) ska utföras konkretiseras i haditherna, liksom specifika djur som är tillåtna eller förbjudna utöver Koranens generella principer.</p>
+          <p><strong>Äktenskap och familj:</strong> Muhammeds egna äktenskap, uttalanden om bröllopsseder och familjeetik är normgivande. Hans omsorg om hustrun, barnen och de svaga är ett etiskt föredöme.</p>
+          <p><strong>Klädsel och hygien:</strong> Männens skäggstil, kvinnors täckningsgrad och rituell renhetspraxis (<em>wudu</em>, <em>ghusl</em>) specificeras via haditherna.</p>
+          <p><strong>Moralisk etik:</strong> Muhammeds uttalanden om ärlighet, barmhärtighet, välgörenhet och social rättvisa är moraliska riktmärken.</p>
+
+          <div class="highlight-box">Utan haditherna och sunnan vore Koranen svår att tillämpa i daglig praktik — de utgör tillsammans den fullständiga vägledningen (<em>sharia</em>) för hur ett muslimskt liv levs.</div>
+        </div>
+      </div>
+
+      <!-- ISLAM F4 -->
+      <div class="q-card islam" id="islam-4">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">4</div>
+          <div class="q-question">Berätta om Gabrielhadithen och på vilka sätt den har betydelse inom islam</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Gabrielhadithen</span> (arabiska: <em>Hadith Jibril</em>) är en av islams mest centrala och välkända hadither, bevarad i Sahih Muslim. Den berättar om ett besök av ärkeängeln Gabriel (Jibril) i mänsklig gestalt.</p>
+
+          <h4>Berättelsens innehåll</h4>
+          <p>En man i ovanligt vita kläder sätter sig nära profeten Muhammed bland hans följeslagare och ställer honom frågor:</p>
+          <p><strong>"Vad är islam?"</strong> — Muhammed svarar: att vittna om att det finns ingen gud utom Allah och att Muhammed är hans sändebud (<em>shahada</em>); förrätta bönen fem gånger om dagen (<em>salat</em>); ge allmosor (<em>zakat</em>); fasta under Ramadan (<em>sawm</em>); och vallfärda till Ka'ba om man har möjlighet (<em>hajj</em>). <em>→ Islams fem pelare.</em></p>
+          <p><strong>"Vad är iman (tron)?"</strong> — Tro på Allah, hans änglar, hans böcker, hans profeter, den yttersta dagen och förutbestämmelsen (det goda och det onda). <em>→ Islams sex trosartiklar.</em></p>
+          <p><strong>"Vad är ihsan (det goda / fromheten)?"</strong> — "Att du dyrkar Allah som om du ser Honom, ty även om du inte ser Honom ser Han dig." <em>→ Islams inre, andliga dimension.</em></p>
+          <p>Gabriel avslöjar sedan för Muhammed att han är Gabriel och kom för att lära muslimerna sin religion.</p>
+
+          <h4>Hadithens betydelse</h4>
+          <p><strong>Strukturell:</strong> Den ger islams mest kompakta och auktoritativa systematik — tre dimensioner som täcker hela det religiösa livet: yttre handling, inre tro och andlig kvalitet.</p>
+          <p><strong>Pedagogisk:</strong> Hadithen används fortfarande i muslimsk undervisning och katekes för att introducera islams kärna.</p>
+          <p><strong>Spirituell:</strong> Begreppet <em>ihsan</em> — att handla och be som om man ser Gud — lyfter fram att religion inte bara är yttre lydnad utan ett inre tillstånd av gudsmedvetenhet.</p>
+          <p><strong>Teologisk:</strong> Den bekräftar tron på änglar, uppenbarelseskrifter, profeternas kedja och Domedagen som centrala trosartiklar.</p>
+        </div>
+      </div>
+
+      <!-- ISLAM F5 -->
+      <div class="q-card islam" id="islam-5">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">5</div>
+          <div class="q-question">Förklara hur en rättslärd går tillväga för att komma fram till om en handling kan betraktas som riktig eller inte, och beskriv vilka olika sätt att beskriva en handling som finns i islam</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Islamisk rätt (<span class="term">fiqh</span>) utarbetas av rättslärda (<em>fuqaha</em>, sing. <em>faqih</em>) med hjälp av en strukturerad juridisk metodik (<em>usul al-fiqh</em>).</p>
+
+          <h4>De fyra rättskällorna</h4>
+          <p>En rättslärd undersöker frågan i följande ordning:</p>
+          <p>1. <strong>Koranen</strong> — primärkälla. Finns ett direkt svar i Guds ord?<br>
+          2. <strong>Sunna/hadith</strong> — profetens exempel. Vad sade eller gjorde Muhammed i en liknande situation?<br>
+          3. <strong>Ijma</strong> — konsensus bland de lärda i en fråga. Har traditionens rättsskolor nått enighet?<br>
+          4. <strong>Qiyas</strong> — analogiskt resonemang. Kan man dra slutsatser om det nya fallet med stöd av ett liknande fall i källorna? (Exempel: alkohol är <em>haram</em> för att det bedövar sinnet → narkotika är analogt haram.)</p>
+          <p>Sunnitisk islam har fyra stora rättsskolor (<em>madhahib</em>): Hanafi, Maliki, Shafi'i och Hanbali — alla giltiga men med skilda betoningar.</p>
+
+          <h4>Handlingarnas fem kategorier (al-ahkam al-khamsa)</h4>
+          <table class="compare-table">
+            <tr><th>Kategori</th><th>Arabiska</th><th>Innebörd</th><th>Exempel</th></tr>
+            <tr><td>Obligatoriskt</td><td><em>Fard/Wajib</em></td><td>Måste göras; underlåtelse är synd</td><td>De fem bönerna, fastan i Ramadan</td></tr>
+            <tr><td>Rekommenderat</td><td><em>Mustahab/Sunnah</em></td><td>Bra att göra; underlåtelse ej synd</td><td>Frivilliga böner, ge hälsning</td></tr>
+            <tr><td>Tillåtet</td><td><em>Mubah</em></td><td>Varken uppmuntrat eller avrådd</td><td>De flesta vardagliga val</td></tr>
+            <tr><td>Ogillat</td><td><em>Makruh</em></td><td>Misshagligt; bättre att undvika</td><td>Röka (i många tolkningar)</td></tr>
+            <tr><td>Förbjudet</td><td><em>Haram</em></td><td>Strängt förbjudet; är synd</td><td>Alkohol, griskött, ränta, hor</td></tr>
+          </table>
+          <p>Systemet ger en heltäckande moralisk klassificering av alla tänkbara mänskliga handlingar och uttrycker islams ambition att reglera hela livet — det religiösa likväl som det sekulära — under Guds vilja.</p>
+        </div>
+      </div>
+
+      <!-- ISLAM F6 -->
+      <div class="q-card islam" id="islam-6">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">6</div>
+          <div class="q-question">Ge exempel på en fråga som förstås på olika sätt i olika muslimska grupper och vad som ligger till grund för de olika förhållningssätten</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p>Ett utmärkt exempel är <strong>hijab och muslimska kvinnors klädsel</strong> — en fråga som tolkas radikalt olika inom islam och som belyser hur teologi, kultur och politik samverkar i religiös praktik.</p>
+
+          <h4>Den konservativa/traditionella tolkningen</h4>
+          <p>Hijab (täckning av hår och ansikte) betraktas som <em>fard</em> (obligatorisk) baserat på Koranens verserna 24:31 ("Och säg till de troende kvinnorna att de bör sänka blicken... och inte visa sina prydnader utom vad som oundvikligen syns") och 33:59 ("Profet, säg till dina hustrur, dina döttrar och de troendes hustrur att draga sina ytterplagg tätt om sig"). Hadither preciserar vidare täckningsgraden. I Iran är hijab lagstadgad; i Saudiarabien krävde traditionellt en mer fullständig täckning (<em>niqab</em>).</p>
+
+          <h4>Den modernistiska/liberala tolkningen</h4>
+          <p>Muslimska feminister och reformtänkare — som Amina Wadud (<em>Quran and Woman</em>, 1992) och Fatema Mernissi — argumenterar för att hijab-verserna adresserade specifika historiska situationer: Muhammeds fruar och profetens hushåll i den tidiga medinska kontexten. Det eviga budskapet är <em>anständighet och värdighet</em> (<em>haya</em>), inte en specifik klädesform. Att tvinga fram hijab är att missförstå islams syfte.</p>
+
+          <h4>Skälen till tolkningsskillnaden</h4>
+          <p><strong>Hermeneutik:</strong> Bokstavstrogen kontra kontextuell läsning av Koranen.<br>
+          <strong>Hadith-urval:</strong> Vilka hadither om klädsel anses tillförlitliga och relevanta?<br>
+          <strong>Kulturell kontext:</strong> Indonesisk islam, turkisk laicism (Atatürks sekulara revolution) och arabisk Gulf-tradition har format vitt skilda lokala tolkningar.<br>
+          <strong>Politisk dimension:</strong> I post-koloniala sammanhang har hijab burits som identitetssymbol och politiskt motstånd mot västerländsk kulturimperialism — en dimension som inte är rent religiös.</p>
+
+          <h4>Sunni och shia</h4>
+          <p>Den historiskt djupaste skiljelinjen inom islam är klyvningen i <strong>sunni</strong> och <strong>shia</strong> efter Muhammeds död 632 e.Kr. — en fråga om vem som rätteligen skulle leda det muslimska samfundet (<em>umma</em>). Sunnimuslimer valde Abu Bakr (Muhammeds nära följeslagare); shiamuslimer menade att Ali (Muhammeds kusin och svärson) var den rättmätiga efterföljaren. Denna ursprungliga politiska skiljelinje har sedan djupnat till teologiska och juridiska skillnader. Idag är 85–90% av världens muslimer sunnimuslimer.</p>
+        </div>
+      </div>
+
+      <!-- ISLAM F7 -->
+      <div class="q-card islam" id="islam-7">
+        <div class="q-header" onclick="toggle(this)">
+          <div class="q-num">7</div>
+          <div class="q-question">Ge exempel på hur begreppet tawhid, enhet, uttrycks praktiskt inom islam i olika riter och högtider</div>
+          <div class="q-toggle">▾</div>
+        </div>
+        <div class="q-body">
+          <p><span class="term">Tawhid</span> (arabiska: توحيد, "enhet") är islams fundamentala teologiska princip: Guds absoluta, odelbara och oöverträffliga enhet. Tawhid är inte bara ett trospåstående utan ett <em>livsprogram</em> — det genomsyrar varje aspekt av muslimsk tillbedjan och vardag.</p>
+
+          <h4>Shahada — trosbekännelsen</h4>
+          <p>"<em>La ilaha illa Allah, Muhammadun rasul Allah</em>" — det finns ingen gud utom Allah och Muhammed är hans sändebud. Varje ny muslim börjar med denna bekräftelse av Guds absoluta enhet. Den yttras vid varje kallelserop till bön (<em>adhan</em>), vid födseln (viskad i spädbarns öra) och som det sista som yttras vid döden.</p>
+
+          <h4>Salat — de fem dagliga bönerna</h4>
+          <p>Varje bön inleds med <em>Allahu Akbar</em> ("Gud är störst") och inkluderar läsning av Surah Al-Fatiha och Surah Al-Ikhlas: "Säg: Han är Allah, den Ene" (112:1). De fem bönerna är ett rytmiskt återkommande bekräftande av Guds enhet som strukturerar hela dagen.</p>
+
+          <h4>Jumu'ah — fredagsbönen</h4>
+          <p>Fredagsbönen samlar hela det lokala muslimska samfundet (<em>umma</em>) gemensamt i tillbedjan. Att tusentals — ibland miljoner — muslimer böjer sig mot Mecka i samma riktning och yttrar samma böner är en kraftfull kollektiv manifestation av tawhid: ett folk, en Gud, en riktning (<em>qibla</em>).</p>
+
+          <h4>Hajj — vallfärden</h4>
+          <p>Pilgrimsfärden till Mecka är tawhids kanske starkaste yttre uttryck: muslimer från hela världens alla nationer, hudfärger och kulturer samlas klädda i identisk enkel vit klädnad (<em>ihram</em>) — alla sociala distinktioner upplöses. Att cirkla kring Ka'ba (<em>tawaf</em>) — den kub som Ibrahim byggde för att hylla den ene Guden — är den konkreta symbolen för tawhid. Alla rör sig i samma riktning runt samma center: Gud.</p>
+
+          <h4>Basmala och det dagliga livet</h4>
+          <p>Att inleda varje handling — måltider, resor, arbete — med "<em>Bismillah al-Rahman al-Rahim</em>" (I Guds namn, den Barmhärtige, den Nåderike) är ett ständigt påminnande om att all mänsklig aktivitet sker under Guds vilja och enhet. Tawhid är alltså inte reserverat för fredagsmoskén — det är ett sätt att leva.</p>
+
+          <div class="highlight-box">"Tawhid är inte en abstrakt dogm utan ett levnadsprogram: hela livet ska genomsyras av medvetenhet om att det finns bara en Gud och att allt sker under hans blick."</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ======================== PROVTIPS ======================== -->
+    <section class="section" id="provtips">
+      <div class="section-header">
+        <div class="section-icon icon-abr">📝</div>
+        <div>
+          <h2>Analystips för provet</h2>
+          <div class="section-sub">Hur du skriver ett A-svar på essäfrågor</div>
+        </div>
+      </div>
+
+      <div class="exam-tips">
+        <h3>Tolkningsmodeller du ska kunna använda</h3>
+        <div class="tips-grid">
+          <div class="tip-item">
+            <strong>Bokstavstrogen / fundamentalistisk</strong>
+            Texten tolkas exakt som den lyder — tidlöst och utan hänsyn till historisk kontext. Texten är Guds direkt giltiga instruktion för alla tider. Ex: Ortodoxa judar, konservativa evangelikaler, salafistiska muslimer.
+          </div>
+          <div class="tip-item">
+            <strong>Traditionalistisk</strong>
+            Man följer den etablerade tolkningstraditionen som förts vidare av auktoritativa lärde — Talmud-rabbiner, Kyrkofäder, islamiska rättsskolor. Texten tolkas alltid i ljuset av traditionen.
+          </div>
+          <div class="tip-item">
+            <strong>Modernistisk / liberal</strong>
+            Textens grundläggande budskap (kärlek, rättvisa, gudsmedvetenhet) väger tyngre än kulturellt bundna detaljer. Modern etik och vetenskap tas på allvar. Ex: Reformjudar, Svenska kyrkan, progressiva muslimer.
+          </div>
+          <div class="tip-item">
+            <strong>Historisk-kritisk</strong>
+            Texter läses med hänsyn till sin historiska tillkomstsituation — vem skrev, till vem, varför, i vilken kontext? Skillnad görs mellan det tidsbundna och det tidlösa. Används i akademisk teologi och av liberala tolkare.
+          </div>
+        </div>
+
+        <h3 style="margin-top:28px;">4-stegs analysmodell för essäfrågor</h3>
+        <div class="tips-grid">
+          <div class="tip-item">
+            <strong>1. Jämförelse MELLAN religionerna</strong>
+            Vad är likt? Vad skiljer? (Exempel: Kosher vs halal — båda förbjuder gris, men kosher kräver åtskillnad av kött och mejeri.)
+          </div>
+          <div class="tip-item">
+            <strong>2. Jämförelse INOM religionerna</strong>
+            Hur tolkar olika riktningar frågan? (Ortodox vs reform, Katolik vs protestant, Sunni vs shia)
+          </div>
+          <div class="tip-item">
+            <strong>3. Kulturellt sammanhang</strong>
+            Hur påverkar var man bor, i vilken historisk tid och kulturell miljö sin tolkning? (Svensk muslim vs. saudisk muslim — samma text, olika tillämpning)
+          </div>
+          <div class="tip-item">
+            <strong>4. Identitet och samhälle</strong>
+            Hur formar religiösa praktiker gemenskapskänsla och individens identitet? Vad händer när religiösa normer möter ett sekulärt majoritetssamhälle?
+          </div>
+        </div>
+
+        <h3 style="margin-top:28px;">Viktiga begrepp att använda på provet</h3>
+        <div class="tips-grid">
+          <div class="tip-item"><strong>Tanakh, Bibeln, Koranen</strong> — heliga skrifter; vet vad som ingår och hur de ses i respektive tradition</div>
+          <div class="tip-item"><strong>Talmud, Sunna, Hadith</strong> — sekundärkällor; tolkningslitteratur och profetiska traditioner</div>
+          <div class="tip-item"><strong>Kosher, Halal, Haram</strong> — matregler; likheter och skillnader</div>
+          <div class="tip-item"><strong>Diaspora, sekularism</strong> — samhällsbegrepp; hur religion möter moderniteten</div>
+          <div class="tip-item"><strong>Tawhid, Treenigheten, Shema</strong> — gudsuppfattningens skillnader</div>
+          <div class="tip-item"><strong>Messias, Kristus, Rasul</strong> — profeter och frälsarfigurer; hur de liknar och skiljer sig</div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+  function toggle(header) {
+    const card = header.closest('.q-card');
+    card.classList.toggle('open');
+  }
+
+  // Open all cards on print
+  window.onbeforeprint = function() {
+    document.querySelectorAll('.q-card').forEach(c => c.classList.add('open'));
+  };
+</script>
+
+</body>
+</html>
