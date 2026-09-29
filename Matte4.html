@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sv"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matte – kartan över kapitlen</title>
+<style>
+:root{--bg:#f7f6f1;--ink:#1d2433;--mut:#5d6675;--line:#c9ccd4;--card:#fff;--a:#0f766e;--a2:#fff;--b:#6d3fc0;--b2:#fff;--hl:#d9480f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a26;--ink:#e6e9f0;--mut:#9aa4b5;--line:#3a4557;--card:#1a2433;--a:#2dd4bf;--a2:#062b27;--b:#b79bff;--b2:#1c1236;--hl:#ff9f5a}}
+:root[data-theme="dark"]{--bg:#121a26;--ink:#e6e9f0;--mut:#9aa4b5;--line:#3a4557;--card:#1a2433;--a:#2dd4bf;--a2:#062b27;--b:#b79bff;--b2:#1c1236;--hl:#ff9f5a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;background-attachment:local}
+main{max-width:880px;margin:0 auto;padding:28px 16px 60px;background:linear-gradient(var(--bg),var(--bg));background-clip:content-box}
+h1,h2,h3{font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+h1{font-size:2rem}h2{font-size:1.4rem;margin:40px 0 8px}h3{font-size:1.1rem}
+p{margin:6px 0}.mut{color:var(--mut)}
+.map{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:16px;overflow-x:auto}
+svg{width:100%;min-width:560px;height:auto;display:block}
+.n{cursor:pointer}.n rect{stroke-width:2;transition:opacity .15s}
+.n text{font:600 13px system-ui,sans-serif;pointer-events:none}.n .s{font:400 11px system-ui,sans-serif}
+.n:focus{outline:none}.n:focus rect{stroke:var(--hl);stroke-width:3}
+.p1 rect{fill:var(--a);stroke:var(--a)}.p1 text{fill:var(--a2)}
+.p2 rect{fill:var(--b);stroke:var(--b)}.p2 text{fill:var(--b2)}
+.hub rect{fill:var(--card);stroke:var(--ink)}.hub text{fill:var(--ink)}
+.e{fill:none;stroke:var(--mut);stroke-width:1.6;opacity:.55;transition:all .15s}
+.e.x{stroke-dasharray:6 5}.e.on{stroke:var(--hl);stroke-width:3.2;opacity:1}
+.dim .n:not(.sel):not(.rel) rect{opacity:.35}
+.n.sel rect{stroke:var(--hl);stroke-width:4}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:.85rem;color:var(--mut);margin:10px 4px 0}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+#panel{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--a);border-radius:6px;padding:18px 20px;margin-top:14px}
+#panel.p2{border-left-color:var(--b)}
+#panel h3{margin-bottom:2px}
+.row{margin-top:14px}.row b{display:block;font-size:.9rem;color:var(--mut);font-weight:600}
+.f{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--bg);padding:8px 10px;border-radius:4px;margin:6px 0;overflow-x:auto;white-space:pre}
+ul{margin:4px 0 0;padding-left:20px}
+.chip{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:2px 12px;margin:3px 4px 3px 0;font-size:.9rem}
+.grp{margin-top:14px;padding-left:12px;border-left:4px solid var(--a)}.grp.b{border-left-color:var(--b)}
+.grp h3{font-size:1rem;margin-bottom:4px}
+.flows{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.flow ol{list-style:none;margin:8px 0 0;padding:0}
+.flow li{padding:5px 0 5px 22px;position:relative}
+.flow li:not(:last-child)::before{content:"↓";position:absolute;left:2px;color:var(--hl);font-weight:700}
+.flow li:last-child::before{content:"■";position:absolute;left:3px;color:var(--hl);font-size:.7rem;top:9px}
+.fix{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px 16px;margin-top:10px}
+.fix s{color:var(--mut)}
+</style></head>
+<body><main>
+<h1>Kartan över kapitlen</h1>
+<p class="mut">Kapitel 1 lär dig läsa och bygga funktioner. Kapitel 3 lär dig mäta och analysera hur de förändras. Klicka på ett kapitel för att se vad det innehåller och hur det hänger ihop med resten.</p>
+
+<div class="map" id="map"><svg viewBox="-20 0 780 510" role="group" aria-label="Kartan över kapitlen">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+<g id="edges">
+<path class="e" data-a="n11" data-b="n12" d="M350 72L215 126" marker-end="url(#ah)"/>
+<path class="e" data-a="n11" data-b="n13" d="M410 72L545 126" marker-end="url(#ah)"/>
+<path class="e" data-a="n12" data-b="hub" d="M215 182L350 232" marker-end="url(#ah)"/>
+<path class="e" data-a="n13" data-b="hub" d="M545 182L410 232" marker-end="url(#ah)"/>
+<path class="e" data-a="hub" data-b="n33" d="M340 288L80 336" marker-end="url(#ah)"/>
+<path class="e" data-a="hub" data-b="n32" d="M360 288L260 336" marker-end="url(#ah)"/>
+<path class="e" data-a="hub" data-b="n34" d="M400 288L440 336" marker-end="url(#ah)"/>
+<path class="e" data-a="hub" data-b="n35" d="M420 288L620 336" marker-end="url(#ah)"/>
+<path class="e x" data-a="n32" data-b="n34" d="M330 364L368 364" marker-end="url(#ah)"/>
+<path class="e x" data-a="n32" data-b="n35" d="M285 336C285 296 595 296 595 334" marker-end="url(#ah)"/>
+<path class="e" data-a="n33" data-b="n36" d="M80 392V418H680V392M380 418V444" />
+<path class="e" data-a="n32" data-b="n36" d="M260 392V418"/>
+<path class="e" data-a="n34" data-b="n36" d="M440 392V418"/>
+<path class="e" data-a="n35" data-b="n36" d="M620 392V418"/>
+<path class="e x" data-a="n11" data-b="n36" d="M310 44C-70 44 -70 472 306 472" marker-end="url(#ah)"/>
+<path class="e x" data-a="n13" data-b="n33" d="M480 154C120 190 30 230 60 334" marker-end="url(#ah)"/>
+</g>
+<g id="nodes"></g>
+</svg></div>
+<div class="leg"><span><i style="background:var(--a)"></i>Del 1: Funktioner och grafer</span><span><i style="background:var(--b)"></i>Del 2: Derivata som verktyg</span><span>Heldragen linje = huvudflöde</span><span>Streckad = tvärkoppling</span></div>
+
+<section id="panel" aria-live="polite"></section>
+
+<h2>Begrepp – sorterade efter när de används</h2>
+<p class="mut">Trettio lösa ord är svårt att lära sig. Fem grupper som hör ihop är lättare.</p>
+<div id="terms"></div>
+
+<h2>Tänk verktyg, inte kapitel</h2>
+<p class="mut">På provet frågar du dig: vad ska jag ta reda på, och vilket verktyg behöver jag?</p>
+<div class="flows">
+<div class="flow"><h3>”Skissa funktionen”</h3><ol><li>Definitionsmängd</li><li>Nollställen</li><li>Asymptoter</li><li>Derivera, f′(x)</li><li>Extrempunkter</li><li>Teckentabell</li><li>Graf</li></ol></div>
+<div class="flow"><h3>”Bestäm derivatan”</h3><ol><li>Hur är funktionen uppbyggd?</li><li>Vanlig derivata?</li><li>Kedjeregel? Produktregel? Kvotregel?</li><li>Ofta en kombination</li></ol></div>
+<div class="flow"><h3>”Bestäm extrempunkterna”</h3><ol><li>Derivera</li><li>Lös f′(x) = 0</li><li>Kritiska x-värden</li><li>Teckentabell och/eller f″</li><li>Ange koordinaterna</li></ol></div>
+</div>
+
+<h2>Definitioner som bör rättas</h2>
+<div class="fix"><b>Asymptot</b><br><s>en linje som grafen aldrig skär</s><br>En graf kan skära en horisontell eller sned asymptot. Det centrala är att grafen närmar sig linjen på ett bestämt sätt.</div>
+<div class="fix"><b>Gränsvärde</b><br>Det värde som f(x) närmar sig när x närmar sig ett visst värde eller går mot oändligheten.</div>
+<div class="fix"><b>Terrasspunkt</b><br>En punkt där f′(a) = 0 men f′ inte byter tecken. Terminologin kan variera mellan läroböcker.</div>
+<div class="fix"><b>Rot / nollställe</b><br>Ett nollställe är ett x-värde där f(x) = 0. ”Rot” används bredare om lösningar till ekvationer och polynom.</div>
+</main>
+<script>
+const N={
+n11:{t:"1.1 Faktorsatsen och polynomdivision",s:"algebraiska verktyg",p:1,x:305,y:16,w:150,
+about:"Algebraiska verktyg för polynom: hitta nollställen, faktorisera och lösa ekvationer av högre grad.",
+can:["Faktorisera polynom","Använda faktorsatsen","Hitta nollställen","Utföra polynomdivision","Använda ett känt nollställe för att bryta ner ett polynom","Lösa polynomekvationer av högre grad"],
+f:"f(a) = 0  ⇔  (x − a) är en faktor",
+from:"Grundläggande algebra",to:["1.2: faktorisering ger grafens nollställen","1.3: polynomdivision ger sneda asymptoter","3.6: lösa f′(x) = 0 när ekvationen är av högre grad"],
+note:"Kapitlet betyder inte att f′(x) = 0 alltid blir en tredjegradsekvation. Derivatan kan ha många grader. Sambandet är att 1.1 ger verktyg som ibland behövs."},
+n12:{t:"1.2 Skissa polynomfunktioner",s:"algebra → graf",p:1,x:130,y:126,w:150,
+about:"Du tar ett polynom och förstår hur grafen måste se ut.",
+can:["Läsa av grad och ledande koefficient","Hitta nollställen","Känna igen dubbelrötter och trippelrötter","Beskriva beteendet långt åt höger och vänster","Avgöra var grafen skär eller tangerar x-axeln"],
+f:"f(x) = (x − 2)²(x + 1)\nnollställen: x = 2 (dubbelrot), x = −1",
+from:"1.1: faktorisering",to:["Derivata: samma mål, förstå grafen, men med ett kraftfullare verktyg"],note:""},
+n13:{t:"1.3 Skissa rationella funktioner",s:"polynom / polynom",p:1,x:480,y:126,w:150,
+about:"Nästa steg efter polynom: kvoten av två polynom och allt som kan hända när nämnaren närmar sig noll.",
+can:["Bestämma definitionsmängd (nämnaren får inte vara noll)","Hitta nollställen från täljaren","Hitta vertikala asymptoter där nämnaren blir noll och faktorn inte förkortats bort","Hitta horisontella asymptoter, y-värdet när x → ±∞","Hitta sneda asymptoter med polynomdivision"],
+f:"f(x) = P(x) / Q(x)",
+from:"1.1: polynomdivision och faktorisering",to:["3.3: kvotregeln när du deriverar en rationell funktion","3.6: analysera samma graf med derivatan"],
+note:"En horisontell eller sned asymptot kan korsas av grafen."},
+hub:{t:"Derivata",s:"nu blir grafen mätbar",p:0,x:305,y:232,w:150,
+about:"Kopplingen mellan de två delarna. Idén att förstå en funktions graf återkommer, men nu med derivatan som verktyg.",
+can:["Derivera allt mer komplicerade funktioner","Använda derivatan för att undersöka hur funktionen beter sig"],f:"",from:"1.2 och 1.3: hur ser grafen ut?",to:["3.2 – 3.5: derivera olika sorters funktioner","3.6: hur förändras grafen och var vänder den?"],note:""},
+n32:{t:"3.2 Kedjeregeln",s:"verktygskapitlet",p:2,x:190,y:336,w:140,
+about:"Hur deriverar jag en funktion som är byggd av andra funktioner? Ett verktygskapitel som används i nästan allt som följer.",
+can:["Se yttre och inre funktion","Derivera sammansatta funktioner","Kombinera med andra regler"],
+f:"f(g(x))′ = f′(g(x)) · g′(x)\nex: sin(2x), (4x + 3)¹², 1/(x² + 1)",
+from:"Vanlig derivering",to:["3.4: e^(3x), ln(2x + 1)","3.5: sin(5x)"],note:""},
+n33:{t:"3.3 Produkt- och kvotregeln",s:"multiplikation och division",p:2,x:10,y:336,w:140,
+about:"Vad gör du när funktioner multipliceras eller divideras.",
+can:["Använda produktregeln för produkter","Använda kvotregeln för kvoter","Känna igen när flera regler behövs i samma funktion"],
+f:"(g·h)′ = g′h + gh′\nkvotregeln används för g(x)/h(x)",
+from:"1.3: rationella funktioner",to:["3.6: alla regler är verktyg för extrempunkter"],
+note:"Känn igen uppbyggnaden: sammansättning → kedjeregeln, multiplikation → produktregeln, division → kvotregeln."},
+n34:{t:"3.4 Exponential och logaritm",s:"e^x, a^x, ln x",p:2,x:370,y:336,w:140,
+about:"Derivator för exponential- och logaritmfunktioner och varianter av dem.",
+can:["Derivera e^x, a^x och ln x","Upptäcka inre funktioner, som 2x + 1 i e^(2x + 1)","Kombinera med kedjeregeln"],
+f:"(e^x)′ = e^x     (ln x)′ = 1/x",
+from:"3.2: kedjeregeln",to:["3.6: extrempunkter för sådana funktioner"],note:"Exempel som kräver 3.4 + 3.2 samtidigt: e^(2x + 1) och ln(x² + 1)."},
+n35:{t:"3.5 Trigonometriska funktioner",s:"derivering, inte ekvationer",p:2,x:550,y:336,w:140,
+about:"Derivering av trigonometriska funktioner. Det handlar alltså inte om att lösa trigonometriska ekvationer.",
+can:["Derivera sin x och cos x","Arbeta med radianer","Kombinera med kedjeregeln"],
+f:"(sin x)′ = cos x\n(cos x)′ = −sin x",
+from:"3.2: kedjeregeln",to:["3.6: extrempunkter"],note:"För sin(3x) behöver du både derivatan av sin x och kedjeregeln."},
+n36:{t:"3.6 Andraderivata och analys",s:"användningen av allt",p:2,x:305,y:444,w:150,
+about:"Här används allt som kommit tidigare. Du analyserar funktionens form med derivator.",
+can:["Lösa f′(x) = 0 för att hitta möjliga extrempunkter","Använda teckentabell: växer eller avtar f?","Klassificera med f″","Se tecknet på f′ byta + → − (max) eller − → + (min)"],
+f:"f′ > 0 ⇒ f växer     f′ < 0 ⇒ f avtar\nf″(a) > 0 ⇒ lokal minimipunkt\nf″(a) < 0 ⇒ lokal maximipunkt",
+from:"3.2 – 3.5 (alla deriveringsregler) och 1.1 (lösa ekvationen)",to:["Skissa hela funktionsgrafen"],note:""}
+};
+const rel={};document.querySelectorAll('.e').forEach(e=>{});
+const g=document.getElementById('nodes'),NS='http://www.w3.org/2000/svg';
+Object.entries(N).forEach(([id,d])=>{
+const el=document.createElementNS(NS,'g');el.setAttribute('class','n '+(d.p==1?'p1':d.p==2?'p2':'hub'));el.setAttribute('id',id);el.setAttribute('tabindex','0');el.setAttribute('role','button');
+const r=document.createElementNS(NS,'rect');[['x',d.x],['y',d.y],['width',d.w],['height',56],['rx',8]].forEach(([k,v])=>r.setAttribute(k,v));el.appendChild(r);
+const wrap=(s,n)=>{const w=s.split(' ');const L=[''];w.forEach(x=>{if((L[L.length-1]+' '+x).trim().length>n&&L[L.length-1])L.push(x);else L[L.length-1]=(L[L.length-1]+' '+x).trim()});return L};
+const lines=wrap(d.t,d.w>145?22:19).slice(0,2);
+lines.forEach((l,i)=>{const t=document.createElementNS(NS,'text');t.setAttribute('x',d.x+d.w/2);t.setAttribute('y',d.y+(lines.length>1?20:25)+i*15);t.setAttribute('text-anchor','middle');t.textContent=l;el.appendChild(t)});
+const s=document.createElementNS(NS,'text');s.setAttribute('class','s');s.setAttribute('x',d.x+d.w/2);s.setAttribute('y',d.y+50);s.setAttribute('text-anchor','middle');s.textContent=d.s;el.appendChild(s);
+el.addEventListener('click',()=>sel(id));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(id)}});
+g.appendChild(el)});
+function sel(id){
+const d=N[id],m=document.getElementById('map');m.classList.add('dim');
+const related=new Set();
+document.querySelectorAll('.e').forEach(e=>{const on=e.dataset.a===id||e.dataset.b===id;e.classList.toggle('on',on);if(on){related.add(e.dataset.a);related.add(e.dataset.b)}});
+document.querySelectorAll('.n').forEach(n=>{n.classList.toggle('sel',n.id===id);n.classList.toggle('rel',related.has(n.id))});
+const p=document.getElementById('panel');p.className=d.p==2?'p2':'';p.id='panel';
+const li=a=>'<ul>'+a.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+p.innerHTML='<h3>'+d.t+'</h3><p class="mut">'+d.about+'</p>'+
+'<div class="row"><b>Du ska kunna</b>'+li(d.can)+'</div>'+
+(d.f?'<div class="row"><b>Formler och regler</b><div class="f">'+d.f+'</div></div>':'')+
+'<div class="row"><b>Bygger på</b>'+d.from+'</div>'+
+'<div class="row"><b>Används i</b>'+li(d.to)+'</div>'+
+(d.note?'<div class="row"><b>Tänk på</b>'+d.note+'</div>':'')}
+sel('n11');
+const T=[["1.1 Algebra och polynom",0,"Uttryck,Ekvation,Faktor,Kvot,Differens,Polynom,Nollställe,Rot"],["1.2 Funktioner och grafer",0,"Funktion,Koordinat,Graf,Linjär funktion,Andragradsfunktion,Tredjegradsfunktion,Potensfunktion,Exponentialfunktion"],["1.3 Rationella funktioner",0,"Rationell funktion,Definitionsmängd,Asymptot,Vertikal asymptot,Horisontell asymptot,Sned asymptot,Gränsvärde"],["3.2 – 3.5 Derivata",1,"Derivata,Förändringshastighet,Sammansatt funktion,Kedjeregel,Produktregel,Kvotregel"],["3.6 Funktionsanalys",1,"Maximipunkt,Minimipunkt,Terrasspunkt,Växande,Avtagande,Teckentabell,Andraderivata"]];
+document.getElementById('terms').innerHTML=T.map(([h,b,c])=>'<div class="grp'+(b?' b':'')+'"><h3>'+h+'</h3>'+c.split(',').map(x=>'<span class="chip">'+x+'</span>').join('')+'</div>').join('');
+</script></body></html>
